@@ -16,7 +16,7 @@ class Shaker {
         this.dice = new Die(numberOfSides);
     }
 
-    int[] shake() {
+    public int[] shake() {
         int[] rtn = new int[this.numberOfDices];
         for(int i = 0; i < this.numberOfDices; i++) {
             rtn[i] = this.dice.roll();
@@ -24,7 +24,7 @@ class Shaker {
         return rtn;
     }
 
-    int shake_and_sum() {
+    public int shake_and_sum() {
         int rtn = 0;
         for(int i = 0; i < this.numberOfDices; i++) {
             rtn += this.dice.roll();
