@@ -9,5 +9,6 @@ import gui_main.GUI;
 public class BoardController {
 
     public BoardController() {
+        Deck deck = new Deck();
     }
 }
