@@ -1,0 +1,641 @@
+[
+	{
+		"nr": 1,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": -200,
+		"navn": "Start",
+		"type": "start"
+	},
+	{
+		"nr": 2,
+		"farve": {
+			"bg": {"r": 18, "g": 111, "b": 204},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 60,
+		"navn": "Rødovrevej",
+		"gruppe": "blå",
+		"leje": [
+			2,
+			10,
+			30,
+			90,
+			160,
+			250
+		],
+		"hus": 50,
+		"type": "ownable"
+	},
+	{
+		"nr": 3,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 4,
+		"farve": {
+			"bg": {"r": 18, "g": 111, "b": 204},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 60,
+		"navn": "Hvidovre",
+		"gruppe": "blå",
+		"leje": [
+			4,
+			20,
+			60,
+			180,
+			320,
+			540
+		],
+		"hus": 50,
+		"type": "ownable"
+	},
+	{
+		"nr": 5,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Betal indkomstskat 10% eller 200 kr.",
+		"type": "action"
+	},
+	{
+		"nr": 6,
+		"farve": {
+			"bg": {"r": 255, "g": 255, "b": 255},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 200,
+		"navn": "Øresund A/S",
+		"gruppe": "skib",
+		"leje": [
+			25,
+			50,
+			100,
+			200
+		],
+		"type": "ownable"
+	},
+	{
+		"nr": 7,
+		"farve": {
+			"bg": {"r": 221, "g": 66, "b": 195},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 100,
+		"navn": "Roskildevej",
+		"gruppe": "pink",
+		"leje": [
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		],
+		"hus": 50,
+		"type": "ownable"
+	},
+	{
+		"nr": 8,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 9,
+		"farve": {
+			"bg": {"r": 221, "g": 66, "b": 195},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 100,
+		"navn": "Valby Langgade",
+		"gruppe": "pink",
+		"leje": [
+			6,
+			30,
+			90,
+			270,
+			400,
+			550
+		],
+		"hus": 50,
+		"type": "ownable"
+	},
+	{
+		"nr": 10,
+		"farve": {
+			"bg": {"r": 221, "g": 66, "b": 195},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 120,
+		"navn": "Allégade",
+		"gruppe": "pink",
+		"leje": [
+			8,
+			40,
+			100,
+			300,
+			450,
+			600
+		],
+		"hus": 50,
+		"type": "ownable"
+	},
+	{
+		"nr": 11,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Fængsel",
+		"type": "prison"
+	},
+	{
+		"nr": 12,
+		"farve": {
+			"bg": {"r": 50, "g": 85, "b": 65},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 140,
+		"navn": "Frederiksberg Allé",
+		"gruppe": "grøn",
+		"leje": [
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 13,
+		"farve": {
+			"bg": {"r": 73, "g": 121, "b": 95},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 150,
+		"navn": "Tuborg",
+		"gruppe": "bryggeri",
+		"type": "ownable"
+	},
+	{
+		"nr": 14,
+		"farve": {
+			"bg": {"r": 50, "g": 85, "b": 65},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 140,
+		"navn": "Bülowsvej",
+		"gruppe": "grøn",
+		"leje": [
+			10,
+			50,
+			150,
+			450,
+			625,
+			750
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 15,
+		"farve": {
+			"bg": {"r": 50, "g": 85, "b": 65},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 160,
+		"navn": "Gl. Kongevej",
+		"gruppe": "grøn",
+		"leje": [
+			12,
+			60,
+			180,
+			500,
+			700,
+			900
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 16,
+		"farve": {
+			"bg": {"r": 255, "g": 255, "b": 255},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 200,
+		"navn": "D. F. D. S.",
+		"gruppe": "skib",
+		"leje": [
+			25,
+			50,
+			100,
+			200
+		],
+		"type": "ownable"
+	},
+	{
+		"nr": 17,
+		"farve": {
+			"bg": {"r": 86, "g": 74, "b": 72},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 180,
+		"navn": "Bernstorffsvej",
+		"gruppe": "grå",
+		"leje": [
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 18,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 19,
+		"farve": {
+			"bg": {"r": 86, "g": 74, "b": 72},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 180,
+		"navn": "Hellrupvej",
+		"gruppe": "grå",
+		"leje": [
+			14,
+			70,
+			200,
+			550,
+			750,
+			950
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 20,
+		"farve": {
+			"bg": {"r": 86, "g": 74, "b": 72},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 200,
+		"navn": "Strandvej",
+		"gruppe": "grå",
+		"leje": [
+			16,
+			80,
+			220,
+			600,
+			800,
+			1000
+		],
+		"hus": 100,
+		"type": "ownable"
+	},
+	{
+		"nr": 21,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Helle",
+		"type": "safe"
+	},
+	{
+		"nr": 22,
+		"farve": {
+			"bg": {"r": 193, "g": 44, "b": 21},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 220,
+		"navn": "Trianglen",
+		"gruppe": "rød",
+		"leje": [
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 23,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 24,
+		"farve": {
+			"bg": {"r": 193, "g": 44, "b": 21},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 220,
+		"navn": "Østerbrogade",
+		"gruppe": "rød",
+		"leje": [
+			18,
+			90,
+			250,
+			700,
+			875,
+			1050
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 25,
+		"farve": {
+			"bg": {"r": 193, "g": 44, "b": 21},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 240,
+		"navn": "Grønningen",
+		"gruppe": "rød",
+		"leje": [
+			20,
+			100,
+			300,
+			750,
+			925,
+			1100
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 26,
+		"farve": {
+			"bg": {"r": 255, "g": 255, "b": 255},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 200,
+		"navn": "Ø. K.",
+		"gruppe": "skib",
+		"leje": [
+			25,
+			50,
+			100,
+			200
+		],
+		"type": "ownable"
+	},
+	{
+		"nr": 27,
+		"farve": {
+			"bg": {"r": 186, "g": 186, "b": 186},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 260,
+		"navn": "Bredgade",
+		"gruppe": "hvid",
+		"leje": [
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 28,
+		"farve": {
+			"bg": {"r": 186, "g": 186, "b": 186},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 260,
+		"navn": "Kg. Nytorv",
+		"gruppe": "hvid",
+		"leje": [
+			22,
+			110,
+			330,
+			800,
+			975,
+			1150
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 29,
+		"farve": {
+			"bg": {"r": 73, "g": 121, "b": 95},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 150,
+		"navn": "Carlsberg",
+		"gruppe": "bryggeri",
+		"type": "ownable"
+	},
+	{
+		"nr": 30,
+		"farve": {
+			"bg": {"r": 186, "g": 186, "b": 186},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 280,
+		"navn": "Østergade",
+		"gruppe": "hvid",
+		"leje": [
+			22,
+			120,
+			360,
+			850,
+			1025,
+			1200
+		],
+		"hus": 150,
+		"type": "ownable"
+	},
+	{
+		"nr": 31,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "De sættes i fængsel",
+		"type": "action"
+	},
+	{
+		"nr": 32,
+		"farve": {
+			"bg": {"r": 224, "g": 184, "b": 76},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 300,
+		"navn": "Amagertorv",
+		"gruppe": "gul",
+		"leje": [
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		],
+		"hus": 200,
+		"type": "ownable"
+	},
+	{
+		"nr": 33,
+		"farve": {
+			"bg": {"r": 224, "g": 184, "b": 76},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 300,
+		"navn": "Vimmelskaftet",
+		"gruppe": "gul",
+		"leje": [
+			26,
+			130,
+			390,
+			900,
+			1100,
+			1275
+		],
+		"hus": 200,
+		"type": "ownable"
+	},
+	{
+		"nr": 34,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 35,
+		"farve": {
+			"bg": {"r": 224, "g": 184, "b": 76},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 320,
+		"navn": "Nygade",
+		"gruppe": "gul",
+		"leje": [
+			28,
+			150,
+			450,
+			1000,
+			1200,
+			1400
+		],
+		"hus": 200,
+		"type": "ownable"
+	},
+	{
+		"nr": 36,
+		"farve": {
+			"bg": {"r": 255, "g": 255, "b": 255},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 200,
+		"navn": "D/S Bornholm 1866",
+		"gruppe": "skib",
+		"leje": [
+			25,
+			50,
+			100,
+			200
+		],
+		"type": "ownable"
+	},
+	{
+		"nr": 37,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Prøv lykken",
+		"type": "chance"
+	},
+	{
+		"nr": 38,
+		"farve": {
+			"bg": {"r": 93, "g": 25, "b": 24},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 350,
+		"navn": "Frederiksberggade",
+		"gruppe": "brun",
+		"leje": [
+			35,
+			175,
+			500,
+			1100,
+			1300,
+			1500
+		],
+		"hus": 200,
+		"type": "ownable"
+	},
+	{
+		"nr": 39,
+		"farve": {
+			"bg": {"r": 0, "g": 0, "b": 0, "a": 0},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"navn": "Ekstraordinær statsskat",
+		"type": "action"
+	},
+	{
+		"nr": 40,
+		"farve": {
+			"bg": {"r": 93, "g": 25, "b": 24},
+			"text": {"r": 0, "g": 0, "b": 0}
+		},
+		"pris": 400,
+		"navn": "Rådhuspladsen",
+		"gruppe": "brun",
+		"leje": [
+			50,
+			200,
+			600,
+			1400,
+			1700,
+			2000
+		],
+		"hus": 200,
+		"type": "ownable"
+	}
+]
