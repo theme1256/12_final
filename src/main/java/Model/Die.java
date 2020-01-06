@@ -1,28 +1,28 @@
 package Model;
 
-public class Die
-{
-    private final int MAX = 6; // maksimale face value
-    private int faceValue; // Integer der skal repræsentere faceValuen
+import java.util.Random;
 
-    Die()
-    {
-        faceValue = 1;
+public class Die {
+    private int numberOfSides = 6;
+    private int faceValue = 0;
+
+    Die() {}
+    Die(int s) {
+        if(s > 1)
+            this.numberOfSides = s;
     }
 
-    int roll()
-    {
-        faceValue = (int)(Math.random() * MAX) + 1;
-        return faceValue;
+    int roll() {
+        Random rand = new Random();
+        this.faceValue = 1 + rand.nextInt((this.numberOfSides));
+        return this.faceValue;
     }
 
-    int getFaceValue()
-    {
-        return faceValue;
+    int getFaceValue() {
+        return this.faceValue;
     }
 
-    public String toString()
-    {
-        return Integer.toString(faceValue);
+    public String toString() {
+        return Integer.toString(this.faceValue);
     }
 }
