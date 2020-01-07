@@ -11,7 +11,7 @@ public class BoardController {
 
     // street 22
     // Chance Card 6
-    // Tax
+    // Tax 2
     // Jail
     // Ferry
     // Parking
