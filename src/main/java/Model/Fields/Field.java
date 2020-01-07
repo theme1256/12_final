@@ -4,17 +4,20 @@ import java.awt.*;
 
 public class Field {
 
-    Color farve;
-    int pris;
-    String navn;
+    public Color farve;
+    public int pris;
+    public String navn;
+    public String type;
+    public String gruppe;
 
 
-    public Field(String navn, int pris, Color farve){
+    public Field(Color farve, int pris, String navn, String type){
 
         this.navn = navn;
         this.pris = pris;
         this.farve = farve;
-
+        this.type = type;
+        this.gruppe = gruppe;
 
     }
 

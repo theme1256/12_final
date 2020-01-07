@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class Board {
 
-    private Field[] fields = new Field[40];
+    public Field[] fields = new Field[40];
     int pris;
     public Board() {
         JSONParser jsonParser = new JSONParser();
@@ -40,20 +40,24 @@ public class Board {
         JSONObject farve = (JSONObject)field.get("farve");
         JSONObject bg = (JSONObject)farve.get("bg");
 
+
         int r = Math.toIntExact((long)bg.get("r"));
         int g = Math.toIntExact((long)bg.get("g"));
         int b = Math.toIntExact((long)bg.get("b"));
+        String type = (String) field.get("type");
         Color color = new Color(r,g,b);
 
 
-        if(!field.get("type").equals("chance")&&!field.get("type").equals("start")&&!field.get("type").equals("action")&&!field.get("type").equals("prison")&&!field.get("type").equals("safe")) {
+        if(!field.get("type").equals("chance")&&!field.get("type").equals("start")&&!field.get("type").equals("skat")&&!field.get("type").equals("prison")&&!field.get("type").equals("safe")&&!field.get("type").equals("action")) {
             this.pris = Math.toIntExact((long) field.get("pris"));
         } else {
             this.pris = 0;
         }
         int id = Math.toIntExact((long)field.get("nr"))-1;
-        this.fields[id] = new Field(navn, pris, color);
+        this.fields[id] = new Field(color, pris, navn, type);
         System.out.println(navn);
+        System.out.println(type);
+
     }
 
 
