@@ -24,7 +24,9 @@ public class Deck {
             Object obj = jsonParser.parse(reader);
             JSONArray cards = (JSONArray) obj;
 
-            cards.forEach(card -> parseCard((JSONObject) card));
+            for (Object card : cards) {
+                parseCard((JSONObject) card);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

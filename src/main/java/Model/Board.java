@@ -20,7 +20,9 @@ public class Board {
             Object obj = jsonParser.parse(reader);
             JSONArray fields = (JSONArray) obj;
 
-            fields.forEach(field -> parseField((JSONObject) field));
+            for (Object field : fields) {
+                parseField((JSONObject) field);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -33,6 +35,11 @@ public class Board {
     private static void parseField(JSONObject field) {
         //
     }
+
+    private int toInt(long inp) {
+        return Math.toIntExact(inp);
+    }
+
     private File getFileFromResources(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
 
