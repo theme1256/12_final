@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.ChanceCards.Card;
-import Model.Fields.Field;
-import Model.Fields.StartField;
-import Model.Fields.StreetField;
-import Model.Fields.TaxField;
+import Model.Fields.*;
 
 public class BoardController {
     private Field[] boardList = new Field[40];
@@ -13,7 +10,7 @@ public class BoardController {
     // Chance Card 6
     // Tax 2
     // Jail
-    // Ferry
+    // Ferry 4
     // Parking
     // beer
 
@@ -24,7 +21,7 @@ public class BoardController {
         //boardList[2] = new Card();
         boardList[3] = new StreetField(60, 4, "Hvidovre", "blue");
         boardList[4] = new TaxField("Indkomstskat", 200);
-        boardList[5] = new ;
+        boardList[5] = new FerryField("Øresund", 200, 6);
         boardList[6] = new StreetField(100,7,"Roskildevej", "pink");
         //boardList[7] = new Card();
         boardList[8] = new StreetField(100, 9, "Valby Langgade", "pink");
@@ -34,7 +31,7 @@ public class BoardController {
         boardList[12] = new ;
         boardList[13] = new StreetField(140,14,"Bülowsvej","green");
         boardList[14] = new StreetField(160,15,"Gl. Kongevej","green");
-        boardList[15] = new ;
+        boardList[15] = new FerryField("D.F.D.S", 200, 16);
         boardList[16] = new StreetField(180,17,"Bernstorffsvej","grey");
         //boardList[17] = new Card();
         boardList[18] = new StreetField(180,19,"Hellerupvej","grey");
@@ -44,7 +41,7 @@ public class BoardController {
         //boardList[22] = new Card();
         boardList[23] = new StreetField(220,24,"Østrebrogade","red");
         boardList[24] = new StreetField(240,25,"Grønningen","red");
-        boardList[25] = new ;
+        boardList[25] = new FerryField("Ø",200,26);
         boardList[26] = new StreetField(260,27,"Bredgade","white");
         boardList[27] = new StreetField(260,28,"Kgs. Nytorv","white");
         boardList[28] = new ;
@@ -54,7 +51,7 @@ public class BoardController {
         boardList[32] = new StreetField(300,33,"Vimmelskaftet","yellow");
         //boardList[33] = new Card();
         boardList[34] = new StreetField(320,35,"Nygade","yellow");
-        boardList[35] = new ;
+        boardList[35] = new FerryField("D/S Bornholm 1866",200,36);
         //boardList[36] = new Card();
         boardList[37] = new StreetField(350,38,"Frederiksborggade","dark red");
         boardList[38] = new TaxField("Ekstraordinær Statsskat", 100);
