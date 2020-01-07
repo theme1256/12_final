@@ -9,7 +9,7 @@ public class BoardController {
     // street 22
     // Chance Card 6
     // Tax 2
-    // Jail
+    // Jail 2
     // Ferry 4
     // Parking
     // beer
@@ -26,7 +26,7 @@ public class BoardController {
         //boardList[7] = new Card();
         boardList[8] = new StreetField(100, 9, "Valby Langgade", "pink");
         boardList[9] = new StreetField(120, 10, "Allégade","pink");
-        boardList[10] = new ;
+        boardList[10] = new JailField("Fængsel", 11);
         boardList[11] = new StreetField(140, 12,"Frederikberg Alle","green") ;
         boardList[12] = new ;
         boardList[13] = new StreetField(140,14,"Bülowsvej","green");
@@ -46,7 +46,7 @@ public class BoardController {
         boardList[27] = new StreetField(260,28,"Kgs. Nytorv","white");
         boardList[28] = new ;
         boardList[29] = new StreetField(280,30,"Østergade","white");
-        boardList[30] = new ;
+        boardList[30] = new JailField("Sættes i fængsel",31);
         boardList[31] = new StreetField(300,32,"Amagertorv","yellow");
         boardList[32] = new StreetField(300,33,"Vimmelskaftet","yellow");
         //boardList[33] = new Card();
