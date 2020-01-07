@@ -1,4 +1,4 @@
 package Model.Fields;
 
-public class StartField {
+public class StartField extends Field {
 }
