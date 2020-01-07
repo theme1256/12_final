@@ -19,7 +19,7 @@ public class BoardController {
     public BoardController() {
         boardList[0] = new StartField(1);
         boardList[1] = new StreetField(60, 2, "Rødovrevej", "blue");
-        boardList[2] = new ChanceCardsFeild(1);
+        boardList[2] = new ChanceCardsFeild(3);
         boardList[3] = new StreetField(60, 4, "Hvidovre", "blue");
         boardList[4] = new TaxField("Indkomstskat", 200, 5);
         boardList[5] = new FerryField("Øresund", 200, 6);
@@ -37,7 +37,7 @@ public class BoardController {
         boardList[17] =  new ChanceCardsFeild(18);
         boardList[18] = new StreetField(180,19,"Hellerupvej","grey");
         boardList[19] = new StreetField(200,20,"Strandvej","grey");
-        boardList[20] = new Helle();
+        boardList[20] = new Helle(21);
         boardList[21] = new StreetField(220,22,"Trianglen","red");
         boardList[22] = new ChanceCardsFeild(23);
         boardList[23] = new StreetField(220,24,"Østrebrogade","red");
