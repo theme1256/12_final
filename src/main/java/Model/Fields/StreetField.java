@@ -1,17 +1,11 @@
 package Model.Fields;
 
 public class StreetField extends Field {
-    int price;
-    int nr;
-    String streetName;
-    String color;
 
     // Constructor
-    public StreetField ( int price, int nr, String streetName, String color){
-        this.price = price;
-        this.nr = nr;
-        this.streetName = streetName;
-        this.color = color;
+    public StreetField (String name, String color, int Price, int nr){
+        super();
+
     }
 
 }
