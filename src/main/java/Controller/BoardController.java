@@ -11,7 +11,7 @@ public class BoardController {
 private static GUI gui;
 
     public BoardController() {
-        Deck deck = new Deck();
+        Board deck = new Board();
     }
 
 

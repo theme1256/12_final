@@ -13,7 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Deck {
-    Card[] cards = new Card[32];
+    private Card[] cards = new Card[32];
 
     public Deck() {
         JSONParser jsonParser = new JSONParser();
@@ -31,7 +31,7 @@ public class Deck {
             e.printStackTrace();
         }
 
-        System.out.println(cards[2].text);
+
     }
 
     private void parseCard(JSONObject card) {
@@ -39,6 +39,7 @@ public class Deck {
         //System.out.println(text.get("da"));
         int id = Math.toIntExact((long)card.get("id"))-1;
         this.cards[id] = new Card((String)text.get("da"));
+        System.out.println(text.get("da"));
     }
 
     private File getFileFromResources(String fileName) {

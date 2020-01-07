@@ -1,10 +1,12 @@
 package Model;
 
+import Model.Fields.Field;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +15,8 @@ import java.net.URL;
 
 public class Board {
 
+    private Field[] fields = new Field[40];
+    int pris;
     public Board() {
         JSONParser jsonParser = new JSONParser();
         File file = getFileFromResources("Felter.json");
@@ -30,9 +34,31 @@ public class Board {
         }
     }
 
-    private static void parseField(JSONObject field) {
-        //
+    private void parseField(JSONObject field) {
+
+        String navn = (String) field.get("navn");
+        JSONObject farve = (JSONObject)field.get("farve");
+        JSONObject bg = (JSONObject)farve.get("bg");
+
+        int r = Math.toIntExact((long)bg.get("r"));
+        int g = Math.toIntExact((long)bg.get("g"));
+        int b = Math.toIntExact((long)bg.get("b"));
+        Color color = new Color(r,g,b);
+
+
+        if(!field.get("type").equals("chance")&&!field.get("type").equals("start")&&!field.get("type").equals("action")&&!field.get("type").equals("prison")&&!field.get("type").equals("safe")) {
+            this.pris = Math.toIntExact((long) field.get("pris"));
+        } else {
+            this.pris = 0;
+        }
+        int id = Math.toIntExact((long)field.get("nr"))-1;
+        this.fields[id] = new Field(navn, pris, color);
+        System.out.println(navn);
     }
+
+
+
+
     private File getFileFromResources(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
 
