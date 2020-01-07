@@ -1,13 +1,18 @@
 package Model.Fields;
 
 public class Field {
-    int nr;
     String description;
+    String color;
+    int price;
+    int nr;
 
     //Constructor
-    public Field(int nr, String description){
-        this.nr = nr;
+    public Field(String description, String color, int price, int nr){
         this.description = description;
+        this.color = color;
+        this.price = price;
+        this.nr = nr;
+
     }
 
 }
