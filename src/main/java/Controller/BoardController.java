@@ -6,12 +6,13 @@ import Model.Fields.*;
 public class BoardController {
     private Field[] boardList = new Field[40];
 
+    // start 1
     // street 22
     // Chance Card 6
     // Tax 2
     // Jail 2
     // Ferry 4
-    // Parking
+    // Helle 1
     // beer 2
 
     // an array, that contains all fields and attributes
@@ -36,7 +37,7 @@ public class BoardController {
         //boardList[17] = new Card();
         boardList[18] = new StreetField(180,19,"Hellerupvej","grey");
         boardList[19] = new StreetField(200,20,"Strandvej","grey");
-        boardList[20] = new ;
+        boardList[20] = new Helle();
         boardList[21] = new StreetField(220,22,"Trianglen","red");
         //boardList[22] = new Card();
         boardList[23] = new StreetField(220,24,"Østrebrogade","red");
@@ -56,7 +57,6 @@ public class BoardController {
         boardList[37] = new StreetField(350,38,"Frederiksborggade","dark red");
         boardList[38] = new TaxField("Ekstraordinær Statsskat", 100);
         boardList[39] = new StreetField(400,40,"Rådhuspladsen","dark red");
-
 
 
     }
