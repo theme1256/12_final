@@ -14,20 +14,20 @@ public class BoardController {
 
     public BoardController() {
     }
-g
+
 private static void getNumberOfPlayers() {
         System.out.println("Indtast ønskede antal spillere");
 
         numberOfPlayers = gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
 }
 
-private static void getNumberOfPlayers() {
+private static void setStartBalance() {
         getNumberOfPlayers();
-        players =  Player[numberOfPlayers];
+        players = new Player[numberOfPlayers];
 
         if ((numberOfPlayers >=3) && (numberOfPlayers <= 6))
             startBalance = 1500;
-        else        {
+        else {
             System.out.println("Dette antal spillere er ikke understøttet");
             gui.showMessage("Dette antal spillere er ikke understøttet");
         }
