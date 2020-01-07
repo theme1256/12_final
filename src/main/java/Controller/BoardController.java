@@ -7,6 +7,8 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class BoardController {
+    public static String lang = "da";
+    public static int playerCount;
 
     public BoardController() {
         Deck deck = new Deck();
