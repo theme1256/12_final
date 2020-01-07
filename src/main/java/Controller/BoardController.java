@@ -12,7 +12,7 @@ public class BoardController {
     // Jail 2
     // Ferry 4
     // Parking
-    // beer
+    // beer 2
 
     // an array, that contains all fields and attributes
     public BoardController() {
@@ -28,7 +28,7 @@ public class BoardController {
         boardList[9] = new StreetField(120, 10, "Allégade","pink");
         boardList[10] = new JailField("Fængsel", 11);
         boardList[11] = new StreetField(140, 12,"Frederikberg Alle","green") ;
-        boardList[12] = new ;
+        boardList[12] = new BeerFeild("Tuborg",150, 12);
         boardList[13] = new StreetField(140,14,"Bülowsvej","green");
         boardList[14] = new StreetField(160,15,"Gl. Kongevej","green");
         boardList[15] = new FerryField("D.F.D.S", 200, 16);
@@ -44,7 +44,7 @@ public class BoardController {
         boardList[25] = new FerryField("Ø",200,26);
         boardList[26] = new StreetField(260,27,"Bredgade","white");
         boardList[27] = new StreetField(260,28,"Kgs. Nytorv","white");
-        boardList[28] = new ;
+        boardList[28] = new BeerFeild("Carlsberg",150,29);
         boardList[29] = new StreetField(280,30,"Østergade","white");
         boardList[30] = new JailField("Sættes i fængsel",31);
         boardList[31] = new StreetField(300,32,"Amagertorv","yellow");
