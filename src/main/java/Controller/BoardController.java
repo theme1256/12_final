@@ -17,11 +17,11 @@ public class BoardController {
 
     // an array, that contains all fields and attributes
     public BoardController() {
-        boardList[0] = new StartField();
+        boardList[0] = new StartField(1);
         boardList[1] = new StreetField(60, 2, "Rødovrevej", "blue");
         //boardList[2] = new Card();
         boardList[3] = new StreetField(60, 4, "Hvidovre", "blue");
-        boardList[4] = new TaxField("Indkomstskat", 200);
+        boardList[4] = new TaxField("Indkomstskat", 200, 5);
         boardList[5] = new FerryField("Øresund", 200, 6);
         boardList[6] = new StreetField(100,7,"Roskildevej", "pink");
         //boardList[7] = new Card();
@@ -29,7 +29,7 @@ public class BoardController {
         boardList[9] = new StreetField(120, 10, "Allégade","pink");
         boardList[10] = new JailField("Fængsel", 11);
         boardList[11] = new StreetField(140, 12,"Frederikberg Alle","green") ;
-        boardList[12] = new BeerFeild("Tuborg",150, 12);
+        boardList[12] = new BeerFeild("Tuborg",150, 13);
         boardList[13] = new StreetField(140,14,"Bülowsvej","green");
         boardList[14] = new StreetField(160,15,"Gl. Kongevej","green");
         boardList[15] = new FerryField("D.F.D.S", 200, 16);
@@ -55,7 +55,7 @@ public class BoardController {
         boardList[35] = new FerryField("D/S Bornholm 1866",200,36);
         //boardList[36] = new Card();
         boardList[37] = new StreetField(350,38,"Frederiksborggade","dark red");
-        boardList[38] = new TaxField("Ekstraordinær Statsskat", 100);
+        boardList[38] = new TaxField("Ekstraordinær Statsskat", 100, 39);
         boardList[39] = new StreetField(400,40,"Rådhuspladsen","dark red");
 
 
