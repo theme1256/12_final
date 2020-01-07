@@ -3,7 +3,7 @@ package Model.ChanceCards;
 import Model.Player;
 import gui_main.GUI;
 
-public class Card {
+public abstract class Card {
     protected int cardNumber;
     protected String text;
 
@@ -15,9 +15,7 @@ public class Card {
     public int getCardNumber() {
         return this.cardNumber;
     }
-
-    public void action(Player player, GUI gui) {
-    }
+    public abstract void action(Player player, GUI gui);
 
     @Override
     public String toString() {

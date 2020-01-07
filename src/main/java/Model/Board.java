@@ -23,11 +23,7 @@ public class Board {
             for (Object field : fields) {
                 parseField((JSONObject) field);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
