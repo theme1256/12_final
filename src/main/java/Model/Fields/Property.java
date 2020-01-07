@@ -15,4 +15,6 @@ public abstract class Property extends Field{
 
     int price;
     Player owner;
+
+
 }
