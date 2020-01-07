@@ -24,7 +24,7 @@ public class BoardController {
         boardList[4] = new TaxField("Indkomstskat", 200, 5);
         boardList[5] = new FerryField("Øresund", 200, 6);
         boardList[6] = new StreetField(100,7,"Roskildevej", "pink");
-        boardList[7] = new  ChanceCardsFeild(8);
+        boardList[7] = new ChanceCardsFeild(8);
         boardList[8] = new StreetField(100, 9, "Valby Langgade", "pink");
         boardList[9] = new StreetField(120, 10, "Allégade","pink");
         boardList[10] = new JailField("Fængsel", 11);
@@ -34,7 +34,7 @@ public class BoardController {
         boardList[14] = new StreetField(160,15,"Gl. Kongevej","green");
         boardList[15] = new FerryField("D.F.D.S", 200, 16);
         boardList[16] = new StreetField(180,17,"Bernstorffsvej","grey");
-        boardList[17] =  new ChanceCardsFeild(18);
+        boardList[17] = new ChanceCardsFeild(18);
         boardList[18] = new StreetField(180,19,"Hellerupvej","grey");
         boardList[19] = new StreetField(200,20,"Strandvej","grey");
         boardList[20] = new Helle(21);
@@ -50,10 +50,10 @@ public class BoardController {
         boardList[30] = new JailField("Sættes i fængsel",31);
         boardList[31] = new StreetField(300,32,"Amagertorv","yellow");
         boardList[32] = new StreetField(300,33,"Vimmelskaftet","yellow");
-        boardList[33] = new  ChanceCardsFeild(34);
+        boardList[33] = new ChanceCardsFeild(34);
         boardList[34] = new StreetField(320,35,"Nygade","yellow");
         boardList[35] = new FerryField("D/S Bornholm 1866",200,36);
-        boardList[36] = new  ChanceCardsFeild(37);
+        boardList[36] = new ChanceCardsFeild(37);
         boardList[37] = new StreetField(350,38,"Frederiksborggade","dark red");
         boardList[38] = new TaxField("Ekstraordinær Statsskat", 100, 39);
         boardList[39] = new StreetField(400,40,"Rådhuspladsen","dark red");
