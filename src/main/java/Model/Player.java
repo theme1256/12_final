@@ -29,10 +29,10 @@ public class Player {
                 Color.BLACK,
                 Color.WHITE,
                 (
-                        i == 0 ? GUI_Car.Type.CAR :
-                                i == 1 ? GUI_Car.Type.RACECAR :
-                                        i == 2 ? GUI_Car.Type.TRACTOR :
-                                                GUI_Car.Type.UFO
+                    i == 0 ? GUI_Car.Type.CAR :
+                    i == 1 ? GUI_Car.Type.RACECAR :
+                    i == 2 ? GUI_Car.Type.TRACTOR :
+                    GUI_Car.Type.UFO
                 ),
                 GUI_Car.Pattern.FILL);
 

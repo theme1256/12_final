@@ -8,7 +8,16 @@ import gui_main.GUI;
 
 public class BoardController {
 
+private static GUI gui;
+
     public BoardController() {
         Deck deck = new Deck();
     }
+
+
+
+
+
+
+
 }

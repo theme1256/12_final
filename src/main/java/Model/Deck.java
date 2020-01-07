@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.File;
 import java.net.URL;
 
+import Model.ChanceCards.Card;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Deck {
+    Card[] cards = new Card[32];
 
     public Deck() {
         JSONParser jsonParser = new JSONParser();
@@ -28,11 +30,17 @@ public class Deck {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        System.out.println(cards[2].text);
     }
 
-    private static void parseCard(JSONObject card) {
-        //
+    private void parseCard(JSONObject card) {
+        JSONObject text = (JSONObject)card.get("text");
+        //System.out.println(text.get("da"));
+        int id = Math.toIntExact((long)card.get("id"))-1;
+        this.cards[id] = new Card((String)text.get("da"));
     }
+
     private File getFileFromResources(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
 
