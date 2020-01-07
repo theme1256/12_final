@@ -1,9 +1,12 @@
 package Model.Fields;
 
-public class BeerFeild extends Field{
+import Model.Player;
 
-    //Constructor
-    public BeerFeild(String name, int price, int nr){
-        super();
+import java.awt.*;
+
+public class BeerFeild extends Property{
+
+    public BeerFeild(String name, String description, int nr, int price, Player owner) {
+        super(name, description, nr, price, owner);
     }
 }

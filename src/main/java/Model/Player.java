@@ -6,6 +6,7 @@ public class Player {
     private String position;
     private boolean inJail;
     private boolean turn;
+    private boolean owner;
 
 
 

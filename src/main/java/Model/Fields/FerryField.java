@@ -1,11 +1,11 @@
 package Model.Fields;
 
-public class FerryField extends Field {
+import Model.Player;
 
-    //Constructor
-    public FerryField(String name, int pris, int nr){
-        super();
+import java.awt.*;
 
+public class FerryField extends Property {
+    public FerryField(String name, String description, int nr, int price, Player owner) {
+        super(name, description, nr, price, owner);
     }
-
 }
