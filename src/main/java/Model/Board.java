@@ -25,11 +25,7 @@ public class Board {
             JSONArray fields = (JSONArray) obj;
 
             fields.forEach(field -> parseField((JSONObject) field));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
@@ -48,15 +44,14 @@ public class Board {
         Color color = new Color(r,g,b);
 
 
-        if(!field.get("type").equals("chance")&&!field.get("type").equals("start")&&!field.get("type").equals("skat")&&!field.get("type").equals("prison")&&!field.get("type").equals("safe")&&!field.get("type").equals("action")) {
+        if(!field.get("type").equals("chance")&&!field.get("type").equals("start")&&!field.get("type").equals("skat")
+                &&!field.get("type").equals("prison")&&!field.get("type").equals("safe")&&!field.get("type").equals("action")&&!field.get("type").equals("toJail")) {
             this.pris = Math.toIntExact((long) field.get("pris"));
         } else {
             this.pris = 0;
         }
         int id = Math.toIntExact((long)field.get("nr"))-1;
         this.fields[id] = new Field(color, pris, navn, type);
-        System.out.println(navn);
-        System.out.println(type);
 
     }
 
