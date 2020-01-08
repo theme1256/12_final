@@ -24,7 +24,7 @@ public class Board {
         boardList[1] = new StreetField("Rødovrevej", "",2,60, null, new Color(18,111,204));
         boardList[2] = new ChanceCardsFeild("Prøv lykken","",3);
         boardList[3] = new StreetField("Hvidovre","",4,60, null,new Color(18,111,204));
-        boardList[4] = new TaxField("Indkomstskat", 200, 5);
+        boardList[4] = new TaxField("Indkomstskat", "",200, 5);
         boardList[5] = new FerryField("Øresund","",6,200, null);
         boardList[6] = new StreetField("Roskildevej", "",7,100, null, new Color(221, 66, 195));
         boardList[7] = new ChanceCardsFeild("Prøv lykken","",8);
@@ -58,7 +58,7 @@ public class Board {
         boardList[35] = new FerryField("D/S Bornholm 1866","",36,200, null);
         boardList[36] = new ChanceCardsFeild("Prøv lykken","",37);
         boardList[37] = new StreetField("Frederiksborggade","",38,350, null,new Color(93,25,24));
-        boardList[38] = new TaxField("Ekstraordinær Statsskat", 100, 39);
+        boardList[38] = new TaxField("Ekstraordinær Statsskat", "",100, 39);
         boardList[39] = new StreetField("Rådhuspladsen","",40,400, null,new Color(93,25,24));
 
     }

@@ -8,7 +8,7 @@ import java.awt.*;
 
 public abstract class Property extends Field{
     public Property(String name, String description, int nr, int price, Player owner, Color color) {
-        super(name, description, nr);
+        super(name, description, price, nr);
         this.price = price;
         this.owner = owner;
     }
