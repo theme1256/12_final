@@ -77,9 +77,10 @@ public class Board {
 }
 
 
-    // Anden måde at lave felter på
-   /* public Board() {
-        boardList[0] = new StartField("Start Field","",1);
+    // an array, that contains all fields and attributes
+   public Board() {
+}
+  boardList[0] = new StartField("Start Field","",1);
         Player owner = null;
         boardList[1] = new StreetField("Rødovrevej", "",2,60, null, new Color(18,111,204));
         boardList[2] = new ChanceCardsFeild("Prøv lykken","",3);
@@ -120,6 +121,6 @@ public class Board {
         boardList[37] = new StreetField("Frederiksborggade","",38,350, null,new Color(93,25,24));
         boardList[38] = new TaxField("Ekstraordinær Statsskat", "",100, 39);
         boardList[39] = new StreetField("Rådhuspladsen","",40,400, null,new Color(93,25,24));
-
-    } */
+}
+    }
 

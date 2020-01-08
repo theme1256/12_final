@@ -31,10 +31,11 @@ public class Field {
     int nr;
 
     //Constructor
-    public Field(String name, String description, int price, int nr) {
+    public Field(String name, String description, int nr) {
         this.description = description;
         this.name = name;
         this.nr = nr;
+    }
     } */
 
 
