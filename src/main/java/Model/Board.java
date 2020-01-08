@@ -14,7 +14,7 @@ public Board() {
         fields[1] = new StreetField("Rødovrevej", "",2,60, new Color(18,111,204), null);
         fields[2] = new ChanceCardsField("Prøv lykken","",3);
         fields[3] = new StreetField("Hvidovre","",4,60, new Color(18,111,204), null);
-        fields[4] = new TaxField("Indkomstskat", "",5);
+        fields[4] = new TaxField("Betal indkomstskat 10% eller 200 kr", "Betal indkomstskat 10% eller 200 kr",5);
         fields[5] = new FerryField("Øresund","",6,200, null);
         fields[6] = new StreetField("Roskildevej", "",7,100, new Color(221, 66, 195), null);
         fields[7] = new ChanceCardsField("Prøv lykken","",8);
@@ -48,7 +48,7 @@ public Board() {
         fields[35] = new FerryField("D/S Bornholm 1866","",36,200, null);
         fields[36] = new ChanceCardsField("Prøv lykken","",37);
         fields[37] = new StreetField("Frederiksborggade","",38,350, new Color(93,25,24), null);
-        fields[38] = new TaxField("Ekstraordinær Statsskat", "",39);
+        fields[38] = new TaxField("Ekstraordinær Statsskat betal 100kr", "Ekstraordinær statsskat betal 100kr",39);
         fields[39] = new StreetField("Rådhuspladsen","",40,400,new Color(93,25,24), null);
         }
 

@@ -34,6 +34,7 @@ public class BoardController {
                 GUI_Field field = new GUI_Tax();
                 field.setTitle(felter[i].getName());
                 field.setSubText(" ");
+                field.setDescription(felter[i].getDescription());
                 gui_fields[i] = field;
 
             } else if(felter[i].getNr()==6||felter[i].getNr()==16||felter[i].getNr()==26||felter[i].getNr()==36){
