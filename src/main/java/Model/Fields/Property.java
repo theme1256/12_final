@@ -12,6 +12,11 @@ public abstract class Property extends Field{
         this.price = price;
         this.owner = owner;
     }
+    public Property(String name, String description, int nr, int price, Player owner, Color color) {
+        super(name, description, nr, color);
+        this.price = price;
+        this.owner = owner;
+    }
 
     int price;
     Player owner;

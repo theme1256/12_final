@@ -1,6 +1,6 @@
 package Model.Cards;
 
-import Cards.*;
+
 
 import java.util.Arrays;
 import java.util.Random;

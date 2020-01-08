@@ -5,11 +5,12 @@ import java.awt.*;
 
 //Til brug af anden felt metode HUSK AT TILFØJ FELT KLASSER
 public abstract class Field {
-    String description;
-    String name;
+    protected String description;
+    protected String name;
     //String color;
     //int price;
-    int nr;
+    protected int nr;
+    protected Color color;
 
     //Constructor
     public Field(String name, String description, int nr) {
@@ -17,6 +18,17 @@ public abstract class Field {
         this.name = name;
         this.nr = nr;
     }
+    public Field(String name, String description, int nr, Color color) {
+        this.description = description;
+        this.name = name;
+        this.nr = nr;
+        this.color = color;
+    }
+
+    public String getName() {return name;}
+    public int getNr() {return nr;}
+    public String getDescription() {return description;}
+    public Color getColor() {return color;}
 }
 
 

@@ -21,12 +21,23 @@ public class BoardController {
         felter = new Board();
         createGUIFromFields(felter.fields);
     }
-    private static void getNumberOfPlayers() {
-        System.out.println("Indtast ønskede antal spillere");
-
-        numberOfPlayers = gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
+    private static void createGUIFromFields(Field[] felter) {
+        GUI_Field[] gui_fields = new GUI_Field[felter.length];
+        for (int i = 0; i < felter.length; i++) {
+            GUI_Field field = new GUI_Street();
+            Field felt = felter[i];
+            field.setTitle(felter[i].getName());
+            field.setBackGroundColor(felter[i].getColor());
+            field.setSubText(String.valueOf(felter[i].getDescription()));
+            gui_fields[i] = field;
+        }
+        gui = new GUI(gui_fields);
     }
-    private void createGUIFromFields(Field[] felter) {
+
+
+
+
+    /*private void createGUIFromFields(Field[] felter) {
         GUI_Field[] gui_fields = new GUI_Field[felter.length];
 
         for (int i = 0; i < felter.length; i++) {
@@ -93,10 +104,15 @@ public class BoardController {
         }
         }
         gui = new GUI(gui_fields);
+    }*/
+
+    private static void getNumberOfPlayers() {
+        System.out.println("Indtast ønskede antal spillere");
+
+        numberOfPlayers = gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
     }
 
-
-private static void setStartBalance() {
+    private static void setStartBalance() {
         getNumberOfPlayers();
         players = new Player[numberOfPlayers];
 
