@@ -15,7 +15,7 @@ public class Board {
 
     public Board() {
         JSONParser jsonParser = new JSONParser();
-        File file = getFileFromResources("Felter.json");
+        File file = getFileFromResources(BoardController.lang + "/Fields.json");
         try (FileReader reader = new FileReader(file)) {
             Object obj = jsonParser.parse(reader);
             JSONArray fields = (JSONArray) obj;

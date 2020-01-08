@@ -19,7 +19,7 @@ public class Deck {
 
     public Deck() {
         JSONParser jsonParser = new JSONParser();
-        File file = getFileFromResources("Kort.json");
+        File file = getFileFromResources(BoardController.lang + "/Cards.json");
         try (FileReader reader = new FileReader(file)) {
             Object obj = jsonParser.parse(reader);
             JSONArray cards = (JSONArray) obj;
@@ -52,9 +52,8 @@ public class Deck {
     }
 
     private void parseCard(JSONObject card) {
-        JSONObject tmp = (JSONObject) card.get("text");
+        String text = (String) card.get("text");
         int id = toInt((long) card.get("id"))-1;
-        String text = (String) tmp.get(BoardController.lang);
 
         int amount;
 

@@ -1,0 +1,206 @@
+[
+	{
+		"id": 1,
+		"type": "move-special",
+		"text": "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.",
+		"to": [6, 16, 26, 36]
+	},
+	{
+		"id": 2,
+		"type": "move-special",
+		"text": "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.",
+		"to": [6, 16, 26, 36]
+	},
+	{
+		"id": 3,
+		"type": "money-special",
+		"text": "De har lagt penge ud til sammenskudsgilde. Mærkværdigvis betaler alle straks. Modtag fra hver medspiller kr. 25,00.",
+		"amount": 25
+	},
+	{
+		"id": 4,
+		"type": "money",
+		"text": "Modtag udbytte af Deres aktier\nkr. 50,00.",
+		"amount": 50
+	},
+	{
+		"id": 5,
+		"type": "money",
+		"text": "Betal kr. 125,00 for at modtagne 2 kasser øl.",
+		"amount": -125
+	},
+	{
+		"id": 6,
+		"type": "money",
+		"text": "Betal for vognvask og smøring\nkr. 15,00.",
+		"amount": -15
+	},
+	{
+		"id": 7,
+		"type": "jail",
+		"text": {
+			"da": "I anledning af Kongens fødselsdag benådes De herved for fængsel.\nDette kort opbevares, indtil De får brug for det, eller De kan sælge det.",
+		}
+	},
+	{
+		"id": 8,
+		"type": "move-to",
+		"text": "Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer >Start<, indkasserer De ikke kr. 200,00.",
+		"to": 11,
+		"start": false
+	},
+	{
+		"id": 9,
+		"type": "move-to",
+		"text": "Ryk frem til Frederiksbergallé. Hvis De passerer >Start<, indkassér kr. 200,00.",
+		"to": 12,
+		"start": true
+	},
+	{
+		"id": 10,
+		"type": "move",
+		"text": "Ryk tre felter tilbage.",
+		"amount": -3
+	},
+	{
+		"id": 11,
+		"type": "money",
+		"text": "De har rettidigt afleveret Deres abonnementskort.\nDepositum kr. 5,00 udbetales Dem af banken.",
+		"amount": 5
+	},
+	{
+		"id": 12,
+		"type": "jail",
+		"text": {
+			"da": "I anledning af Kongens fødselsdag benådes De herved for fængsel.\nDette kort opbevares, indtil De får brug for det, eller De kan sælge det.",
+		}
+	},
+	{
+		"id": 13,
+		"type": "move-to",
+		"text": "Tag ind på Rådhuspladsen.",
+		"to": 40,
+		"start": false
+	},
+	{
+		"id": 14,
+		"type": "money",
+		"text": "De har anskaffet et nyt dæk til Deres vogn.\nIndbetal kr. 120,00.",
+		"amount": -120
+	},
+	{
+		"id": 15,
+		"type": "money",
+		"text": "Værdien af egen avl fra nyttehaven udgør kr. 200,00, som De modtager af banken",
+		"amount": 200
+	},
+	{
+		"id": 16,
+		"type": "money",
+		"text": "De har solgt Deres gamle klude.\nModtag kr. 20,00.",
+		"amount": 20
+	},
+	{
+		"id": 17,
+		"type": "move",
+		"text": "Ryk tre felter tilbage.",
+		"amount": -3
+	},
+	{
+		"id": 18,
+		"type": "money",
+		"text": "Kommunen har eftergivet et kvartals skat, hæv i banken til en glad aften kr. 200,00.",
+		"amount": 200
+	},
+	{
+		"id": 19,
+		"type": "money",
+		"text": "De har været en tur i udlandet og haft for mange cigaretter med hjem.\nBetal told kr. 50,00.",
+		"amount": -50
+	},
+	{
+		"id": 20,
+		"type": "money-special",
+		"text": "De modtager >Matador-legatet for værdig trængende<, stort 2000,00.\nVed værdig trængende forstås at Deres formue, dvs. Deres kontante penge + skøder + bygninger ikke overstiger kr. 750,00.",
+		"amount": 2000,
+		"fortune": 750
+	},
+	{
+		"id": 21,
+		"type": "move-to",
+		"text": "Tag med Øresundsbåden - Flyt brukken frem, og hvis De passerer >Start<, indkassér kr. 200,00.",
+		"to": 6,
+		"start": true
+	},
+	{
+		"id": 22,
+		"type": "money-special",
+		"text": "Kul- og kokspriserne er steget, og De skal betale:\nkr. 25,00 pr. hus og\nkr. 125,00 pr. hotel.",
+		"hus": 25,
+		"hotel": 125
+	},
+	{
+		"id": 23,
+		"type": "money",
+		"text": "Efter auktionen på Assistenthuset, hvor De havde pantsat Deres tøj, modtager De ekstra kr. 108,00.",
+		"amount": 108
+	},
+	{
+		"id": 24,
+		"type": "move-to",
+		"text": "Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer >Start<, indkasserer De ikke kr. 200,00.",
+		"to": 11,
+		"start": false
+	},
+	{
+		"id": 25,
+		"type": "money-special",
+		"text": "Ejendomsskatterne er steget, ekstraudgifterne er:\nkr. 50,00 pr. hus\nkr. 125,00 pr. hotel.",
+		"hus": 50,
+		"hotel": 125
+	},
+	{
+		"id": 26,
+		"type": "money",
+		"text": "De har kørt frem for >Fuld Stop<. Betal kr. 150,00. i bøde.",
+		"amount": -150
+	},
+	{
+		"id": 27,
+		"type": "money",
+		"text": "Grundet på dyrtiden har De fået gageforhøjelse.\nModtag kr. 50,00.",
+		"amount": 50
+	},
+	{
+		"id": 28,
+		"type": "money",
+		"text": "De har måttet vedtage en parkeringsbøde.\nBetal kr. 60,00 til banken.",
+		"amount": -60
+	},
+	{
+		"id": 29,
+		"type": "move-to",
+		"text": "Ryk frem til Grønningen. Hvis de passerer >Start<, indkassér da kr. 200,00.",
+		"to": 25,
+		"start": true
+	},
+	{
+		"id": 30,
+		"type": "money",
+		"text": "Manufakturvarerne er blevet billigere og bedre, herved sparer De kr. 100,00, som De modtager af banken.",
+		"amount": 100
+	},
+	{
+		"id": 31,
+		"type": "move-to",
+		"text": "Ryk frem til >Start<.",
+		"to": 1,
+		"start": false
+	},
+	{
+		"id": 32,
+		"type": "money",
+		"text": "Deres præmieobligation er kommet ud. De modtager kr. 100,00 af banken.",
+		"amount": 100
+	}
+]
