@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.ChanceCards.Card;
+import Model.Fields.*;
 import Model.*;
 import Model.Fields.Field;
 import gui_fields.*;
