@@ -2,7 +2,28 @@ package Model.Fields;
 
 import java.awt.*;
 
-public class Field {
+
+//Til brug af anden felt metode HUSK AT TILFØJ FELT KLASSER
+public abstract class Field {
+    String description;
+    String name;
+    //String color;
+    //int price;
+    int nr;
+
+    //Constructor
+    public Field(String name, String description, int nr) {
+        this.description = description;
+        this.name = name;
+        this.nr = nr;
+    }
+}
+
+
+
+
+
+/*public class Field {
 
     public Color farve;
     public int pris;
@@ -19,26 +40,11 @@ public class Field {
         this.type = type;
         this.gruppe = gruppe;
 
-    }
-
-
-//Til brug af anden felt metode HUSK AT TILFØJ FELT KLASSER
-/* public abstract class Field {
-    String description;
-    String name;
-    //String color;
-    //int price;
-    int nr;
-
-    //Constructor
-    public Field(String name, String description, int nr) {
-        this.description = description;
-        this.name = name;
-        this.nr = nr;
-    }
     } */
 
 
-}
+
+
+
 
 

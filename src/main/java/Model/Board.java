@@ -2,21 +2,9 @@ package Model;
 
 import Model.Fields.*;
 
-import javax.swing.*;
 import java.awt.*;
 
 import Model.Fields.Field;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
 
 public class Board {
     private Field[] boardList = new Field[40];
@@ -27,7 +15,7 @@ public Board() {
         boardList[1] = new StreetField("Rødovrevej", "",2,60, null, new Color(18,111,204));
         boardList[2] = new ChanceCardsFeild("Prøv lykken","",3);
         boardList[3] = new StreetField("Hvidovre","",4,60, null,new Color(18,111,204));
-        boardList[4] = new TaxField("Indkomstskat", "",200, 5);
+        boardList[4] = new TaxField("Indkomstskat", "",5);
         boardList[5] = new FerryField("Øresund","",6,200, null);
         boardList[6] = new StreetField("Roskildevej", "",7,100, null, new Color(221, 66, 195));
         boardList[7] = new ChanceCardsFeild("Prøv lykken","",8);
@@ -35,7 +23,7 @@ public Board() {
         boardList[9] = new StreetField( "Allégade","",10,120, null,new Color(211,66,195));
         boardList[10] = new JailField("Fængsel", "",11);
         boardList[11] = new StreetField("Frederikberg Alle","",12,140, null, new Color(50,85,65)) ;
-        boardList[12] = new BeerFeild("Tuborg","",13,150, null);
+        boardList[12] = new BeerField("Tuborg","",13,150, null);
         boardList[13] = new StreetField("Bülowsvej","",14,140, null, new Color(50,85,65));
         boardList[14] = new StreetField("Gl. Kongevej","",15,160, null, new Color(50,85,65));
         boardList[15] = new FerryField("D.F.D.S", "", 16,200, null);
@@ -51,7 +39,7 @@ public Board() {
         boardList[25] = new FerryField("Ø","",26,200, null);
         boardList[26] = new StreetField("Bredgade","",27,260, null,new Color(186,186,186));
         boardList[27] = new StreetField("Kgs. Nytorv","",28,260, null,new Color(186,186,186));
-        boardList[28] = new BeerFeild("Carlsberg","",29,150, null);
+        boardList[28] = new BeerField("Carlsberg","",29,150, null);
         boardList[29] = new StreetField("Østergade","",30,280, null, new Color(186,186,186));
         boardList[30] = new JailField("Sættes i fængsel","",31);
         boardList[31] = new StreetField("Amagertorv","",32,300, null,new Color(224,184,74));
@@ -61,7 +49,7 @@ public Board() {
         boardList[35] = new FerryField("D/S Bornholm 1866","",36,200, null);
         boardList[36] = new ChanceCardsFeild("Prøv lykken","",37);
         boardList[37] = new StreetField("Frederiksborggade","",38,350, null,new Color(93,25,24));
-        boardList[38] = new TaxField("Ekstraordinær Statsskat", "",100, 39);
+        boardList[38] = new TaxField("Ekstraordinær Statsskat", "",39);
         boardList[39] = new StreetField("Rådhuspladsen","",40,400, null,new Color(93,25,24));
         }
 
@@ -104,9 +92,6 @@ public Board() {
         this.fields[id] = new Field(color, pris, navn, type);
 
     }
-
-
-
 
     private File getFileFromResources(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
