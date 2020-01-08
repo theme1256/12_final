@@ -52,7 +52,7 @@ public class Deck {
     }
 
     private void parseCard(JSONObject card) {
-        String text = (String) card.get("text");
+        String text = card.get("text").toString();
         int id = toInt((long) card.get("id"))-1;
 
         int amount;
@@ -80,8 +80,19 @@ public class Deck {
                 cards[id] = new Amount(id, text, amount);
                 break;
             case "money-special":
-                amount = toInt((long) card.get("amount"));
-                cards[id] = new AmountSpecial(id, text, amount);
+                if (card.containsKey("hus")) {
+                    int[] a = new int[2];
+                    a[0] = toInt((long) card.get("hus"));
+                    a[1] = toInt((long) card.get("hotel"));
+                    cards[id] = new AmountSpecial(id, text, a);
+                } else if (card.containsKey("fortune")) {
+                    amount = toInt((long) card.get("amount"));
+                    int fortune = toInt((long) card.get("fortune"));
+                    cards[id] = new AmountSpecial(id, text, amount, fortune);
+                } else {
+                    amount = toInt((long) card.get("amount"));
+                    cards[id] = new AmountSpecial(id, text, amount);
+                }
                 break;
             case "jail":
                 cards[id] = new Jail(id, text);
