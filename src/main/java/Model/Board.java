@@ -7,18 +7,11 @@ import java.awt.*;
 
 public class Board {
     private Field[] boardList = new Field[40];
+}
 
-    // start 1
-    // street 22
-    // Chance Card 6
-    // Tax 2
-    // Jail 2
-    // Ferry 4
-    // Helle 1
-    // beer 2
 
     // an array, that contains all fields and attributes
-    public Board() {
+   /* public Board() {
         boardList[0] = new StartField("Start Field","",1);
         Player owner = null;
         boardList[1] = new StreetField("Rødovrevej", "",2,60, null, new Color(18,111,204));
@@ -61,5 +54,5 @@ public class Board {
         boardList[38] = new TaxField("Ekstraordinær Statsskat", "",100, 39);
         boardList[39] = new StreetField("Rådhuspladsen","",40,400, null,new Color(93,25,24));
 
-    }
+    }*\
 }
