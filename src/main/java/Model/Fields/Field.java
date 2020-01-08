@@ -1,5 +1,7 @@
 package Model.Fields;
 
+import Model.Player;
+
 import java.awt.*;
 
 
@@ -8,6 +10,7 @@ public abstract class Field {
     protected String description;
     protected String name;
     protected int nr;
+    protected Player owner;
     protected Color color;
     protected int price;
 
@@ -17,18 +20,20 @@ public abstract class Field {
         this.name = name;
         this.nr = nr;
     }
-    public Field(String name, String description, int nr, int price) {
+    public Field(String name, String description, int nr, int price, Player owner) {
         this.description = description;
         this.name = name;
         this.nr = nr;
         this.price = price;
+        this.owner = owner;
     }
-    public Field(String name, String description, int nr,int price, Color color) {
+    public Field(String name, String description, int nr, int price, Color color, Player owner) {
         this.description = description;
         this.name = name;
         this.nr = nr;
         this.color = color;
         this.price = price;
+        this.owner = owner;
     }
 
     public String getName() {return name;}
