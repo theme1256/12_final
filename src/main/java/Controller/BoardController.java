@@ -6,16 +6,22 @@ import gui_fields.*;
 import gui_main.GUI;
 
 public class BoardController {
-
-private  static GUI gui;
-private  static Board felter;
+    private static int numberOfPlayers = 0;
+    private static GUI gui;
+    private static int startBalance = 0;
+    private static Player[] players;
+    private  static Board felter;
 
     public BoardController() {
 
         felter = new Board();
         createGUIFromFields(felter.fields);
     }
+    private static void getNumberOfPlayers() {
+        System.out.println("Indtast ønskede antal spillere");
 
+        numberOfPlayers = gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
+    }
     private void createGUIFromFields(Field[] felter) {
         GUI_Field[] gui_fields = new GUI_Field[felter.length];
 
@@ -83,6 +89,22 @@ private  static Board felter;
         }
         gui = new GUI(gui_fields);
     }
+
+
+private static void setStartBalance() {
+        getNumberOfPlayers();
+        players = new Player[numberOfPlayers];
+
+        if ((numberOfPlayers >=3) && (numberOfPlayers <= 6))
+            startBalance = 1500;
+        else {
+            System.out.println("Dette antal spillere er ikke understøttet");
+            gui.showMessage("Dette antal spillere er ikke understøttet");
+        }
+}
+
+
+
 
 
 }
