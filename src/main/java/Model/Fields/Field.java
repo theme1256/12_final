@@ -22,7 +22,8 @@ public class Field {
     }
 
 
-public abstract class Field {
+//Til brug af anden felt metode HUSK AT TILFØJ FELT KLASSER
+/* public abstract class Field {
     String description;
     String name;
     //String color;
@@ -34,7 +35,7 @@ public abstract class Field {
         this.description = description;
         this.name = name;
         this.nr = nr;
-    }
+    } */
 
 
 }

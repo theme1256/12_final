@@ -77,7 +77,7 @@ public class Board {
 }
 
 
-    // an array, that contains all fields and attributes
+    // Anden måde at lave felter på
    /* public Board() {
         boardList[0] = new StartField("Start Field","",1);
         Player owner = null;
@@ -121,5 +121,5 @@ public class Board {
         boardList[38] = new TaxField("Ekstraordinær Statsskat", "",100, 39);
         boardList[39] = new StreetField("Rådhuspladsen","",40,400, null,new Color(93,25,24));
 
-    }*\
-}
+    } */
+
