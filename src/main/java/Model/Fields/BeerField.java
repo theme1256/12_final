@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class BeerField extends Property{
 
-    public BeerField(String name, String description, int nr, int price, Player owner) {
-        super(name, description, nr, price, owner);
+    public BeerField(String name, String description, int nr, int price) {
+        super(name, description, nr, price);
     }
 }

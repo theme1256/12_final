@@ -7,10 +7,9 @@ import java.awt.*;
 public abstract class Field {
     protected String description;
     protected String name;
-    //String color;
-    //int price;
     protected int nr;
     protected Color color;
+    protected int price;
 
     //Constructor
     public Field(String name, String description, int nr) {
@@ -18,17 +17,25 @@ public abstract class Field {
         this.name = name;
         this.nr = nr;
     }
-    public Field(String name, String description, int nr, Color color) {
+    public Field(String name, String description, int nr, int price) {
+        this.description = description;
+        this.name = name;
+        this.nr = nr;
+        this.price = price;
+    }
+    public Field(String name, String description, int nr,int price, Color color) {
         this.description = description;
         this.name = name;
         this.nr = nr;
         this.color = color;
+        this.price = price;
     }
 
     public String getName() {return name;}
     public int getNr() {return nr;}
     public String getDescription() {return description;}
     public Color getColor() {return color;}
+    public int getPrice(){return price;};
 }
 
 
