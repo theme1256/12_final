@@ -1,13 +1,13 @@
 package Model;
 
-class Shaker {
+public class Shaker {
     private Die dice;
     private int numberOfDices = 2;
 
     Shaker() {
         this.dice = new Die();
     }
-    Shaker(int numberOfDices) {
+    public Shaker(int numberOfDices) {
         this.numberOfDices = numberOfDices;
         this.dice = new Die();
     }
