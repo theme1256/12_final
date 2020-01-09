@@ -503,7 +503,7 @@
 			"text": {"r": 0, "g": 0, "b": 0}
 		},
 		"navn": "De sættes i fængsel",
-		"type": "prison"
+		"type": "toJail"
 	},
 	{
 		"nr": 32,
@@ -630,7 +630,7 @@
 			"bg": {"r": 100, "g": 200, "b": 100, "a": 0},
 			"text": {"r": 0, "g": 0, "b": 0}
 		},
-		"navn": "Ekstraordinær statsskat",
+		"navn": "Ekstraordinær statsskat betal 100kr",
 		"type": "skat"
 	},
 	{
