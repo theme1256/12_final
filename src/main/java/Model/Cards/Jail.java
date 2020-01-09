@@ -20,11 +20,11 @@ public class Jail extends Kort {
         value = 0;
         switch (cardNumber){
             case 0:
-                cardDescription += "I anledning af Kongens fødselsdag benådes De herved for fængsel.\n" +
+                cardDescription = "I anledning af Kongens fødselsdag benådes De herved for fængsel.\n" +
                         "Dette kort opbevares, indtil De får brug for det, eller De kan sælge det.";
                 break;
             case 1:
-                cardDescription += "I anledning af Kongens fødselsdag benådes De herved for fængsel.\nDette kort opbevares, indtil De får brug for det, eller De kan sælge det.";
+                cardDescription = "I anledning af Kongens fødselsdag benådes De herved for fængsel.\nDette kort opbevares, indtil De får brug for det, eller De kan sælge det.";
                 break;
             default:
                 cardDescription += cardNumber+0;
