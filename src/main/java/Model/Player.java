@@ -12,38 +12,70 @@ public class Player {
     public String playerName;
     private GUI_Player car;
     private GUI gui;
+    private static   GUI_Car brik;
 
     public boolean passedStart = false;
-    public boolean extraTurn = true;
     private boolean jailPass = false;
-    private boolean freebee = false;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
+
+    private static boolean bilLock = false;
+    private static boolean bilLock2 = false;
+    private static boolean bilLock3 = false;
+    private static boolean bilLock4 = false;
+    private static boolean bilLock5 = false;
+    private static boolean bilLock6 = false;
+
 
     public Player(GUI gui, int startBalance, int i) {
         this.gui = gui;
         username();
         account = new Account(startBalance);
 
-        GUI_Car brik = new GUI_Car(
-                Color.BLACK,
-                Color.WHITE,
-                (
-                    i == 0 ? GUI_Car.Type.CAR :
-                    i == 1 ? GUI_Car.Type.CAR :
-                    i == 2 ? GUI_Car.Type.CAR :
-                    i == 3 ? GUI_Car.Type.CAR :
-                    i == 4 ? GUI_Car.Type.CAR :
-                    GUI_Car.Type.CAR
-                ),
-                GUI_Car.Pattern.FILL);
+        brikselect();
 
         GUI_Player playercar = new GUI_Player(playerName, account.balance, brik);
         gui.addPlayer(playercar);
         car = playercar;
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
+    private static void brikselect(){
+
+        while(true){
+
+            if(!bilLock){
+                brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                bilLock = true;
+                System.out.println("BLACK");
+                break;
+            }if(!bilLock2 && bilLock){
+                brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                System.out.println("WHITE");
+                bilLock2 = true;
+                break;
+            } if(!bilLock3 && bilLock && bilLock2){
+                brik = new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                bilLock3 = true;
+                break;
+            }if(!bilLock4 && bilLock && bilLock2&&bilLock3){
+                brik = new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                bilLock4 = true;
+                break;
+            }if(!bilLock5 && bilLock && bilLock2&&bilLock3&&bilLock4){
+                brik = new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                bilLock5 = true;
+                break;
+            }if(!bilLock6 && bilLock && bilLock2&&bilLock3&&bilLock4&&bilLock5){
+                brik = new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+                bilLock6 = true;
+                break;
+            }
+
+        }
+
+    }
+
 
     public Player(int startBalance, String username) {
         account = new Account(startBalance);

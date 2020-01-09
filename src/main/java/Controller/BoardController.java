@@ -128,7 +128,7 @@ public class BoardController {
 
     private static void handleChancekort(Player player) {
         if(felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
-
+            gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
             Kort chanceKort = chanceDeck.traekkort();
 
             System.out.println(chanceKort);
