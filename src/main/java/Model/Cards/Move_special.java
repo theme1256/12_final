@@ -11,7 +11,7 @@ public class Move_special extends Kort {
                         "Hvis selskabet ikke ejes af nogen, kan De købe det af banken";
                 break;
             case 31:
-                cardDescription += "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.";
+                cardDescription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.";
                 break;
             default:
             cardDescription +=cardNumber+0;
