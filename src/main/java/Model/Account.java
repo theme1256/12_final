@@ -1,21 +1,14 @@
 package Model;
 
 public class Account {
-    int startBalance;
-    int updateBalance;
+    public int balance;
 
-    //Constructor
-    public Account (int startBalance){
-        this.startBalance = startBalance;
+    Account(int startBalance){
+        this.balance = startBalance;
     }
 
-
-    // get and set methods
-    public int getUpdateBalance() {
-        return updateBalance;
-    }
-
-    public void setUpdateBalance(int updateBalance) {
-        this.updateBalance = updateBalance;
+    public int updateBalance(int diff){
+        this.balance += diff;
+        return this.balance;
     }
 }

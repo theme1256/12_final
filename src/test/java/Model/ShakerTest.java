@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ShakerTest {
 
     @Test
-    void shake() {
+    public void shake() {
         Shaker shaker = new Shaker();
         int[] sum = shaker.shake();
         assertTrue((1 <= sum[0] && sum[0] <= 6));
@@ -15,7 +15,7 @@ public class ShakerTest {
     }
 
     @Test
-    void shake_and_sum() {
+    public void shake_and_sum() {
         Shaker shaker = new Shaker();
         int sum = shaker.shake_and_sum();
         assertTrue((2 <= sum && sum <= 12));
