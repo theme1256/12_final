@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.File;
 import java.net.URL;
 
-import Model.ChanceCards.Card;
-
 public class Deck {/*
     private Card[] cards = new Card[32];
 
