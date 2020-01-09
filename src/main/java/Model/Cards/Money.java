@@ -1,10 +1,71 @@
 package Model.Cards;
 
+import Model.Player;
+import gui_main.GUI;
+
 public class Money extends Kort {
     public Money(int cardNumber) {
         super(cardNumber);
     }
+
+    @Override
+    public void action(Player player, GUI gui) {
+        switch (this.cardNumber) {
+            case 2:
+                player.updateBalance(+50);
+                break;
+            case 3:
+                player.updateBalance(-125);
+                break;
+            case 4:
+                player.updateBalance(-15);
+                break;
+            case 5:
+                player.updateBalance(+5);
+                break;
+            case 6:
+                player.updateBalance(-120);
+                break;
+            case 7:
+                player.updateBalance(+200);
+                break;
+            case 8:
+                player.updateBalance(+20);
+                break;
+            case 9:
+                player.updateBalance(+200);
+                break;
+            case 10:
+                player.updateBalance(-50);
+                break;
+            case 11:
+                player.updateBalance(+100);
+                break;
+            case 12:
+                player.updateBalance(-150);
+                break;
+            case 13:
+                player.updateBalance(+50);
+                break;
+            case 14:
+                player.updateBalance(-60);
+                break;
+            case 15:
+                player.updateBalance(+100);
+                break;
+            case 16:
+                player.updateBalance(+100);
+                break;
+            default:
+                break;
+        }
+        gui.displayChanceCard(toString());
+    }
+
     public String toString(){
+        cardDescription = "";
+        action = "";
+        value = 0;
         switch (cardNumber){
             case 2:
                 cardDescription += "Modtag udbytte af Deres aktier\nkr. 50,00.";
@@ -52,7 +113,8 @@ public class Money extends Kort {
                 cardDescription += "Deres præmieobligation er kommet ud. De modtager kr. 100,00 af banken.";
                 break;
             default:
-                cardDescription += cardNumber+0;
+                cardDescription = "Ukendt Penge-kort... nummer: " + cardNumber;
+                System.out.println(cardDescription);
                 break;
         }
         return cardDescription;
