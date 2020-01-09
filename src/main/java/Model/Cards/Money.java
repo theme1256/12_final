@@ -59,6 +59,7 @@ public class Money extends Kort {
             default:
                 break;
         }
+
         gui.displayChanceCard(toString());
     }
 
