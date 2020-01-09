@@ -34,6 +34,7 @@ public class BoardController {
     }
 
     private static void initVars() {
+
         felter = new Board();
         createGUIFromFields(felter.fields);
         shaker = new Shaker(2);
@@ -129,24 +130,15 @@ public class BoardController {
         if(felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
 
             Kort chanceKort = chanceDeck.traekkort();
-            System.out.println(chanceKort);
-            chanceKort.action(player, gui);
 
-        }
-    }
-    private static void traekJail(Player player){
-        if(felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
-
-            Kort chanceKort = chanceDeck.traekkort();
             System.out.println(chanceKort);
-            System.out.println("Hej");
             chanceKort.action(player, gui);
 
         }
     }
 
     private static boolean handleRound(Player player) {
-        gui.displayChanceCard("");
+
         // Slå med terningen når spilleren trykker
         gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
