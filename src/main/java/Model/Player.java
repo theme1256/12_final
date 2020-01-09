@@ -71,8 +71,8 @@ public class Player {
     public void move(int amount) {
         this.previousFelt = this.currentFelt;
         this.currentFelt += amount;
-        if(this.currentFelt >= 24) {
-            this.currentFelt -= 24;
+        if(this.currentFelt >= 40) {
+            this.currentFelt -= 40;
             this.passedStart = true;
         }
         this.updateCar();
