@@ -1,9 +1,8 @@
 package Controller;
 
-import Model.Cards.ChanceKortDeck;
+import Model.ChanceDeck;
 
 import Model.Cards.*;
-import Model.Fields.*;
 import Model.*;
 import Model.Fields.Field;
 import gui_fields.*;
@@ -18,7 +17,7 @@ public class BoardController {
     private static Player[] players;
     private static Board felter;
     private static Shaker shaker;
-    private static ChanceKortDeck chanceDeck;
+    private static ChanceDeck chanceDeck;
 
     public BoardController() {
 
@@ -38,7 +37,7 @@ public class BoardController {
         felter = new Board();
         createGUIFromFields(felter.fields);
         shaker = new Shaker(2);
-        chanceDeck = new ChanceKortDeck();
+        chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
         while (startBalance == 0) {
             setStartBalance();
@@ -131,6 +130,7 @@ public class BoardController {
 
             Kort chanceKort = chanceDeck.traekkort();
             System.out.println(chanceKort);
+            chanceKort.action(player, gui);
 
         }
     }

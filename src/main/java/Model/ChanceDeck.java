@@ -1,16 +1,18 @@
-package Model.Cards;
+package Model;
 
 
+
+import Model.Cards.*;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class ChanceKortDeck {
+public class ChanceDeck {
     private int cardNumber;
     private Kort kort = new Kort(0);
     private Kort[] cards;
 
-    public ChanceKortDeck() {
+    public ChanceDeck() {
         this.cards = new Kort[32];
         cards();
     }
