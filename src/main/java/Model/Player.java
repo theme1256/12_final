@@ -84,6 +84,7 @@ public class Player {
     public void moveTo(int to) {
         this.previousFelt = this.currentFelt;
         this.currentFelt = to;
+
         this.updateCar();
     }
 

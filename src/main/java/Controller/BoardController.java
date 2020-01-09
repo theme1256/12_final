@@ -149,6 +149,7 @@ public class BoardController {
 
         player.move(value);
 
+        handleGetInJail(player);
         //Håndterer chancekort
        handleChancekort(player);
 
@@ -160,6 +161,7 @@ public class BoardController {
            gui.setDice(val1[0],val1[1]);
            int value1 = val1[0] + val1[1];
            player.move(value1);
+           handleGetInJail(player);
 
            if((val1[0]==1 && val1[1] ==1)||(val1[0]==2 && val1[1] ==2) ||(val1[0]==3 && val1[1] ==3) || (val1[0]==4 && val1[1] ==4) || (val1[0]==5 && val1[1] ==5) ||(val1[0]==6 && val1[1] ==6)){
                gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
@@ -170,6 +172,7 @@ public class BoardController {
                gui.setDice(val2[0],val2[1]);
                int value2 = val2[0] + val2[1];
                player.move(value2);
+               handleGetInJail(player);
 
                if((val2[0]==1 && val2[1] ==1)||(val2[0]==2 && val2[1] ==2) ||(val2[0]==3 && val2[1] ==3) || (val2[0]==4 && val2[1] ==4) || (val2[0]==5 && val2[1] ==5) ||(val2[0]==6 && val2[1] ==6)){
                     gui.getUserButtonPressed(player + ", er for heldig til det kan være rigtigt! Du ryger i fængsel", "ØV!");
@@ -187,7 +190,7 @@ public class BoardController {
     }
 
     private static void handlePassStart(Player player) {
-        if (player.passedStart) {
+        if (player.passedStart == true) {
             gui.getUserButtonPressed(player + " passerer start og modtager 200 kr", "OK");
             player.updateBalance(200);
             player.passedStart = false;
@@ -195,7 +198,13 @@ public class BoardController {
         }
     }
 
+    private static void handleGetInJail(Player player) {
+        if(player.currentFelt == 31) {
+            gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
+            player.moveTo(10,false);
 
+        }
+    }
 
 
 
