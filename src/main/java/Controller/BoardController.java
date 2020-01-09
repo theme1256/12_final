@@ -180,7 +180,19 @@ public class BoardController {
            }
        }
 
+        //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brætte
+        handlePassStart(player);
+
         return  player.account.balance > 0;
+    }
+
+    private static void handlePassStart(Player player) {
+        if (player.passedStart) {
+            gui.getUserButtonPressed(player + " passerer start og modtager 200 kr", "OK");
+            player.updateBalance(200);
+            player.passedStart = false;
+
+        }
     }
 
 
