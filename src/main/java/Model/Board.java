@@ -8,7 +8,7 @@ public class Board {
     public Field[] fields = new Field[40];
 
 public Board() {
-      fields[0] = new StartField("Start","",1);
+        fields[0] = new StartField("Start","",1);
         fields[1] = new StreetField("Rødovrevej", "",2,60, new Color(18,111,204), null);
         fields[2] = new ChanceCardsField("Prøv lykken","",3);
         fields[3] = new StreetField("Hvidovre","",4,60, new Color(18,111,204), null);
