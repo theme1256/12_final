@@ -62,6 +62,7 @@ public class ChanceDeck {
         return trukket;
     }
 
+
     public void blandkort() {
         int index;
         Kort temp;
