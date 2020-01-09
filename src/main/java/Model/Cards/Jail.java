@@ -8,16 +8,17 @@ public class Jail extends Kort {
         super(cardNumber);
     }
 
-
     @Override
     public void action(Player player, GUI gui) {
         player.setJailPass(true);
         gui.displayChanceCard(toString());
     }
 
-    @Override
-    public String toString() {
-        switch (cardNumber) {
+    public String toString(){
+        cardDescription = "";
+        action = "";
+        value = 0;
+        switch (cardNumber){
             case 0:
                 cardDescription = "I anledning af Kongens fødselsdag benådes De herved for fængsel.\n" +
                         "Dette kort opbevares, indtil De får brug for det, eller De kan sælge det.";
