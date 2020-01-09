@@ -7,12 +7,8 @@ import java.io.File;
 import java.net.URL;
 
 import Model.ChanceCards.Card;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-public class Deck {
+public class Deck {/*
     private Card[] cards = new Card[32];
 
     public Deck() {
@@ -51,5 +47,5 @@ public class Deck {
         } else {
             return new File(resource.getFile());
         }
-    }
+    }*/
 }
