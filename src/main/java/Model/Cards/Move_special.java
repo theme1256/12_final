@@ -7,16 +7,16 @@ public class Move_special extends Kort {
     public String toString(){
         switch (cardNumber){
             case 30:
-                cardDiscription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til.\n " +
+                cardDescription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til.\n " +
                         "Hvis selskabet ikke ejes af nogen, kan De købe det af banken";
                 break;
             case 31:
-                cardDiscription += "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.";
+                cardDescription += "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.";
                 break;
             default:
-            cardDiscription +=cardNumber+0;
+            cardDescription +=cardNumber+0;
             break;
         }
-        return cardDiscription;
+        return cardDescription;
     }
 }
