@@ -8,11 +8,22 @@
     <artifactId>12_final</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>Matador_GUI-repository</id>
+            <url>https://github.com/diplomit-dtu/Matador_GUI/raw/repository</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>diplomitdtu</groupId>
             <artifactId>matadorgui</artifactId>
-            <version>3.1.7</version>
+            <version>3.1.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -20,15 +31,10 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
     </dependencies>
 
     <properties>
-        <maven.compiler.source>1.11</maven.compiler.source>
-        <maven.compiler.target>1.11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 </project>
