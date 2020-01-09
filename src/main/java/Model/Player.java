@@ -14,6 +14,7 @@ public class Player {
     private GUI gui;
 
     public boolean passedStart = false;
+    public boolean extraTurn = true;
     private boolean jailPass = false;
     private boolean freebee = false;
 

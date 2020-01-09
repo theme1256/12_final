@@ -2,7 +2,7 @@ package Model;
 
 public class Shaker {
     private Die dice;
-    private int numberOfDices = 2;
+    private int numberOfDices;
 
     Shaker() {
         this.dice = new Die();
