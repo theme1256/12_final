@@ -1,9 +1,8 @@
 package Controller;
 
-import Model.Cards.ChanceKortDeck;
+import Model.ChanceDeck;
 
 import Model.Cards.*;
-import Model.Fields.*;
 import Model.*;
 import Model.Fields.Field;
 import gui_fields.*;
@@ -18,7 +17,7 @@ public class BoardController {
     private static Player[] players;
     private static Board felter;
     private static Shaker shaker;
-    private static ChanceKortDeck chanceDeck;
+    private static ChanceDeck chanceDeck;
 
     public BoardController() {
 
@@ -35,10 +34,11 @@ public class BoardController {
     }
 
     private static void initVars() {
+
         felter = new Board();
         createGUIFromFields(felter.fields);
         shaker = new Shaker(2);
-        chanceDeck = new ChanceKortDeck();
+        chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
         while (startBalance == 0) {
             setStartBalance();
@@ -130,28 +130,81 @@ public class BoardController {
         if(felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
 
             Kort chanceKort = chanceDeck.traekkort();
+
             System.out.println(chanceKort);
+            chanceKort.action(player, gui);
 
         }
     }
 
     private static boolean handleRound(Player player) {
-        gui.displayChanceCard("");
+
         // Slå med terningen når spilleren trykker
         gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
         // Vis resultatet og opdater felt
-        int val = shaker.shake_and_sum();
-        gui.setDie(val);
-        player.move(val);
+        int[] val = shaker.shake();
+        gui.setDice(val[0],val[1]);
+        int value = val[0] + val[1];
 
+        player.move(value);
+
+        handleGetInJail(player);
         //Håndterer chancekort
-        handleChancekort(player);
+       handleChancekort(player);
+
+       if((val[0]==1 && val[1] ==1)||(val[0]==2 && val[1] ==2) ||(val[0]==3 && val[1] ==3) || (val[0]==4 && val[1] ==4) || (val[0]==5 && val[1] ==5) ||(val[0]==6 && val[1] ==6)){
+
+           gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
+           gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+           int[] val1 = shaker.shake();
+           gui.setDice(val1[0],val1[1]);
+           int value1 = val1[0] + val1[1];
+           player.move(value1);
+           handleGetInJail(player);
+
+           if((val1[0]==1 && val1[1] ==1)||(val1[0]==2 && val1[1] ==2) ||(val1[0]==3 && val1[1] ==3) || (val1[0]==4 && val1[1] ==4) || (val1[0]==5 && val1[1] ==5) ||(val1[0]==6 && val1[1] ==6)){
+               gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
+               gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+
+               System.out.println("Tillykke du får en ekstra tur");
+               int[] val2 = shaker.shake();
+               gui.setDice(val2[0],val2[1]);
+               int value2 = val2[0] + val2[1];
+               player.move(value2);
+               handleGetInJail(player);
+
+               if((val2[0]==1 && val2[1] ==1)||(val2[0]==2 && val2[1] ==2) ||(val2[0]==3 && val2[1] ==3) || (val2[0]==4 && val2[1] ==4) || (val2[0]==5 && val2[1] ==5) ||(val2[0]==6 && val2[1] ==6)){
+                    gui.getUserButtonPressed(player + ", er for heldig til det kan være rigtigt! Du ryger i fængsel", "ØV!");
+                    player.moveTo(10,false);
+
+               }
+
+           }
+       }
+
+        //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brætte
+        handlePassStart(player);
 
         return  player.account.balance > 0;
     }
 
+    private static void handlePassStart(Player player) {
+        if (player.passedStart == true) {
+            gui.getUserButtonPressed(player + " passerer start og modtager 200 kr", "OK");
+            player.updateBalance(200);
+            player.passedStart = false;
 
+        }
+    }
+
+    private static void handleGetInJail(Player player) {
+        if(player.currentFelt == 31) {
+            gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
+            player.moveTo(10,false);
+
+        }
+    }
 
 
 
