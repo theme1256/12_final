@@ -4,8 +4,6 @@ import Model.Fields.*;
 
 import java.awt.*;
 
-import Model.Fields.Field;
-
 public class Board {
     public Field[] fields = new Field[40];
 
