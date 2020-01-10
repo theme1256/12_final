@@ -4,7 +4,7 @@ public class Shaker {
     private Die dice;
     private int numberOfDices;
 
-    Shaker() {
+    public Shaker() {
         this.dice = new Die();
     }
     public Shaker(int numberOfDices) {

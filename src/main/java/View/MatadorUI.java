@@ -1,11 +1,11 @@
 package View;
 
-import Controller.BoardController;
+import Controller.BoardControllerGUI;
 
 public class MatadorUI {
-    static BoardController boardController;
+    static BoardControllerGUI boardControllerGUI;
 
     public static void main(String[] args) {
-        boardController = new BoardController();
+        boardControllerGUI = new BoardControllerGUI();
     }
 }
