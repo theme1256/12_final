@@ -4,24 +4,27 @@ import Model.Cards.ChanceCards;
 import Model.ChanceDeck;
 import Model.Player;
 import View.MatadorUI;
+import gui_main.GUI;
 
 public class ChanceCardController {
-    static ChanceDeck chanceDeck;
+    private FieldController fieldController;
+    private GUI gui;
+    private ChanceDeck chanceDeck;
 
-    ChanceCardController(){
+    public ChanceCardController(FieldController fc, GUI gui) {
+        this.fieldController = fc;
+        this.gui = gui;
         chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
-
     }
 
-    public static void handleChancekort(Player player) {
-        if(MatadorUI.felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
-            MatadorUI.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
-            ChanceCards chanceChanceCards = chanceDeck.traekkort();
+    public void handleChancekort(Player player) {
+        if(fieldController.getField(player.currentFelt).getName().equals("Prøv lykken")) {
+            this.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
+            ChanceCards card = chanceDeck.traekkort();
 
-            System.out.println(chanceChanceCards);
-            chanceChanceCards.action(player, MatadorUI.gui);
-
+            System.out.println(card);
+            card.action(player, this.gui);
         }
     }
 }

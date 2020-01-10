@@ -5,9 +5,9 @@ import Model.Fields.*;
 import java.awt.*;
 
 public class BoardsFields {
-    public Model.Fields.Field[] fields = new Model.Fields.Field[40];
+    private Field[] fields = new Field[40];
 
-public BoardsFields() {
+    public BoardsFields() {
         fields[0] = new StartField("Start","",1);
         fields[1] = new StreetField("Rødovrevej", "",2,60, new Color(18,111,204), null);
         fields[2] = new ChanceCardsField("Prøv lykken","",3);
@@ -48,9 +48,13 @@ public BoardsFields() {
         fields[37] = new StreetField("Frederiksborggade","",38,350, new Color(93,25,24), null);
         fields[38] = new TaxField("Ekstraordinær Statsskat betal 100kr", "Ekstraordinær statsskat betal 100kr",39);
         fields[39] = new StreetField("Rådhuspladsen","",40,400,new Color(93,25,24), null);
-        }
+    }
 
-        /*  public Field[] fields = new Field[40];
+    public Field[] getFields() {
+            return fields;
+    }
+
+/*  public Field[] fields = new Field[40];
     int pris;
     public Board() {
         JSONParser jsonParser = new JSONParser();

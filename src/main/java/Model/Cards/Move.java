@@ -12,6 +12,7 @@ public class Move extends ChanceCards {
     public void action(Player player, GUI gui) {
         switch (this.cardNumber) {
             case 21:
+            case 27:
                 player.moveTo(10, false);
                 break;
             case 22:
@@ -33,9 +34,6 @@ public class Move extends ChanceCards {
                 else
                 player.moveTo(5, false);
                 break;
-            case 27:
-                player.moveTo(10, false);
-                break;
             case 28:
                 if (player.currentFelt >= 34){
                     player.moveTo(24, true);
@@ -55,6 +53,7 @@ public class Move extends ChanceCards {
     public String toString(){
         switch (cardNumber){
             case 21:
+            case 27:
                 cardDescription = "Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer >Start<, indkasserer De ikke kr. 200,00.";
                 break;
             case 22:
@@ -71,9 +70,6 @@ public class Move extends ChanceCards {
                 break;
             case 26:
                 cardDescription = "Tag med Øresundsbåden - Flyt brikken frem, og hvis De passerer >Start<, indkassér kr. 200,00.";
-                break;
-            case 27:
-                cardDescription = "Gå i fængsel. Ryk direkte til fængslet. Selv om De passerer >Start<, indkasserer De ikke kr. 200,00.";
                 break;
             case 28:
                 cardDescription = "Ryk frem til Grønningen. Hvis de passerer >Start<, indkassér da kr. 200,00.";
