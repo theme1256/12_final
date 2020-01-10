@@ -1,8 +1,5 @@
 package Controller;
-import Model.ChanceDeck;
-import Model.Player;
 import Model.Shaker;
-import View.MatadorUI;
 import gui_main.GUI;
 
 

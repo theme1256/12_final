@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Player;
-import View.MatadorUI;
 import gui_main.GUI;
 
 

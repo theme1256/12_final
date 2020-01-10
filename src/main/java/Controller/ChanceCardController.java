@@ -3,7 +3,6 @@ package Controller;
 import Model.Cards.ChanceCards;
 import Model.ChanceDeck;
 import Model.Player;
-import View.MatadorUI;
 import gui_main.GUI;
 
 public class ChanceCardController {
