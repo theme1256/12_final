@@ -8,12 +8,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ChanceDeck {
-    private int cardNumber;
-    private Kort kort = new Kort(0);
-    private Kort[] cards;
+    private ChanceCards[] cards;
 
     public ChanceDeck() {
-        this.cards = new Kort[32];
+        this.cards = new ChanceCards[32];
         cards();
     }
 
@@ -52,8 +50,8 @@ public class ChanceDeck {
         cards[31] = new Move_special(31);
     }
 
-    public Kort traekkort() {
-        Kort trukket = cards[0];
+    public ChanceCards traekkort() {
+        ChanceCards trukket = cards[0];
         for (int i = 0; i < cards.length - 1; i++) {
             cards[i] = cards[i + 1];
 
@@ -65,7 +63,7 @@ public class ChanceDeck {
 
     public void blandkort() {
         int index;
-        Kort temp;
+        ChanceCards temp;
         Random random = new Random();
         for (int i = cards.length - 1; i > 0; i--) {
             index = random.nextInt(i + 1);

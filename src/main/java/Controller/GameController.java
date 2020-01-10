@@ -3,11 +3,13 @@ package Controller;
 import Model.ChanceDeck;
 import Model.Player;
 import Model.Shaker;
+import View.MatadorUI;
 
 public class GameController {
 
     static int startBalance = 0;
-    static Shaker shaker;
+
+    //static Shaker shaker;
     static ChanceDeck chanceDeck;
     static int[] val;
     static int value;
@@ -24,8 +26,9 @@ public class GameController {
         }
     }
 
-    static void initVars() {
-        shaker = new Shaker(2);
+    public static void initVars() {
+        //shaker = new Shaker(2);
+        DiceController dice = new DiceController();
         chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
         PlayerController.createPlayers();
@@ -33,7 +36,7 @@ public class GameController {
 
     private static void getNumberOfPlayers() {
         System.out.println("Indtast ønskede antal spillere");
-        PlayerController.numberOfPlayers = BoardControllerGUI.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
+        PlayerController.numberOfPlayers = MatadorUI.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
     }
 
     static void setStartBalance() {
@@ -43,7 +46,7 @@ public class GameController {
             startBalance = 1500;
         else {
             System.out.println("Dette antal spillere er ikke understøttet");
-            BoardControllerGUI.gui.showMessage("Dette antal spillere er ikke understøttet");
+            MatadorUI.gui.showMessage("Dette antal spillere er ikke understøttet");
         }
     }
 
@@ -51,11 +54,11 @@ public class GameController {
     static boolean handleRound(Player player) {
 
         // Slå med terningen når spilleren trykker
-        BoardControllerGUI.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+        MatadorUI.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
         // Vis resultatet og opdater felt
-        val = GameController.shaker.shake();
-        BoardControllerGUI.gui.setDice(val[0], val[1]);
+        val = DiceController.shaker.shake();
+        MatadorUI.gui.setDice(val[0], val[1]);
         value = val[0] + val[1];
 
         player.move(value);
@@ -65,6 +68,7 @@ public class GameController {
         //Håndterer chancekort
         ChanceCardController.handleChancekort(player);
 
+        //Tjekker hvorvidt en spiller har slået 2 ens og hvor mange gange.
         DiceController.extraTurn(player);
 
         //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.

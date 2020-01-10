@@ -16,6 +16,7 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
+    public boolean extraTurn = true;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
