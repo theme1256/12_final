@@ -6,7 +6,7 @@ import View.MatadorUI;
 
 public class GameController {
 
-    static ChanceDeck chanceDeck;
+    //static ChanceDeck chanceDeck;
     static int[] val;
     static int value;
     static int startBalance = 0;
@@ -25,8 +25,7 @@ public class GameController {
 
     public static void initVars() {
         DiceController dice = new DiceController();
-        chanceDeck = new ChanceDeck();
-        chanceDeck.blandkort();
+        ChanceCardController chanceKort = new ChanceCardController();
         PlayerController.createPlayers();
     }
 
