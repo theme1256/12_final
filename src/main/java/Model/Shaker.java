@@ -1,25 +1,26 @@
 package Model;
 
 public class Shaker {
-    private Die dice;
+    private Die die;
     private int numberOfDices;
 
-    Shaker() {
-        this.dice = new Die();
+    public Shaker() {
+        this.die = new Die();
+        this.numberOfDices = 2;
     }
     public Shaker(int numberOfDices) {
         this.numberOfDices = numberOfDices;
-        this.dice = new Die();
+        this.die = new Die();
     }
     Shaker(int numberOfDices, int numberOfSides) {
         this.numberOfDices = numberOfDices;
-        this.dice = new Die(numberOfSides);
+        this.die = new Die(numberOfSides);
     }
 
     public int[] shake() {
         int[] rtn = new int[this.numberOfDices];
         for(int i = 0; i < this.numberOfDices; i++) {
-            rtn[i] = this.dice.roll();
+            rtn[i] = this.die.roll();
         }
         return rtn;
     }
@@ -27,7 +28,7 @@ public class Shaker {
     public int shake_and_sum() {
         int rtn = 0;
         for(int i = 0; i < this.numberOfDices; i++) {
-            rtn += this.dice.roll();
+            rtn += this.die.roll();
         }
         return rtn;
     }
