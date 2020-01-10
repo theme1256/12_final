@@ -4,8 +4,20 @@ import Model.Player;
 
 
 public class PlayerController {
+    static Player[] players;
+    static int numberOfPlayers = 0;
 
-    //private static GUI gui = new GUI();
+    public static  void createPlayers(){
+        while (GameController.startBalance == 0) {
+            GameController.setStartBalance();
+        }
+        players = new Player[numberOfPlayers];
+        for (int i = 0; i < numberOfPlayers; i++) {
+            players[i] = new Player(BoardControllerGUI.gui, GameController.startBalance, i);
+
+            BoardControllerGUI.gui.showMessage("Navn: " + players[i].playerName + "\nStart-balance: " + players[i].account.balance);
+        }
+    }
 
     public static void handlePassStart(Player player) {
         if (player.passedStart) {
