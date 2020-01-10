@@ -16,7 +16,6 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
-    public boolean extraTurn = true;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -41,10 +40,9 @@ public class Player {
         car = playercar;
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
+
     private static void brikselect(){
-
         while(true){
-
             if(!bilLock){
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock = true;
@@ -70,7 +68,6 @@ public class Player {
                 bilLock6 = true;
                 break;
             }
-
         }
 
     }
