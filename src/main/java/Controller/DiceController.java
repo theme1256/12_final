@@ -1,26 +1,13 @@
 package Controller;
+import Model.ChanceDeck;
 import Model.Player;
 
 
 public class DiceController {
 
-    static boolean handleRound(Player player) {
+    public static void extraTurn(Player player){
 
-        // Slå med terningen når spilleren trykker
-        BoardControllerGUI.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
-
-        // Vis resultatet og opdater felt
-        int[] val = GameController.shaker.shake();
-        BoardControllerGUI.gui.setDice(val[0],val[1]);
-        int value = val[0] + val[1];
-
-        player.move(value);
-
-        PlayerController.handleGetInJail(player);
-        //Håndterer chancekort
-        ChanceCardController.handleChancekort(player);
-
-        if(val[0]==val[1]){
+        if(GameController.val[0]==GameController.val[1]){
 
             BoardControllerGUI.gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
             BoardControllerGUI.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
@@ -49,10 +36,7 @@ public class DiceController {
             }
         }
 
-        //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
-        PlayerController.handlePassStart(player);
 
-        return  player.account.balance > 0;
     }
 
 
