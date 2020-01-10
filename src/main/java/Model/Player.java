@@ -47,11 +47,9 @@ public class Player {
             if(!bilLock){
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock = true;
-                System.out.println("BLACK");
                 break;
             }if(!bilLock2 && bilLock){
                 brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                System.out.println("WHITE");
                 bilLock2 = true;
                 break;
             } if(!bilLock3 && bilLock && bilLock2){
