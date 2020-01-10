@@ -19,6 +19,8 @@ public class BoardController {
     private static Shaker shaker;
     private static ChanceDeck chanceDeck;
 
+
+
     public BoardController() {
 
         initVars();
