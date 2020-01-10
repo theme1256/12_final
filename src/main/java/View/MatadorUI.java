@@ -13,7 +13,6 @@ public class MatadorUI {
     public static GUI gui;
     public static BoardsFields felter;
 
-
     public static void main(String[] args) {
         initGame();
     }
