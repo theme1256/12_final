@@ -12,7 +12,6 @@ public class MatadorUI {
     private static DiceController diceController;
     private static PlayerController playerController;
 
-
     public static void main(String[] args) {
         initGame();
     }
