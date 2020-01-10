@@ -33,7 +33,7 @@ public class GameController {
         for (int i = 0; i < GameController.numberOfPlayers; i++) {
             players[i] = new Player(BoardControllerGUI.gui, GameController.startBalance, i);
 
-            BoardControllerGUI.gui.showMessage("Navn: " + players[i].playerName + "\nStart-balance: " + players[i].account.balance);
+            BoardControllerGUI.gui.showMessage("Navn: " + players[i].playerName + ", Start-balance: " + players[i].account.balance);
         }
     }
 
