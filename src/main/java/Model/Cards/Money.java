@@ -3,7 +3,7 @@ package Model.Cards;
 import Model.Player;
 import gui_main.GUI;
 
-public class Money extends Kort {
+public class Money extends ChanceCards {
     public Money(int cardNumber) {
         super(cardNumber);
     }

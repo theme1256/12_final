@@ -3,7 +3,7 @@ package Model.Cards;
 import Model.Player;
 import gui_main.GUI;
 
-public class Move extends Kort {
+public class Move extends ChanceCards {
     public Move(int cardNumber) {
         super(cardNumber);
     }
