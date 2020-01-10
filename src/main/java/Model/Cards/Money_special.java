@@ -1,6 +1,6 @@
 package Model.Cards;
 
-public class Money_special extends Kort {
+public class Money_special extends ChanceCards {
     public Money_special(int cardNumber) {
         super(cardNumber);
     }

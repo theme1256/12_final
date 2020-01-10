@@ -3,13 +3,13 @@ package Model.Cards;
 import Model.Player;
 import gui_main.GUI;
 
-public class Kort {
+public abstract class ChanceCards {
     protected int cardNumber;
     protected String cardDescription;
     protected String action;
     protected int value;
 
-    public Kort(int cardNumber){
+    public ChanceCards(int cardNumber){
         this.cardNumber = cardNumber;
     }
 

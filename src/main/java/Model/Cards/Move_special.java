@@ -1,6 +1,6 @@
 package Model.Cards;
 
-public class Move_special extends Kort {
+public class Move_special extends ChanceCards {
     public Move_special(int cardNumber) {
         super(cardNumber);
     }

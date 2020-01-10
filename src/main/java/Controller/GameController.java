@@ -1,60 +1,70 @@
 package Controller;
 
-import Model.ChanceDeck;
 import Model.Player;
-import Model.Shaker;
+import gui_main.GUI;
 
 public class GameController {
-    static int numberOfPlayers = 0;
-    static int startBalance = 0;
-    static Shaker shaker;
-    static ChanceDeck chanceDeck;
-    static Player[] players;
+    private GUI gui;
+    private ChanceCardController chanceCardController;
+    private DiceController diceController;
+    private PlayerController playerController;
 
-    public GameController(){
+    private boolean extraTurn = false;
+    public int turnsInARow = 0;
+
+    public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc) {
+        this.gui = gui;
+        this.chanceCardController = cc;
+        this.diceController = dc;
+        this.playerController = pc;
+        playerController.createPlayers();
         boolean playing = true;
         while (playing) {
-            for (Player player : GameController.players) {
-                playing = DiceController.handleRound(player);
-                if(!playing)
+            for (int i = 0; i < playerController.players.length; i++) {
+                turnsInARow++;
+                Player player = playerController.players[i];
+                playing = handleRound(player);
+
+                if (!playing)
                     break;
+
+                if (extraTurn) {
+                    i--;
+                    extraTurn = false;
+                } else {
+                    turnsInARow = 0;
+                }
             }
         }
     }
 
-    static void initVars(){
-        shaker = new Shaker(2);
-        chanceDeck = new ChanceDeck();
-        chanceDeck.blandkort();
-        while (GameController.startBalance == 0) {
-            setStartBalance();
+    boolean handleRound(Player player) {
+        // Slå med terningen når spilleren trykker
+        this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+
+        // Vis resultatet og opdater felt
+        int[] val = diceController.rollDice();
+        this.gui.setDice(val[0], val[1]);
+        int value = val[0] + val[1];
+        player.move(value);
+
+        // Tjek om spilleren landede på "Gå i fængsel"
+        if(!playerController.handleGetInJail(player)) {
+            //Håndterer chancekort
+            this.chanceCardController.handleChancekort(player);
+
+            //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
+            playerController.handlePassStart(player);
+
+            // Tjek om spilleren har fået 3 ture i streg
+            if (turnsInARow == 3) {
+                gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
+                player.moveTo(10, false);
+            } else {
+                //Tjekker hvorvidt en spiller har slået 2 ens
+                extraTurn = diceController.giveExtraTurn();
+            }
         }
-
-        for (int i = 0; i < GameController.numberOfPlayers; i++) {
-            players[i] = new Player(BoardControllerGUI.gui, GameController.startBalance, i);
-
-            BoardControllerGUI.gui.showMessage("Navn: " + players[i].playerName + ", Start-balance: " + players[i].account.balance);
-        }
+        return player.account.balance > 0;
     }
-
-    private static void getNumberOfPlayers() {
-        System.out.println("Indtast ønskede antal spillere");
-        numberOfPlayers = BoardControllerGUI.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
-    }
-
-    static void setStartBalance() {
-        getNumberOfPlayers();
-        GameController.players = new Player[numberOfPlayers];
-
-        if ((numberOfPlayers >= 3) && (numberOfPlayers <= 6))
-            startBalance = 1500;
-        else {
-            System.out.println("Dette antal spillere er ikke understøttet");
-            BoardControllerGUI.gui.showMessage("Dette antal spillere er ikke understøttet");
-        }
-    }
-
-
-
-
 }
