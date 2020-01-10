@@ -24,9 +24,9 @@ public class PlayerController {
     private void setStartBalance() {
         getNumberOfPlayers();
 
-        if ((numberOfPlayers >= 3) && (numberOfPlayers <= 6))
+        if ((numberOfPlayers >= 3) && (numberOfPlayers <= 6)) {
             startBalance = 1500;
-        else {
+        } else {
             System.out.println("Dette antal spillere er ikke understøttet");
             this.gui.showMessage("Dette antal spillere er ikke understøttet");
         }
@@ -40,7 +40,7 @@ public class PlayerController {
         for (int i = 0; i < numberOfPlayers; i++) {
             players[i] = new Player(this.gui, startBalance, i);
 
-            this.gui.showMessage("Navn: " + players[i].playerName + "\nStart-balance: " + players[i].account.balance);
+            this.gui.showMessage("Navn: " + players[i].playerName + ", start-balance: " + players[i].account.balance);
         }
     }
 
@@ -49,20 +49,15 @@ public class PlayerController {
             this.gui.getUserButtonPressed(player + " passerer start og modtager 200 kr", "OK");
             player.updateBalance(200);
             player.passedStart = false;
-
         }
     }
 
-    public void handleGetInJail(Player player) {
+    public boolean handleGetInJail(Player player) {
         if(player.currentFelt == 31) {
             this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
-            player.extraTurn = false;
             player.moveTo(10,false);
-
+            return true;
         }
+        return false;
     }
-
-
-
-
 }

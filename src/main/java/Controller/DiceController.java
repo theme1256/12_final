@@ -22,38 +22,7 @@ public class DiceController {
         return lastShake;
     }
 
-    void extraTurn(Player player, PlayerController playerController){
-        if(lastShake[0] == lastShake[1] && player.extraTurn){
-
-            this.gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
-            this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
-            int[] val1 = shaker.shake();
-            this.gui.setDice(val1[0],val1[1]);
-            int value1 = val1[0] + val1[1];
-            player.move(value1);
-            playerController.handleGetInJail(player);
-
-            if(val1[0]== val1[1] && player.extraTurn){
-                this.gui.getUserButtonPressed(player + ", får en ekstra tur!", "FEDT!");
-                this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
-
-                System.out.println("Tillykke du får en ekstra tur");
-                int[] val2 = shaker.shake();
-                this.gui.setDice(val2[0],val2[1]);
-                int value2 = val2[0] + val2[1];
-                player.move(value2);
-                playerController.handleGetInJail(player);
-
-                if(val2[0]== val2[1] && player.extraTurn){
-                    this.gui.getUserButtonPressed(player + ", er for heldig til det kan være rigtigt! Du ryger i fængsel", "ØV!");
-                    player.moveTo(10,false);
-
-                }
-            }
-        }
-
-
+    public boolean giveExtraTurn() {
+        return (lastShake[0] == lastShake[1]);
     }
-
-
 }

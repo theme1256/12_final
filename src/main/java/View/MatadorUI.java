@@ -19,7 +19,7 @@ public class MatadorUI {
 
     private static void initGame() {
         fieldController = new FieldController();
-        GUI_Field[] gui_fields = fieldController.createGUIFromFields();
+        GUI_Field[] gui_fields = fieldController.createFieldsForGUI();
 
         gui = new GUI(gui_fields);
 
