@@ -2,17 +2,14 @@ package Controller;
 
 import Model.ChanceDeck;
 import Model.Player;
-import Model.Shaker;
 import View.MatadorUI;
 
 public class GameController {
 
-    static int startBalance = 0;
-
-    //static Shaker shaker;
     static ChanceDeck chanceDeck;
     static int[] val;
     static int value;
+    static int startBalance = 0;
 
 
     public GameController() {
@@ -27,7 +24,6 @@ public class GameController {
     }
 
     public static void initVars() {
-        //shaker = new Shaker(2);
         DiceController dice = new DiceController();
         chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
