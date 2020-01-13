@@ -16,10 +16,11 @@ public class DiceController {
 
     public int[] rollDice() {
         lastShake = shaker.shake();
+        this.gui.setDice(lastShake[0], lastShake[1]);
         return lastShake;
     }
 
-    public boolean giveExtraTurn() {
+    public boolean gaveExtraTurn() {
         return (lastShake[0] == lastShake[1]);
     }
 }
