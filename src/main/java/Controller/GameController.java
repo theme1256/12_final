@@ -58,7 +58,7 @@ public class GameController {
             playerController.handlePassStart(player);
 
             // Lad feltet håndtere at der er landet en person på det
-            Field felt = fieldController.getField(value);
+            Field felt = fieldController.getField(player.currentFelt);
             if (felt instanceof Property)
                 felt.action(gui, player, fieldController.getFields());
             else
