@@ -75,7 +75,7 @@ public class GameController {
             // Håndterer chancekort
             if (this.chanceCardController.handleChancekort(player)) {
                 handleRound(player, false);
-            } else {
+            } else if (move) {
                 //Tjekker hvorvidt en spiller har slået 2 ens
                 extraTurn = diceController.giveExtraTurn();
                 // Tjek om spilleren har fået 3 ture i streg
