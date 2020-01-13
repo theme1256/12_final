@@ -3,7 +3,6 @@ package Controller;
 import Model.Player;
 import gui_main.GUI;
 
-
 public class PlayerController {
     private GUI gui;
 
@@ -56,7 +55,7 @@ public class PlayerController {
     }
 
     public boolean handleGetInJail(Player player) {
-        if(player.currentFelt == 31) {
+        if (player.currentFelt == 31) {
             this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
             player.moveTo(10,false);
             return true;
@@ -64,31 +63,27 @@ public class PlayerController {
         return false;
     }
 
-    public void handeGetOutOfJail(Player player){
-
+    public void handeGetOutOfJail(Player player) {
         System.out.println("hej");
-            if(player.getJailPass()){
-                player.setJailPass(false);
-                gui.showMessage("Du løslades med dit frikort");
+        if (player.getJailPass()) {
+            player.setJailPass(false);
+            gui.showMessage("Du løslades med dit frikort");
 
-            } else if (!player.getJailPass()){
-                String valg = gui.getUserButtonPressed("Hvordan vil du løslades?", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
+        } else if (!player.getJailPass()) {
+            String valg = gui.getUserButtonPressed("Hvordan vil du løslades?", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
 
-                if(valg.equals("Betal 50kr og ryk det slåede")){
-                    player.updateBalance(-50);
-                    GameController.extraTurn = true;
-                } else if (valg.equals("Prøv at slå to ens") && player.turnsInJail <3){
-                    GameController.extraTurn = true;
-                    player.turnsInJail ++;
-                } else
-                    player.turnsInJail = 0;
-                    GameController.extraTurn = true;
-
-
+            if (valg.equals("Betal 50kr og ryk det slåede")) {
+                player.updateBalance(-50);
+                GameController.extraTurn = true;
+            } else if (valg.equals("Prøv at slå to ens") && player.getTurnsInJail() < 3) {
+                GameController.extraTurn = true;
+                player.addTurnInJail();
+            } else {
+                player.resetTurnsInJail();
+                GameController.extraTurn = true;
             }
-
         }
-
     }
+}
 
 

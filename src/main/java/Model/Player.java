@@ -16,7 +16,7 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
-    public int turnsInJail = 0;
+    private int turnsInJail = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -133,6 +133,9 @@ public class Player {
     }
     public void addTurnInJail() {
         this.turnsInJail++;
+    }
+    public void resetTurnsInJail() {
+        this.turnsInJail = 0;
     }
 
     public int getNetWorth() {
