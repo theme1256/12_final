@@ -24,4 +24,5 @@ public class TaxField extends Field {
             player.updateBalance(-100);
         }
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }

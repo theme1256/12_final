@@ -19,7 +19,6 @@ public class ChanceCardController {
 
     public void handleChancekort(Player player) {
         if(fieldController.getField(player.currentFelt).getName().equals("Prøv lykken")) {
-            this.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
             ChanceCards card = chanceDeck.traekkort();
 
             System.out.println(card);
