@@ -7,7 +7,7 @@ public class GameController {
     private GUI gui;
     private ChanceCardController chanceCardController;
     private DiceController diceController;
-    private PlayerController playerController;
+    public static PlayerController playerController;
     private FieldController fieldController;
 
     private boolean extraTurn = false;
@@ -17,7 +17,7 @@ public class GameController {
         this.gui = gui;
         this.chanceCardController = cc;
         this.diceController = dc;
-        this.playerController = pc;
+        playerController = pc;
         this.fieldController = fc;
         playerController.createPlayers();
         boolean playing = true;

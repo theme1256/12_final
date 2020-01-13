@@ -4,6 +4,7 @@ import gui_fields.*;
 import gui_main.GUI;
 
 public class MatadorUI {
+    public static PlayerController playerController;
 
     public static void main(String[] args) {
         FieldController fieldController = new FieldController();
@@ -15,7 +16,7 @@ public class MatadorUI {
 
         DiceController diceController = new DiceController(gui);
 
-        PlayerController playerController = new PlayerController(gui);
+        playerController = new PlayerController(gui);
 
         GameController gameController = new GameController(gui, chanceCardController, diceController, playerController, fieldController);
     }
