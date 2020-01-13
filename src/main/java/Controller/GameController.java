@@ -24,7 +24,14 @@ public class GameController {
 
         playerController.createPlayers();
 
+        this.playGame();
+    }
 
+    /**
+     * Håndterer at give spillerne deres ture, og ekstra ture.
+     * Holder øje med om en spiller er ude.
+     */
+    private void playGame() {
         boolean playing = true;
         while (playing) {
             for (int i = 0; i < playerController.players.length; i++) {
@@ -45,9 +52,23 @@ public class GameController {
         }
     }
 
+    /**
+     * En wrapper til den anden handleRound, så man ikke skal give den to parametre
+     *
+     * @param player Pointer til den aktive player
+     * @return Om spilleren er ude
+     */
     boolean handleRound(Player player){
         return handleRound(player, true);
     }
+
+    /**
+     * Håndterer det primære flow i en tur, terningkast, land på felter, dobbelt-slag, etc.
+     *
+     * @param player Pointer til den aktive player
+     * @param move Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
+     * @return Om spilleren er ude
+     */
     boolean handleRound(Player player, boolean move) {
         // Slå med terningen når spilleren trykker
         if (move) {
