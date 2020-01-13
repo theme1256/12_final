@@ -18,7 +18,5 @@ public abstract class ChanceCards {
         return this.cardNumber;
     }
 
-    public void action(Player player, GUI gui) {
-    }
-
+    public abstract boolean action(Player player, GUI gui);
 }
