@@ -123,7 +123,7 @@ public class StreetField extends Property {
             }
             player.updateBalance(-1 * this.buildPrice);
         } else {
-            gui.getUserButtonPressed("Du kan ikke bygge på denne grund lige nu", "OK");
+            gui.getUserButtonPressed(player.playerName + " kan ikke bygge på denne grund lige nu", "OK");
         }
     }
 
@@ -171,12 +171,12 @@ public class StreetField extends Property {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent(felter);
-            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
+            gui.getUserButtonPressed(player.playerName + " er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
             player.updateBalance(-1 * rent);
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
-                String valg = gui.getUserButtonPressed("Du har råd til at købe " + this.name + ". Vil du købe grunden?", "Ja", "Nej");
+                String valg = gui.getUserButtonPressed(player.playerName + " har råd til at købe " + this.name + ". Vil du købe grunden?", "Ja", "Nej");
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);

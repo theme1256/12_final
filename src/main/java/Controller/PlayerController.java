@@ -56,20 +56,21 @@ public class PlayerController {
     }
 
     public boolean handleGetInJail(Player player) {
-        if(player.currentFelt == 31) {
-            this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
+        if(player.currentFelt > 20) {
+            this.gui.getUserButtonPressed(player.playerName + " er røget i fængsel!", "ØV");
             player.moveTo(10,false);
+            player.isInJail = true;
             return true;
         }
         return false;
     }
 
-    public void handeGetOutOfJail(Player player){
+    public void handleGetOutOfJail(Player player){
 
-        System.out.println("hej");
             if(player.getJailPass()){
                 player.setJailPass(false);
                 gui.showMessage("Du løslades med dit frikort");
+
 
             } else if (!player.getJailPass()){
                 String valg = gui.getUserButtonPressed("Hvordan vil du løslades?", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
@@ -82,9 +83,8 @@ public class PlayerController {
                     player.turnsInJail ++;
                 } else
                     player.turnsInJail = 0;
+                    player.updateBalance(-50);
                     GameController.extraTurn = true;
-
-
             }
 
         }

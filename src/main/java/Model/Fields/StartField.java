@@ -10,7 +10,7 @@ public class StartField extends Field {
 
     @Override
     public void action(GUI gui, Player player) {
-        gui.getUserButtonPressed("Du er landet på start", "OK");
+        gui.getUserButtonPressed(player.playerName +" er landet på start", "OK");
     }
     public void action(GUI gui, Player player, Field[] felter){}
 }
