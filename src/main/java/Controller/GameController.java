@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Fields.Field;
+import Model.Fields.Property;
 import Model.Player;
 import gui_main.GUI;
 
@@ -56,7 +58,11 @@ public class GameController {
             playerController.handlePassStart(player);
 
             // Lad feltet håndtere at der er landet en person på det
-            fieldController.getField(value).action(gui, player);
+            Field felt = fieldController.getField(value);
+            if (felt instanceof Property)
+                felt.action(gui, player, fieldController.getFields());
+            else
+                felt.action(gui, player);
 
             // Håndterer chancekort
             this.chanceCardController.handleChancekort(player);

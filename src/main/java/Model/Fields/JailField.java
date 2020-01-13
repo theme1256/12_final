@@ -14,6 +14,7 @@ public class JailField extends Field {
         player.addTurnInJail();
         //
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }
 
 

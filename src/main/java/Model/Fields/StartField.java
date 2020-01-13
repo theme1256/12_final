@@ -12,4 +12,5 @@ public class StartField extends Field {
     public void action(GUI gui, Player player) {
         gui.getUserButtonPressed("Du er landet på start", "OK");
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }

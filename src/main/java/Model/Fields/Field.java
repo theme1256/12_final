@@ -47,6 +47,7 @@ public abstract class Field {
     public int getPrice() {return price;}
 
     public abstract void action(GUI gui, Player player);
+    public abstract void action(GUI gui, Player player, Field[] felter);
 }
 
 
