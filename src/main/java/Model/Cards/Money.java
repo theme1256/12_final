@@ -9,7 +9,7 @@ public class Money extends ChanceCards {
     }
 
     @Override
-    public void action(Player player, GUI gui) {
+    public boolean action(Player player, GUI gui) {
         switch (this.cardNumber) {
             case 2:
                 player.updateBalance(+50);
@@ -61,6 +61,7 @@ public class Money extends ChanceCards {
         }
 
         gui.displayChanceCard(toString());
+        return false;
     }
 
     public String toString(){

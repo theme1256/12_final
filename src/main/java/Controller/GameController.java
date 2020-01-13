@@ -45,15 +45,20 @@ public class GameController {
         }
     }
 
-    boolean handleRound(Player player) {
+    boolean handleRound(Player player){
+        return handleRound(player, true);
+    }
+    boolean handleRound(Player player, boolean move) {
         // Slå med terningen når spilleren trykker
-        this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+        if (move) {
+            this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
-        // Vis resultatet og opdater felt
-        int[] val = diceController.rollDice();
-        this.gui.setDice(val[0], val[1]);
-        int value = val[0] + val[1];
-        player.move(value);
+            // Vis resultatet og opdater felt
+            int[] val = diceController.rollDice();
+            this.gui.setDice(val[0], val[1]);
+            int value = val[0] + val[1];
+            player.move(value);
+        }
 
         // Tjek om spilleren landede på "Gå i fængsel"
         if(!playerController.handleGetInJail(player)) {
@@ -68,19 +73,22 @@ public class GameController {
                 felt.action(gui, player);
 
             // Håndterer chancekort
-            this.chanceCardController.handleChancekort(player);
-
-            //Tjekker hvorvidt en spiller har slået 2 ens
-            extraTurn = diceController.giveExtraTurn();
-            // Tjek om spilleren har fået 3 ture i streg
-            if (turnsInARow == 3 && extraTurn) {
-                gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
-                player.moveTo(10, false);
-                extraTurn = false;
+            if (this.chanceCardController.handleChancekort(player)) {
+                handleRound(player, false);
+            } else {
+                //Tjekker hvorvidt en spiller har slået 2 ens
+                extraTurn = diceController.giveExtraTurn();
+                // Tjek om spilleren har fået 3 ture i streg
+                if (turnsInARow == 3 && extraTurn) {
+                    gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
+                    player.moveTo(10, false);
+                    extraTurn = false;
+                }
             }
         } else {
+            playerController.handeGetOutOfJail(player);
+        }
 
-            playerController.handeGetOutOfJail(player);}
         return player.account.balance > 0;
     }
 }

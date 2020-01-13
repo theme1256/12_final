@@ -10,36 +10,30 @@ public class Move_special extends ChanceCards {
 
     //MANGLER AT MAN BETALER DOBBELT!
 
-    public void action(Player player, GUI gui) {
-    switch (this.cardNumber) {
-        case 30:
-        case 31:
-
-            if (player.currentFelt == 3) {
-                player.moveTo(6);
-                break;
-
-            } else if (player.currentFelt == 8) {
-                player.moveTo(16);
-                break;
-
-            } else if (player.currentFelt == 18 || player.currentFelt == 23) {
-                player.moveTo(24);
-                break;
-
-            } else if (player.currentFelt == 34) {
-                player.moveTo(36);
-                break;
-
-            } else if (player.currentFelt == 37) {
-                player.moveTo(6, true);
-                break;
-
-            }
-
-    }
+    public boolean action(Player player, GUI gui) {
+        switch (this.cardNumber) {
+            case 30:
+            case 31:
+                if (player.currentFelt == 3) {
+                    player.moveTo(6);
+                    break;
+                } else if (player.currentFelt == 8) {
+                    player.moveTo(16);
+                    break;
+                } else if (player.currentFelt == 18 || player.currentFelt == 23) {
+                    player.moveTo(24);
+                    break;
+                } else if (player.currentFelt == 34) {
+                    player.moveTo(36);
+                    break;
+                } else if (player.currentFelt == 37) {
+                    player.moveTo(6, true);
+                    break;
+                }
+        }
         gui.displayChanceCard(toString());
-}
+        return true;
+    }
 
 
     public String toString(){
