@@ -9,7 +9,7 @@ public class Move extends ChanceCards {
     }
 
     @Override
-    public void action(Player player, GUI gui) {
+    public boolean action(Player player, GUI gui) {
         switch (this.cardNumber) {
 
             //Fængsel
@@ -72,6 +72,7 @@ public class Move extends ChanceCards {
                 break;
         }
         gui.displayChanceCard(toString());
+        return true;
     }
 
     public String toString(){

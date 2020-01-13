@@ -1,5 +1,6 @@
 package Model.Fields;
 
+import Controller.DiceController;
 import Model.Player;
 import gui_main.GUI;
 
@@ -20,7 +21,8 @@ public class BeerField extends Property{
 
     @Override
     public void action(GUI gui, Player player){}
-    public void action(GUI gui, Player player, Field[] felter) {
-
+    public void action(GUI gui, Player player, Field[] felter) {}
+    public void action(GUI gui, Player player, Field[] felter, DiceController dc) {
+        //
     }
 }

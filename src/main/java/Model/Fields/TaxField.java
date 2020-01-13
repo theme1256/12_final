@@ -14,7 +14,7 @@ public class TaxField extends Field {
         if (this.nr == 5) {
             String valg = gui.getUserButtonPressed(player.playerName +" skal betale 10% eller kr. 200 i skat", "10%", "kr. 200");
             if (valg.equals("10%")) {
-                int total = player.getNetWorth();
+                int total = player.getBalance();
                 player.updateBalance(-1 * total/10);
             } else {
                 player.updateBalance(-200);
