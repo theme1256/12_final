@@ -5,6 +5,7 @@ import gui_main.GUI;
 
 public class PlayerController {
     private GUI gui;
+    private DiceController diceController;
 
     public Player[] players;
     public int numberOfPlayers = 0;
@@ -13,8 +14,9 @@ public class PlayerController {
     public PlayerController() {
     }
 
-    public PlayerController(GUI gui) {
+    public PlayerController(GUI gui, DiceController dc) {
         this.gui = gui;
+        this.diceController = dc;
     }
 
     private void getNumberOfPlayers() {
@@ -76,6 +78,8 @@ public class PlayerController {
                 player.updateBalance(-50);
                 GameController.extraTurn = true;
             } else if (valg.equals("Prøv at slå to ens") && player.getTurnsInJail() < 3) {
+                int[] val = diceController.rollDice();
+                if(val[0] == val[1]) {}
                 GameController.extraTurn = true;
                 player.addTurnInJail();
             } else {
