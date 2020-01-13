@@ -13,4 +13,5 @@ public class Helle extends Field {
     public void action(GUI gui, Player player) {
         gui.getUserButtonPressed("Der sker ikke noget på dette felt", "OK");
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }
