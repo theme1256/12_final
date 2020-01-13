@@ -12,8 +12,8 @@ public class JailField extends Field {
     @Override
     public void action(GUI gui, Player player) {
         player.addTurnInJail();
-        //
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }
 
 

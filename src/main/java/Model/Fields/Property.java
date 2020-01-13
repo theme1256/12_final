@@ -7,7 +7,7 @@ import java.awt.*;
 
 // alt vi vil gerne at eje
 
-public abstract class Property extends Field{
+public abstract class Property extends Field {
     protected boolean owned = false;
     protected Player owner = null;
 
@@ -19,8 +19,9 @@ public abstract class Property extends Field{
     }
 
 
-    protected abstract int calculateRent();
+    protected abstract int calculateRent(Field[] felter);
     public abstract void action(GUI gui, Player player);
+    public abstract void action(GUI gui, Player player, Field[] felter);
     public Player getOwner() {
         return this.owner;
     }
