@@ -14,4 +14,5 @@ public class ChanceCardsField extends Field {
     public void action(GUI gui, Player player) {
         gui.getUserButtonPressed("Træk et chancekort", "OK");
     }
+    public void action(GUI gui, Player player, Field[] felter){}
 }

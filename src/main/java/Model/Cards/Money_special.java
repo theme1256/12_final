@@ -12,7 +12,7 @@ public class Money_special extends ChanceCards {
     }
 
     @Override
-    public void action(Player player, GUI gui) {
+    public boolean action(Player player, GUI gui) {
         switch (this.cardNumber) {
             case 17:
 
@@ -37,6 +37,7 @@ public class Money_special extends ChanceCards {
         }
 
         gui.displayChanceCard(toString());
+        return false;
     }
 
 

@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Cards.ChanceCards;
 import Model.ChanceDeck;
+import Model.Fields.ChanceCardsField;
 import Model.Player;
 import gui_main.GUI;
 
@@ -17,13 +18,13 @@ public class ChanceCardController {
         chanceDeck.blandkort();
     }
 
-    public void handleChancekort(Player player) {
-        if(fieldController.getField(player.currentFelt).getName().equals("Prøv lykken")) {
-            this.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
+    public boolean handleChancekort(Player player) {
+        if(fieldController.getField(player.currentFelt) instanceof ChanceCardsField) {
             ChanceCards card = chanceDeck.traekkort();
 
             System.out.println(card);
-            card.action(player, this.gui);
+            return card.action(player, this.gui);
         }
+        return false;
     }
 }

@@ -9,9 +9,10 @@ public class Jail extends ChanceCards {
     }
 
     @Override
-    public void action(Player player, GUI gui) {
+    public boolean action(Player player, GUI gui) {
         player.setJailPass(true);
         gui.displayChanceCard(toString());
+        return false;
     }
 
     public String toString(){
