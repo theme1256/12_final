@@ -16,7 +16,7 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
-    private int turnsInJail = 0;
+    public int turnsInJail = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;

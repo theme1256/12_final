@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Fields.Field;
+import Model.Fields.Property;
 import Model.Player;
 import gui_main.GUI;
 
@@ -10,7 +12,7 @@ public class GameController {
     public static PlayerController playerController;
     private FieldController fieldController;
 
-    private boolean extraTurn = false;
+    public static boolean extraTurn = false;
     public int turnsInARow = 0;
 
     public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc, FieldController fc) {
@@ -19,7 +21,10 @@ public class GameController {
         this.diceController = dc;
         playerController = pc;
         this.fieldController = fc;
+
         playerController.createPlayers();
+
+
         boolean playing = true;
         while (playing) {
             for (int i = 0; i < playerController.players.length; i++) {
@@ -56,7 +61,11 @@ public class GameController {
             playerController.handlePassStart(player);
 
             // Lad feltet håndtere at der er landet en person på det
-            fieldController.getField(value).action(gui, player);
+            Field felt = fieldController.getField(player.currentFelt);
+            if (felt instanceof Property)
+                felt.action(gui, player, fieldController.getFields());
+            else
+                felt.action(gui, player);
 
             // Håndterer chancekort
             this.chanceCardController.handleChancekort(player);
@@ -69,7 +78,9 @@ public class GameController {
                 //Tjekker hvorvidt en spiller har slået 2 ens
                 extraTurn = diceController.giveExtraTurn();
             }
-        }
+        } else {
+
+            playerController.handeGetOutOfJail(player);}
         return player.account.balance > 0;
     }
 }
