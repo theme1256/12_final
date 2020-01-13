@@ -12,7 +12,7 @@ public class ChanceCardsField extends Field {
 
     @Override
     public void action(GUI gui, Player player) {
-        gui.getUserButtonPressed("Træk et chancekort", "OK");
+        gui.getUserButtonPressed(player.playerName +" træk et chancekort", "OK");
     }
     public void action(GUI gui, Player player, Field[] felter){}
 }

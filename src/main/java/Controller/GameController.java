@@ -15,6 +15,7 @@ public class GameController {
     public static boolean extraTurn = false;
     public int turnsInARow = 0;
 
+
     public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc, FieldController fc) {
         this.gui = gui;
         this.chanceCardController = cc;
@@ -36,6 +37,7 @@ public class GameController {
                     break;
 
                 if (extraTurn) {
+                    gui.getUserButtonPressed(player.playerName +" tillykke du får ekstra tur", "Fedt!");
                     i--;
                     extraTurn = false;
                 } else {
@@ -53,7 +55,9 @@ public class GameController {
         int[] val = diceController.rollDice();
         this.gui.setDice(val[0], val[1]);
         int value = val[0] + val[1];
+
         player.move(value);
+
 
         // Tjek om spilleren landede på "Gå i fængsel"
         if(!playerController.handleGetInJail(player)) {
@@ -78,9 +82,9 @@ public class GameController {
                 //Tjekker hvorvidt en spiller har slået 2 ens
                 extraTurn = diceController.giveExtraTurn();
             }
-        } else {
+        } else
+            playerController.handleGetOutOfJail(player);
 
-            playerController.handeGetOutOfJail(player);}
         return player.account.balance > 0;
     }
 }
