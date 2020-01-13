@@ -70,13 +70,13 @@ public class GameController {
             // Håndterer chancekort
             this.chanceCardController.handleChancekort(player);
 
+            //Tjekker hvorvidt en spiller har slået 2 ens
+            extraTurn = diceController.giveExtraTurn();
             // Tjek om spilleren har fået 3 ture i streg
-            if (turnsInARow == 3) {
+            if (turnsInARow == 3 && extraTurn) {
                 gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
                 player.moveTo(10, false);
-            } else {
-                //Tjekker hvorvidt en spiller har slået 2 ens
-                extraTurn = diceController.giveExtraTurn();
+                extraTurn = false;
             }
         } else {
 
