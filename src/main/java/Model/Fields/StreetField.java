@@ -170,7 +170,7 @@ public class StreetField extends Property {
     public void action(GUI gui, Player player, Field[] felter) {
         if (this.owned) {
             // Beregn leje
-            int rent = this.calculateRent();
+            int rent = this.calculateRent(felter);
             gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
             player.updateBalance(-1 * rent);
         } else {
