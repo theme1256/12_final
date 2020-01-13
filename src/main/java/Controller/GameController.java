@@ -8,15 +8,17 @@ public class GameController {
     private ChanceCardController chanceCardController;
     private DiceController diceController;
     private PlayerController playerController;
+    private FieldController fieldController;
 
     private boolean extraTurn = false;
     public int turnsInARow = 0;
 
-    public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc) {
+    public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc, FieldController fc) {
         this.gui = gui;
         this.chanceCardController = cc;
         this.diceController = dc;
         this.playerController = pc;
+        this.fieldController = fc;
         playerController.createPlayers();
         boolean playing = true;
         while (playing) {
@@ -50,11 +52,14 @@ public class GameController {
 
         // Tjek om spilleren landede på "Gå i fængsel"
         if(!playerController.handleGetInJail(player)) {
-            //Håndterer chancekort
-            this.chanceCardController.handleChancekort(player);
-
-            //Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
+            // Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
             playerController.handlePassStart(player);
+
+            // Lad feltet håndtere at der er landet en person på det
+            fieldController.getField(value).action(gui, player);
+
+            // Håndterer chancekort
+            this.chanceCardController.handleChancekort(player);
 
             // Tjek om spilleren har fået 3 ture i streg
             if (turnsInARow == 3) {

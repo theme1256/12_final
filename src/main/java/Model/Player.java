@@ -16,6 +16,7 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
+    private int turnsInJail = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -91,6 +92,9 @@ public class Player {
         if(car != null)
             car.setBalance(account.balance);
     }
+    public int getBalance() {
+        return account.balance;
+    }
 
     private void updateCar(){
         if(gui != null) {
@@ -122,6 +126,17 @@ public class Player {
         if(this.currentFelt < this.previousFelt && passStart)
             this.passedStart = true;
         this.updateCar();
+    }
+
+    public int getTurnsInJail() {
+        return this.turnsInJail;
+    }
+    public void addTurnInJail() {
+        this.turnsInJail++;
+    }
+
+    public int getNetWorth() {
+        return 0;
     }
 
     public boolean getJailPass() {
