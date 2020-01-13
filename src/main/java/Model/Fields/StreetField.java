@@ -21,7 +21,7 @@ public class StreetField extends Property {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent();
-            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
+            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
             player.updateBalance(-1 * rent);
         } else {
             // Tilbyd at køb, hvis spiller har nok penge

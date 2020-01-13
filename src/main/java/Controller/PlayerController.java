@@ -43,7 +43,7 @@ public class PlayerController {
         for (int i = 0; i < numberOfPlayers; i++) {
             players[i] = new Player(this.gui, startBalance, i);
 
-            this.gui.showMessage("Navn: " + players[i].playerName + ", start-balance: " + players[i].account.balance);
+            this.gui.showMessage("Navn: " + players[i].playerName + ", start-balance: " + players[i].account.balance + " kr.");
         }
     }
 
