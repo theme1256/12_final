@@ -22,7 +22,7 @@ public class FieldController {
         return fields[i];
     }
 
-    public GUI_Field[] createFieldsForGUI() {
+    public GUI_Field[] createGUIFromFields() {
         GUI_Field[] gui_fields = new GUI_Field[fields.length];
         for (int i = 0; i < fields.length; i++) {
             if (fields[i].getNr() == 2 || fields[i].getNr() == 8 || fields[i].getNr() == 18 || fields[i].getNr() == 23 || fields[i].getNr() == 34 || fields[i].getNr() == 37) {
