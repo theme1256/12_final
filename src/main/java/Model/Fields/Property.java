@@ -7,7 +7,7 @@ import java.awt.*;
 
 // alt vi vil gerne at eje
 
-public abstract class Property extends Field{
+public abstract class Property extends Field {
     protected boolean owned = false;
     protected Player owner = null;
 

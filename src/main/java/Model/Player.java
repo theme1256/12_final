@@ -139,6 +139,14 @@ public class Player {
         return 0;
     }
 
+    public int getHouses() {
+        return 0;
+    }
+
+    public int getHotels(){
+        return 0;
+    }
+
     public boolean getJailPass() {
         return this.jailPass;
     }
