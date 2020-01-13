@@ -16,7 +16,7 @@ public class MatadorUI {
 
         DiceController diceController = new DiceController(gui);
 
-        playerController = new PlayerController(gui);
+        playerController = new PlayerController(gui, diceController);
 
         GameController gameController = new GameController(gui, chanceCardController, diceController, playerController, fieldController);
     }

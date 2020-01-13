@@ -18,6 +18,7 @@ public class Player {
     private boolean jailPass = false;
     public int turnsInJail = 0;
     public boolean isInJail = false;
+    public int turnsInARow = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -157,7 +158,13 @@ public class Player {
     public void setJailPass(boolean inp) {
         this.jailPass = inp;
     }
+    public boolean getIsInJail(){
+        return this.isInJail;
+    }
 
+    public void setIsInJail(boolean inp){
+        this.isInJail = inp;
+    }
     @Override
     public String toString() {
         return playerName;

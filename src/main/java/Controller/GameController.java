@@ -72,8 +72,10 @@ public class GameController {
      * @return Om spilleren er ude
      */
     boolean handleRound(Player player, boolean move) {
+
         // Slå med terningen når spilleren trykker
-        if (move) {
+        if (move && !player.getIsInJail()) {
+
             this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
             // Vis resultatet og opdater felt
@@ -85,7 +87,7 @@ public class GameController {
 
 
         // Tjek om spilleren landede på "Gå i fængsel"
-        if(!playerController.handleGetInJail(player)) {
+        if(!playerController.handleGetInJail(player) && !player.getIsInJail()) {
             // Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
             playerController.handlePassStart(player);
 
@@ -109,8 +111,8 @@ public class GameController {
                     extraTurn = false;
                 }
             }
-        } else {
-            playerController.handeGetOutOfJail(player);
+        } else if (player.getIsInJail()){
+            playerController.handeGetOutOfJail(player, diceController);
         }
 
         return player.account.balance > 0;
