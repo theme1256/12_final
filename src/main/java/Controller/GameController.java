@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Fields.BeerField;
 import Model.Fields.Field;
 import Model.Fields.Property;
 import Model.Player;
@@ -76,7 +77,6 @@ public class GameController {
 
             // Vis resultatet og opdater felt
             int[] val = diceController.rollDice();
-            this.gui.setDice(val[0], val[1]);
             int value = val[0] + val[1];
             player.move(value);
         }
@@ -88,7 +88,9 @@ public class GameController {
 
             // Lad feltet håndtere at der er landet en person på det
             Field felt = fieldController.getField(player.currentFelt);
-            if (felt instanceof Property)
+            if (felt instanceof BeerField)
+                ((BeerField) felt).action(gui, player, fieldController.getFields(), diceController);
+            else if (felt instanceof Property)
                 felt.action(gui, player, fieldController.getFields());
             else
                 felt.action(gui, player);
@@ -98,7 +100,7 @@ public class GameController {
                 handleRound(player, false);
             } else if (move) {
                 //Tjekker hvorvidt en spiller har slået 2 ens
-                extraTurn = diceController.giveExtraTurn();
+                extraTurn = diceController.gaveExtraTurn();
                 // Tjek om spilleren har fået 3 ture i streg
                 if (turnsInARow == 3 && extraTurn) {
                     gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
