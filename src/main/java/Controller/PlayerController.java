@@ -69,42 +69,49 @@ public class PlayerController {
 
     public void handeGetOutOfJail(Player player, DiceController diceController) {
 
-        if( player.getTurnsInJail() >= 3){
+        if (player.getTurnsInJail() >= 3) {
             gui.showMessage("Du løslades ved 3. forsøg");
             player.updateBalance(-50);
             player.resetTurnsInJail();
             player.setIsInJail(false);
+        }
 
-        }  String valg = gui.getUserButtonPressed(player.playerName + " hvordan vil du løslades?", "Brug frikort", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
-
-        if(valg.equals("Brug frikort")){
-        if (player.getJailPass() ) {
-            player.setJailPass(false);
-            gui.showMessage("Du løslades med dit frikort");
-
-            } else gui.showMessage("Du har ikke noget frikort!");
-        } else if (!player.getJailPass()) {
-
-            if (valg.equals("Betal 50kr og ryk det slåede")) {
-                player.updateBalance(-50);
-                int[] val = diceController.rollDice();
-                gui.setDice(val[0], val[1]);
-                player.move(val[0]+val[1]);
-                player.setIsInJail(false);
-
-            } else if (valg.equals("Prøv at slå to ens")) {
-                int[] val = diceController.rollDice();
-                gui.setDice(val[0], val[1]);
-                if(val[0] == val[1]) {
-                    gui.showMessage("Tillykke du slog to ens");
-                    player.move(val[0]+val[1]);
+    while (true) {
+            String valg = gui.getUserButtonPressed(player.playerName + " hvordan vil du løslades?", "Brug frikort", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
+            if (valg.equals("Brug frikort")) {
+                if (player.getJailPass()) {
+                    player.setJailPass(false);
+                    gui.showMessage("Du løslades med dit frikort");
+                    break;
+                } else {
+                    gui.showMessage("Du har ikke noget frikort!");
+                    continue;
+                }
+            } else if (!player.getJailPass()) {
+                if (valg.equals("Betal 50kr og ryk det slåede")) {
+                    player.updateBalance(-50);
+                    int[] val = diceController.rollDice();
+                    gui.setDice(val[0], val[1]);
+                    player.move(val[0] + val[1]);
                     player.setIsInJail(false);
-                    player.resetTurnsInJail();
+                    break;
 
-                }else
-                    gui.showMessage(player.playerName + " slog ikke to ens");
-                    player.addTurnInJail();
-                    player.setIsInJail(true);
+                } else if (valg.equals("Prøv at slå to ens")) {
+                    int[] val = diceController.rollDice();
+                    gui.setDice(val[0], val[1]);
+                    if (val[0] == val[1]) {
+                        gui.showMessage("Tillykke du slog to ens");
+                        player.move(val[0] + val[1]);
+                        player.setIsInJail(false);
+                        player.resetTurnsInJail();
+                        break;
+                    } else {
+                        gui.showMessage(player.playerName + " slog ikke to ens");
+                        player.addTurnInJail();
+                        player.setIsInJail(true);
+                        break;
+                    }
+                }
             }
         }
     }
