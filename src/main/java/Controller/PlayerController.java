@@ -11,6 +11,9 @@ public class PlayerController {
     public int numberOfPlayers = 0;
     private int startBalance = 0;
 
+    public PlayerController() {
+    }
+
     public PlayerController(GUI gui) {
         this.gui = gui;
     }
@@ -19,6 +22,7 @@ public class PlayerController {
         System.out.println("Indtast ønskede antal spillere");
         numberOfPlayers = this.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
     }
+
 
     private void setStartBalance() {
         getNumberOfPlayers();

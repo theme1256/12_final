@@ -11,39 +11,63 @@ public class Move extends ChanceCards {
     @Override
     public void action(Player player, GUI gui) {
         switch (this.cardNumber) {
+
+            //Fængsel
             case 21:
             case 27:
                 player.moveTo(10, false);
                 break;
+
+            //Frederikberg Allé
             case 22:
-                player.moveTo(11, true);
+                if (player.currentFelt == 3 || player.currentFelt == 8) {
+                    player.moveTo(11, false);
+                } else {
+                    player.moveTo(11,true);
+                }
                 break;
+
+            //Ryk tre felter tilbage
             case 23:
-                player.moveTo(player.currentFelt -3);
+                player.moveTo(player.currentFelt -3, false);
                 break;
+
+            //Tag ind på Rådhuspladsen
             case 24:
                 player.moveTo(39);
                 break;
+
+            // Ryk tre felter frem
             case 25:
                 player.moveTo(player.currentFelt +3);
                 break;
+
+
+            //Tag til Øresundsbåden
             case 26:
-                if (player.currentFelt >= 7){
+                if (player.currentFelt == 3){
+                    player.moveTo(5, false);
+                }
+                else {
                     player.moveTo(5, true);
                 }
-                else
-                player.moveTo(5, false);
                 break;
+
+            //Grønningen
             case 28:
-                if (player.currentFelt >= 34){
+                if (player.currentFelt < 34){
                     player.moveTo(24, true);
                 }
-                else
-                player.moveTo(24, false);
+                else {
+                    player.moveTo(24, false);
+                }
                 break;
+
+            //Frem til Start
             case 29:
-                player.moveTo(0, true);
+                player.moveTo(0, false);
                 break;
+
             default:
                 break;
         }
@@ -60,13 +84,11 @@ public class Move extends ChanceCards {
                 cardDescription = "Ryk frem til Frederiksbergallé. Hvis De passerer >Start<, indkassér kr. 200,00.";
                 break;
             case 23:
+            case 25:
                 cardDescription = "Ryk tre felter tilbage.";
                 break;
             case 24:
                 cardDescription = "Tag ind på Rådhuspladsen.";
-                break;
-            case 25:
-                cardDescription = "Ryk tre felter tilbage.";
                 break;
             case 26:
                 cardDescription = "Tag med Øresundsbåden - Flyt brikken frem, og hvis De passerer >Start<, indkassér kr. 200,00.";
