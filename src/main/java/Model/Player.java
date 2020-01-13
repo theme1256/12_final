@@ -16,6 +16,7 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
+    private int turnsInJail = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -40,10 +41,9 @@ public class Player {
         car = playercar;
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
+
     private static void brikselect(){
-
         while(true){
-
             if(!bilLock){
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock = true;
@@ -69,7 +69,6 @@ public class Player {
                 bilLock6 = true;
                 break;
             }
-
         }
 
     }
@@ -92,6 +91,9 @@ public class Player {
         account.updateBalance(diff);
         if(car != null)
             car.setBalance(account.balance);
+    }
+    public int getBalance() {
+        return account.balance;
     }
 
     private void updateCar(){
@@ -124,6 +126,25 @@ public class Player {
         if(this.currentFelt < this.previousFelt && passStart)
             this.passedStart = true;
         this.updateCar();
+    }
+
+    public int getTurnsInJail() {
+        return this.turnsInJail;
+    }
+    public void addTurnInJail() {
+        this.turnsInJail++;
+    }
+
+    public int getNetWorth() {
+        return 0;
+    }
+
+    public int getHouses() {
+        return 0;
+    }
+
+    public int getHotels(){
+        return 0;
     }
 
     public boolean getJailPass() {

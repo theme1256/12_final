@@ -1,19 +1,29 @@
 package Controller;
 
-import Model.Cards.Kort;
+import Model.Cards.ChanceCards;
+import Model.ChanceDeck;
 import Model.Player;
+import gui_main.GUI;
 
 public class ChanceCardController {
-    //private static ChanceDeck chanceDeck;
+    private FieldController fieldController;
+    private GUI gui;
+    private ChanceDeck chanceDeck;
 
-    public static void handleChancekort(Player player) {
-        if(BoardControllerGUI.felter.fields[player.currentFelt].getName().equals("Prøv lykken")) {
-            BoardControllerGUI.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
-            Kort chanceKort = GameController.chanceDeck.traekkort();
+    public ChanceCardController(FieldController fc, GUI gui) {
+        this.fieldController = fc;
+        this.gui = gui;
+        chanceDeck = new ChanceDeck();
+        chanceDeck.blandkort();
+    }
 
-            System.out.println(chanceKort);
-            chanceKort.action(player, BoardControllerGUI.gui);
+    public void handleChancekort(Player player) {
+        if(fieldController.getField(player.currentFelt).getName().equals("Prøv lykken")) {
+            this.gui.getUserButtonPressed(player + ", lander på chancekort felt!", "TRÆK KORT");
+            ChanceCards card = chanceDeck.traekkort();
 
+            System.out.println(card);
+            card.action(player, this.gui);
         }
     }
 }
