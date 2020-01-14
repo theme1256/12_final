@@ -153,7 +153,7 @@ public class StreetField extends Property {
     @Override
     protected int calculateRent(Field[] felter) {
         int multiplier = 1;
-        if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner())) {
+        if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner()) && this.buildLevel == 0) {
             multiplier = 2;
         }
         return this.rent[this.buildLevel] * multiplier;

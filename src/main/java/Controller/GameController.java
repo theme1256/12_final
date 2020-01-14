@@ -39,10 +39,12 @@ public class GameController {
             for (int i = 0; i < playerController.players.length; i++) {
                 turnsInARow++;
                 Player player = playerController.players[i];
-                playing = handleRound(player);
+                handleRound(player, true);
 
-                if (!playing)
+                if (playerController.numberOfPlayers <= 1) {
+                    playing = false;
                     break;
+                }
 
                 if (extraTurn) {
                     gui.getUserButtonPressed(player.playerName +" tillykke du får ekstra tur", "Fedt!");
@@ -56,23 +58,13 @@ public class GameController {
     }
 
     /**
-     * En wrapper til den anden handleRound, så man ikke skal give den to parametre
-     *
-     * @param player Pointer til den aktive player
-     * @return Om spilleren er ude
-     */
-    boolean handleRound(Player player){
-        return handleRound(player, true);
-    }
-
-    /**
      * Håndterer det primære flow i en tur, terningkast, land på felter, dobbelt-slag, etc.
      *
      * @param player Pointer til den aktive player
      * @param move Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
      * @return Om spilleren er ude
      */
-    boolean handleRound(Player player, boolean move) {
+    private void handleRound(Player player, boolean move) {
         if (player.getIsInJail()) {
             // Hvis spilleren kommer ud skalder behandles at de er rykket
             if (playerController.handeGetOutOfJail(player, diceController)) {
@@ -114,9 +106,32 @@ public class GameController {
                         extraTurn = false;
                     }
                 }
+
+                // Håndter handel/byg/nedriv
+                handleTrade(player);
             }
         }
+    }
 
-        return player.account.balance > 0;
+    private void handleTrade(Player player) {
+        while (true) {
+            String valg = gui.getUserSelection("Hvad vil du gøre?", "Bygge", "Nedrive", "Sælge", "Give op", "Give turen videre");
+            if (valg.equals("Bygge")) {
+                //
+            } else if (valg.equals("Nedrive")) {
+                //
+            } else if (valg.equals("Sælge")) {
+                //
+            } else if (valg.equals("Give op")) {
+                valg = gui.getUserButtonPressed("Er du sikker?", "Ja", "Nej");
+                if (valg.equals("Ja")) {
+                    player.giveUp();
+                    playerController.numberOfPlayers--;
+                    break;
+                }
+            } else if (valg.equals("Give turen videre")) {
+                break;
+            }
+        }
     }
 }
