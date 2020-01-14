@@ -19,6 +19,7 @@ public class PlayerController {
     public PlayerController(GUI gui, DiceController dc) {
         this.gui = gui;
         this.diceController = dc;
+
     }
     public String[] getCarColors() {
         return this.carColors;

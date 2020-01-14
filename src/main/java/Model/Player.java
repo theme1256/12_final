@@ -147,16 +147,52 @@ public class Player {
         this.isInJail = false;
     }
 
-    public int getNetWorth() {
-        return 0;
+    public int getNetWorth(BaseField[] felter) {
+        int out = getBalance();
+        for (BaseField felt : felter) {
+            if (felt instanceof Property) {
+                Player owner = ((Property) felt).getOwner();
+                if (owner != null) {
+                    if (owner.getPlayerName().equals(this.playerName)) {
+                        out += felt.getPrice();
+                    }
+                }
+            }
+        }
+        return out;
+
     }
 
-    public int getHouses() {
-        return 0;
-    }
+    public int getHouses(BaseField[] felter) {
+        int out = 0;
+        for (BaseField felt : felter) {
+            if (felt instanceof Property) {
+                Player owner = ((Property) felt).getOwner();
+                if (owner != null) {
+                    if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() < 5) {
+                        out +=((StreetField) felt).getBuildLevel();
+                    } else
+                        out += 0;
+                }
+            }
+        }
+        return out;
 
-    public int getHotels(){
-        return 0;
+    }
+    public int getHotels(BaseField[] felter) {
+        int out = 0;
+        for (BaseField felt : felter) {
+            if (felt instanceof Property) {
+                Player owner = ((Property) felt).getOwner();
+                if (owner != null) {
+                    if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() == 5) {
+                        out +=((StreetField) felt).getBuildLevel();
+                    } else
+                        out += 0;
+                }
+            }
+        }
+        return out;
     }
 
     public String[] getStreets(BaseField[] felter) {

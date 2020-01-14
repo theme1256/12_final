@@ -135,6 +135,7 @@ public class GameController {
                     if (!valg.equals("Annuller")) {
                         if (felt instanceof StreetField) {
                             ((StreetField) felt).build(gui, player, fieldController.getFields());
+                            player.getHouses(fieldController.getFields());
                         }
                     }
                 } else {
