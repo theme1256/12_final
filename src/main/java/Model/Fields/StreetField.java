@@ -180,6 +180,9 @@ public class StreetField extends Property {
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);
+                    GUI_Street GUIv = getGuiVersion(gui);
+                    GUIv.setOwnerName(player.getPlayerName());
+                    GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
             }
         }
