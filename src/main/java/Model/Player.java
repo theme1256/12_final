@@ -23,7 +23,7 @@ public class Player {
     private boolean jailPass = false;
     public int turnsInJail = 0;
     public boolean isInJail = false;
-    private boolean hasGivenUp = false;
+    private boolean isOut = false;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -31,10 +31,9 @@ public class Player {
     private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
 
 
-
     public Player(GUI gui, int startBalance, PlayerController playerController) {
         this.gui = gui;
-        username();
+        getUserInputPlayerName(playerController);
         account = new Account(startBalance);
 
         brikselect(gui, playerController);
@@ -45,6 +44,17 @@ public class Player {
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
 
+    public Player(int startBalance, String username) {
+        account = new Account(startBalance);
+        playerName = username;
+    }
+
+    /**
+     * Giver spilleren mulighed for selv at vælge farve på sin brik, og fjerner muligheden, så en anden ikke kan vælge det samme
+     *
+     * @param gui Pointer til aktivt GUI
+     * @param pc Pointer til PlayerController
+     */
     private void brikselect(GUI gui, PlayerController pc){
         while(true){
             String valg = gui.getUserSelection("Hvilken farve bil vil du have?", pc.getCarColors());
@@ -73,29 +83,52 @@ public class Player {
         }
     }
 
-
-    public Player(int startBalance, String username) {
-        account = new Account(startBalance);
-        playerName = username;
+    /**
+     * Beder brugeren om at indtaste et navn og gemmer det
+     */
+    private void getUserInputPlayerName(PlayerController pc) {
+        while (true) {
+            playerName = gui.getUserString("Indtast dit navn");
+            if (Arrays.stream(pc.getPlayerNames()).anyMatch(playerName::equals)) {
+                gui.getUserButtonPressed("Det er der allerede en player der hedder", "Prøv igen");
+            } else {
+                break;
+            }
+        }
     }
 
-    private void username() {
-        playerName = gui.getUserString("Indtast dit navn");
-    }
-
+    /**
+     * Henter navnet på spilleren
+     *
+     * @return Navnet
+     */
     public String getPlayerName() {
         return playerName;
     }
 
+    /**
+     * Opdaterer spillerens balance, også i GUI, hvis det er defineret
+     *
+     * @param diff Hvor meget der skal tilføjes eller fjernes
+     */
     public void updateBalance(int diff){
         account.updateBalance(diff);
-        if(car != null)
+        if (car != null)
             car.setBalance(account.balance);
     }
+
+    /**
+     * Henter hvor mange penge spilleren har
+     *
+     * @return Antal kr. spilleren har
+     */
     public int getBalance() {
         return account.balance;
     }
 
+    /**
+     * Opdaterer spillerens position i GUI, hvis der er defineret et GUI
+     */
     private void updateCar(){
         if(gui != null) {
             gui.getFields()[this.previousFelt].setCar(this.car, false);
@@ -103,6 +136,11 @@ public class Player {
         }
     }
 
+    /**
+     * Flytter spilleren det givne antal felter
+     *
+     * @param amount Antal felter der skal flyttes
+     */
     public void move(int amount) {
         this.previousFelt = this.currentFelt;
         this.currentFelt += amount;
@@ -113,6 +151,11 @@ public class Player {
         this.updateCar();
     }
 
+    /**
+     * Flytter spilleren til det givne felt
+     *
+     * @param to Felt der skal flyttes til
+     */
     public void moveTo(int to) {
         this.previousFelt = this.currentFelt;
         this.currentFelt = to;
@@ -120,6 +163,12 @@ public class Player {
         this.updateCar();
     }
 
+    /**
+     * Flytter spilleren til det givne felt og markerer at spilleren passerede start, hvis passStart er true
+     *
+     * @param to Felt der skal flyttes til
+     * @param passStart Om spilleren skal have penge for at passere start, hvis start passeres
+     */
     public void moveTo(int to, boolean passStart) {
         this.previousFelt = this.currentFelt;
         this.currentFelt = to;
@@ -128,18 +177,37 @@ public class Player {
         this.updateCar();
     }
 
+    /**
+     * Fortæler om spilleren er i fængsel
+     *
+     * @return Om spilleren er i fængsel
+     */
     public int getTurnsInJail() {
         return this.turnsInJail;
     }
+
+    /**
+     * Tæller antal af ture, som spilleren har været i fængsel, en op og markerer at spilleren er i fængsel
+     */
     public void addTurnInJail() {
         this.turnsInJail++;
         this.isInJail = true;
     }
+
+    /**
+     * Nulstiller hvor længe spilleren har været i fængsel og markerer at spilleren ikke er der mere
+     */
     public void resetTurnsInJail() {
         this.turnsInJail = 0;
         this.isInJail = false;
     }
 
+    /**
+     * Finder ud af hvor meget spilleren er værd (balance + værdi af skøder + bygninger)
+     *
+     * @param felter Array af alle felter
+     * @return Antal kr. spilleren er værd
+     */
     public int getNetWorth(BaseField[] felter) {
         int out = getBalance();
         for (BaseField felt : felter) {
@@ -148,46 +216,63 @@ public class Player {
                 if (owner != null) {
                     if (owner.getPlayerName().equals(this.playerName)) {
                         out += felt.getPrice();
+                        if(felt instanceof StreetField)
+                            out += ((StreetField) felt).getBuildLevel() * ((StreetField) felt).getBuildPrice();
                     }
                 }
             }
         }
         return out;
-
     }
 
-    public int getHouses(BaseField[] felter) {
+    /**
+     * Henter antal huse spilleren har bygget
+     *
+     * @param felter Array med alle felter på brættet
+     * @return Antal huse
+     */
+    public int getNumberOfHouses(BaseField[] felter) {
         int out = 0;
         for (BaseField felt : felter) {
             if (felt instanceof Property) {
                 Player owner = ((Property) felt).getOwner();
                 if (owner != null) {
                     if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() < 5) {
-                        out +=((StreetField) felt).getBuildLevel();
-                    } else
-                        out += 0;
+                        out += ((StreetField) felt).getBuildLevel();
+                    }
                 }
             }
         }
         return out;
-
     }
-    public int getHotels(BaseField[] felter) {
+
+    /**
+     * Henter antal hoteller spilleren har bygget
+     *
+     * @param felter Array med alle felter på brættet
+     * @return Antal hoteller
+     */
+    public int getNumberOfHotels(BaseField[] felter) {
         int out = 0;
         for (BaseField felt : felter) {
             if (felt instanceof Property) {
                 Player owner = ((Property) felt).getOwner();
                 if (owner != null) {
                     if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() == 5) {
-                        out +=((StreetField) felt).getBuildLevel();
-                    } else
-                        out += 0;
+                        out++;
+                    }
                 }
             }
         }
         return out;
     }
 
+    /**
+     * Finder ud af hvilke skøder på grunde, som spilleren ejer
+     *
+     * @param felter Array med alle felter
+     * @return Array med navne på grundene som spilleren ejer
+     */
     public String[] getStreets(BaseField[] felter) {
         String[] out = new String[0];
         for (BaseField felt : felter) {
@@ -202,6 +287,13 @@ public class Player {
         }
         return out;
     }
+
+    /**
+     * Finder ud af hvilke skøder spilleren ejer
+     *
+     * @param felter Array med alle felter
+     * @return Array med navne på felterne som spilleren ejer
+     */
     public String[] getProperties(BaseField[] felter) {
         String[] out = new String[0];
         for (BaseField felt : felter) {
@@ -217,6 +309,11 @@ public class Player {
         return out;
     }
 
+    /**
+     * Sælger alle spillerens skøder, sletter spillerens balance og fjerner bilen fra brættet
+     *
+     * @param felter Array med alle felter på brættet
+     */
     public void giveUp(BaseField[] felter) {
         for (BaseField felt : felter) {
             if (felt instanceof Property && ((Property) felt).isOwned()) {
@@ -228,25 +325,53 @@ public class Player {
             gui.getFields()[this.currentFelt].setCar(this.car, false);
         }
         this.updateBalance(-1 * this.getBalance());
-        this.hasGivenUp = true;
-    }
-    public boolean gaveUp() {
-        return this.hasGivenUp;
+        this.isOut = true;
     }
 
+    /**
+     * Fortæller om spilleren har givet op eller tabt
+     *
+     * @return Om spilleren stadig er med
+     */
+    public boolean getIsOut() {
+        return this.isOut;
+    }
+
+    /**
+     * Fortæller om spilleren har et frikokrt til fængslet
+     *
+     * @return Om spilleren har et frikort
+     */
     public boolean getJailPass() {
         return this.jailPass;
     }
+
+    /**
+     * Angiver om spilleren skal have et frikort til fængslet
+     *
+     * @param inp Om spilleren skal have et frikort
+     */
     public void setJailPass(boolean inp) {
         this.jailPass = inp;
     }
+
+    /**
+     * Fortæller om spilleren er i fængsel
+     *
+     * @return Om spilleren er i fængsel
+     */
     public boolean getIsInJail(){
         return this.isInJail;
     }
 
+    /**
+     * Opdaterer om spilleren er i fængsel eller ej
+     * @param inp Om spilleren er i fængsel
+     */
     public void setIsInJail(boolean inp){
         this.isInJail = inp;
     }
+
     @Override
     public String toString() {
         return playerName;

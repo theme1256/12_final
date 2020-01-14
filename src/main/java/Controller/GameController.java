@@ -40,7 +40,7 @@ public class GameController {
             for (int i = 0; i < playerController.players.length; i++) {
                 turnsInARow++;
                 Player player = playerController.players[i];
-                if (!player.gaveUp()) {
+                if (!player.getIsOut()) {
                     handleRound(player, true);
 
                     if (playerController.numberOfPlayers <= 1) {
@@ -48,7 +48,7 @@ public class GameController {
                         break;
                     }
 
-                    if (extraTurn && !player.gaveUp()) {
+                    if (extraTurn && !player.getIsOut()) {
                         gui.getUserButtonPressed(player.playerName + " tillykke du får ekstra tur", "Fedt!");
                         i--;
                         extraTurn = false;
@@ -60,7 +60,7 @@ public class GameController {
         }
         // Skriv hvem der vandt
         for (Player player : playerController.players) {
-            if (!player.gaveUp()) {
+            if (!player.getIsOut()) {
                 gui.showMessage("Tillykke til " + player.getPlayerName() + ", som vandt");
             }
         }
@@ -119,6 +119,12 @@ public class GameController {
 
                 // Håndter handel/byg/nedriv
                 handleOptions(player);
+
+                // Hvis spilleren ikke har flere penge, smid spilleren ud af spillet
+                if (player.getBalance() < 0) {
+                    gui.getUserButtonPressed("Du er gået falit og kan ikke spille med mere", "Ok");
+                    player.giveUp(fieldController.getFields());
+                }
             }
         }
     }
@@ -140,7 +146,7 @@ public class GameController {
                         BaseField felt = fieldController.getFieldFromName(valg);
                         if (felt instanceof StreetField) {
                             ((StreetField) felt).build(gui, player, fieldController.getFields());
-                            player.getHouses(fieldController.getFields());
+                            player.getNumberOfHouses(fieldController.getFields());
                         }
                     }
                 } else {
