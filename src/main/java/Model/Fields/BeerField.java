@@ -55,6 +55,7 @@ public class BeerField extends Property{
             int rent = this.calculateRent(felter, dc);
             gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
             player.updateBalance(-1 * rent);
+            this.owner.updateBalance(rent);
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {

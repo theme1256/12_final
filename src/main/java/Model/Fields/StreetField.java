@@ -175,6 +175,7 @@ public class StreetField extends Property {
             int rent = this.calculateRent(felter);
             gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
             player.updateBalance(-1 * rent);
+            this.owner.updateBalance(rent);
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
