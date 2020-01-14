@@ -1,36 +1,37 @@
 package Model.Cards;
 
+import Controller.FieldController;
 import Controller.GameController;
 import Model.Player;
 import gui_main.GUI;
 
 public class Money_special extends ChanceCards {
 
-
+    //IGNORER ikke slet
     public Money_special(int cardNumber) {
         super(cardNumber);
     }
 
     @Override
-    public boolean action(Player player, GUI gui) {
+    public boolean action(Player player, GUI gui, FieldController fc) {
         switch (this.cardNumber) {
             case 17:
 
                 player.updateBalance((GameController.playerController.numberOfPlayers-1)*25);
                 break;
             case 18:
-                if(player.getNetWorth() <= 750){
+                if(player.getNetWorth(fc.getFields()) <= 750){
                     player.updateBalance(+2000);
                 } else
-                    gui.showMessage("Du lever desværre ikke op til kravene til dette legat, da din totale værdi overstiger græsen med" + (player.getNetWorth() - 750)+ "kr");
+                    gui.showMessage("Du lever desværre ikke op til kravene til dette legat, da din totale værdi overstiger græsen med" + (player.getNetWorth(fc.getFields()) - 750)+ "kr");
                 break;
 
             case 19:
 
-                player.updateBalance(((-25) * player.getHouses()) + ((-125)*player.getHotels()));
+                player.updateBalance(((-25) * player.getHouses(fc.getFields())) + ((-125)*player.getHotels(fc.getFields())));
                 break;
             case 20:
-                player.updateBalance(((-50) * player.getHouses()) + ((-125)*player.getHotels()));
+                player.updateBalance(((-50) * player.getHouses(fc.getFields())) + ((-125)*player.getHotels(fc.getFields())));
             break;
             default:
                 break;
@@ -65,4 +66,10 @@ public class Money_special extends ChanceCards {
         }
         return cardDescription;
     }
+
+    //IGNORER ikke slet
+    public boolean action(Player player, GUI gui){
+        return true;
+    }
 }
+

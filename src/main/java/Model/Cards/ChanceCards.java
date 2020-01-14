@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.FieldController;
 import Model.Player;
 import gui_main.GUI;
 
@@ -9,7 +10,7 @@ public abstract class ChanceCards {
     protected String action;
     protected int value;
 
-    public ChanceCards(int cardNumber){
+    ChanceCards(int cardNumber){
         this.cardNumber = cardNumber;
     }
 
@@ -19,4 +20,6 @@ public abstract class ChanceCards {
     }
 
     public abstract boolean action(Player player, GUI gui);
+
+    public abstract boolean action(Player player, GUI gui, FieldController fc);
 }
