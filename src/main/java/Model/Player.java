@@ -12,13 +12,13 @@ public class Player {
     public String playerName;
     private GUI_Player car;
     private GUI gui;
-    private static   GUI_Car brik;
+    private static GUI_Car brik;
 
     public boolean passedStart = false;
     private boolean jailPass = false;
     public int turnsInJail = 0;
     public boolean isInJail = false;
-    public int turnsInARow = 0;
+    private boolean hasGivenUp = false;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -154,6 +154,10 @@ public class Player {
 
     public int getHotels(){
         return 0;
+    }
+
+    public void giveUp() {
+        this.hasGivenUp = true;
     }
 
     public boolean getJailPass() {
