@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.PlayerController;
 import Model.Fields.Field;
 import Model.Fields.Property;
 import gui_fields.GUI_Car;
@@ -7,6 +8,7 @@ import gui_fields.GUI_Player;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Player {
     public Account account;
@@ -25,6 +27,8 @@ public class Player {
     public int currentFelt = 0;
     public int previousFelt = 0;
 
+    private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
+
     private static boolean bilLock = false;
     private static boolean bilLock2 = false;
     private static boolean bilLock3 = false;
@@ -33,12 +37,12 @@ public class Player {
     private static boolean bilLock6 = false;
 
 
-    public Player(GUI gui, int startBalance, int i) {
+    public Player(GUI gui, int startBalance, PlayerController playerController) {
         this.gui = gui;
         username();
         account = new Account(startBalance);
 
-        brikselect(gui);
+        brikselect(gui, playerController);
 
         GUI_Player playercar = new GUI_Player(playerName, account.balance, brik);
         gui.addPlayer(playercar);
@@ -46,32 +50,27 @@ public class Player {
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
 
-    private static void brikselect(GUI gui){
+    private void brikselect(GUI gui, PlayerController pc){
         while(true){
-            String valg = gui.getUserSelection("Hvilken farve bil vil du have?", "Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid");
-            if (!bilLock && valg.equals("Sort")) {
+            String valg = gui.getUserSelection("Hvilken farve bil vil du have?", pc.getCarColors());
+            pc.removeCarColor(valg);
+            if (valg.equals("Sort")) {
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock = true;
                 break;
-            } else if(!bilLock2 && valg.equals("Rød")) {
+            } else if(valg.equals("Rød")) {
                 brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock2 = true;
                 break;
-            } else if (!bilLock3 && valg.equals("Grøn")) {
+            } else if (valg.equals("Grøn")) {
                 brik = new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock3 = true;
                 break;
-            } else if (!bilLock4 && valg.equals("Blå")) {
+            } else if (valg.equals("Blå")) {
                 brik = new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock4 = true;
                 break;
-            } else if (!bilLock5 && valg.equals("Gul")) {
+            } else if (valg.equals("Gul")) {
                 brik = new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock5 = true;
                 break;
-            } else if (!bilLock6 && valg.equals("Hvid")) {
+            } else if (valg.equals("Hvid")) {
                 brik = new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                bilLock6 = true;
                 break;
             } else {
                 gui.getUserButtonPressed("Den farve er allerede valgt", "Prøv igen");
@@ -156,6 +155,23 @@ public class Player {
 
     public int getHotels(){
         return 0;
+    }
+
+    public String[] getProperties(Field[] felter) {
+        String[] out = new String[0];
+        for (Field felt : felter) {
+            if (felt instanceof Property) {
+                if (((Property) felt).getOwner().getPlayerName().equals(this.playerName)) {
+                    out = addElement(out, felt.getName());
+                }
+            }
+        }
+        return out;
+    }
+    public String[] addElement(String[] srcArray, String elementToAdd) {
+        String[] destArray = Arrays.copyOf(srcArray, srcArray.length + 1);
+        destArray[destArray.length - 1] = elementToAdd;
+        return destArray;
     }
 
     public void giveUp(Field[] felter) {
