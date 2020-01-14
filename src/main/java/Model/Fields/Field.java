@@ -16,24 +16,24 @@ public abstract class Field {
 
     //Constructor
     public Field(String name, String description, int nr) {
-        this.description = description;
+        this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
     }
     public Field(String name, String description, int nr, int price) {
-        this.description = description;
+        this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
         this.price = price;
     }
     public Field(String name, String description, int nr, Color color) {
-        this.description = description;
+        this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
         this.color = color;
     }
     public Field(String name, String description, int nr, int price, Color color) {
-        this.description = description;
+        this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
         this.price = price;

@@ -153,7 +153,7 @@ public class StreetField extends Property {
     @Override
     protected int calculateRent(Field[] felter) {
         int multiplier = 1;
-        if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner())) {
+        if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner()) && this.buildLevel == 0) {
             multiplier = 2;
         }
         return this.rent[this.buildLevel] * multiplier;
@@ -171,7 +171,7 @@ public class StreetField extends Property {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent(felter);
-            gui.getUserButtonPressed(player.playerName + " er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
+            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
             player.updateBalance(-1 * rent);
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
@@ -180,6 +180,9 @@ public class StreetField extends Property {
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);
+                    GUI_Street GUIv = getGuiVersion(gui);
+                    GUIv.setOwnerName(player.getPlayerName());
+                    GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
             }
         }

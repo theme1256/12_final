@@ -99,32 +99,38 @@ public class FieldController {
                 field.setTitle(fields[i].getName());
                 field.setBackGroundColor(fields[i].getColor());
                 field.setSubText(fields[i].getPrice() + "kr");
+                field.setDescription(fields[i].getDescription());
                 gui_fields[i] = field;
             } else if (fields[i] instanceof JailField) {
                 GUI_Field field = new GUI_Jail();
                 field.setTitle(fields[i].getName());
                 field.setSubText("Fængsel");
+                field.setDescription(fields[i].getDescription());
                 gui_fields[i] = field;
             } else if (fields[i] instanceof BeerField) {
                 GUI_Field field = new GUI_Brewery();
                 field.setTitle(fields[i].getName());
                 field.setSubText(fields[i].getPrice() + "kr");
+                field.setDescription(fields[i].getDescription());
                 gui_fields[i] = field;
             } else if (fields[i] instanceof Helle) {
                 GUI_Field field = new GUI_Refuge();
                 field.setTitle(fields[i].getName());
                 field.setBackGroundColor(Color.WHITE);
                 field.setSubText("Helle");
+                field.setDescription(fields[i].getDescription());
                 gui_fields[i] = field;
             } else if (fields[i] instanceof StartField) {
                 GUI_Field field = new GUI_Start();
                 field.setTitle(fields[i].getName());
                 field.setSubText("");
+                field.setDescription(fields[i].getDescription());
                 gui_fields[i] = field;
             } else {
                 GUI_Field field = new GUI_Street();
                 field.setTitle(fields[i].getName());
                 field.setBackGroundColor(fields[i].getColor());
+                field.setDescription(fields[i].getDescription());
                 field.setSubText(String.valueOf(fields[i].getPrice() + "kr"));
                 gui_fields[i] = field;
             }

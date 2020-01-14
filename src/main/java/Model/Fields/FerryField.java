@@ -1,6 +1,8 @@
 package Model.Fields;
 
 import Model.Player;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Shipping;
 import gui_main.GUI;
 
 import java.awt.*;
@@ -14,6 +16,17 @@ public class FerryField extends Property {
     }
 
     /**
+     * Henter den version af feltet, som GUI bruger
+     *
+     * @param gui Pointer til det aktive GUI
+     * @return Et felt, som der kan bruges til at modificere GUI
+     */
+    private GUI_Shipping getGuiVersion(GUI gui) {
+        GUI_Field[] fields = gui.getFields();
+        return ((GUI_Shipping) fields[nr - 1]);
+    }
+
+    /**
      * Finder ud af hvor mange rederier der er ejet af den person, som ejer det aktive felt
      *
      * @param felter Array med alle felterne
@@ -22,8 +35,8 @@ public class FerryField extends Property {
     private int ownersInGroup(Field[] felter) {
         int owns = 1;
         for (int value : group) {
-            if (this.nr != value) {
-                if (((FerryField) felter[value]).getOwner() == this.owner) {
+            if (this.nr != value && felter[value-1] instanceof FerryField) {
+                if (((FerryField) felter[value-1]).getOwner() == this.owner) {
                     owns++;
                 }
             }
@@ -56,6 +69,9 @@ public class FerryField extends Property {
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);
+                    GUI_Shipping GUIv = getGuiVersion(gui);
+                    GUIv.setOwnerName(player.getPlayerName());
+                    GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
             }
         }

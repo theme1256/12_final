@@ -11,22 +11,18 @@ public class PlayerController {
     public int numberOfPlayers = 0;
     private int startBalance = 0;
 
-    public PlayerController() {
-    }
-
     public PlayerController(GUI gui, DiceController dc) {
         this.gui = gui;
         this.diceController = dc;
     }
 
-    private void getNumberOfPlayers() {
+    private void getUserInputNumberOfPlayers() {
         System.out.println("Indtast ønskede antal spillere");
         numberOfPlayers = this.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
     }
 
-
     private void setStartBalance() {
-        getNumberOfPlayers();
+        getUserInputNumberOfPlayers();
 
         if ((numberOfPlayers >= 3) && (numberOfPlayers <= 6)) {
             startBalance = 1500;
@@ -57,60 +53,53 @@ public class PlayerController {
     }
 
     public boolean handleGetInJail(Player player) {
+        //if (player.currentFelt == 30) {
         if (player.currentFelt > 25) {
             this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
             player.moveTo(10,false);
-            player.setIsInJail(true);
             player.resetTurnsInJail();
+            player.setIsInJail(true);
             return true;
         }
         return false;
     }
 
-    public void handeGetOutOfJail(Player player, DiceController diceController) {
-
+    public boolean handeGetOutOfJail(Player player, DiceController diceController) {
         if (player.getTurnsInJail() >= 3) {
             gui.showMessage("Du løslades ved 3. forsøg");
             player.updateBalance(-50);
             player.resetTurnsInJail();
-            player.setIsInJail(false);
+            return true;
         }
 
-    while (true) {
+        while (true) {
             String valg = gui.getUserButtonPressed(player.playerName + " hvordan vil du løslades?", "Brug frikort", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
             if (valg.equals("Brug frikort")) {
                 if (player.getJailPass()) {
                     player.setJailPass(false);
                     gui.showMessage("Du løslades med dit frikort");
-                    break;
+                    player.move(diceController.rollAndSumDice());
+                    return true;
                 } else {
                     gui.showMessage("Du har ikke noget frikort!");
                     continue;
                 }
-            } else if (!player.getJailPass()) {
-                if (valg.equals("Betal 50kr og ryk det slåede")) {
-                    player.updateBalance(-50);
-                    int[] val = diceController.rollDice();
-                    gui.setDice(val[0], val[1]);
+            } else if (valg.equals("Betal 50kr og ryk det slåede")) {
+                player.updateBalance(-50);
+                player.move(diceController.rollAndSumDice());
+                player.resetTurnsInJail();
+                return true;
+            } else if (valg.equals("Prøv at slå to ens")) {
+                int[] val = diceController.rollDice();
+                if (val[0] == val[1]) {
+                    gui.showMessage("Tillykke du slog to ens");
                     player.move(val[0] + val[1]);
-                    player.setIsInJail(false);
-                    break;
-
-                } else if (valg.equals("Prøv at slå to ens")) {
-                    int[] val = diceController.rollDice();
-                    gui.setDice(val[0], val[1]);
-                    if (val[0] == val[1]) {
-                        gui.showMessage("Tillykke du slog to ens");
-                        player.move(val[0] + val[1]);
-                        player.setIsInJail(false);
-                        player.resetTurnsInJail();
-                        break;
-                    } else {
-                        gui.showMessage(player.playerName + " slog ikke to ens");
-                        player.addTurnInJail();
-                        player.setIsInJail(true);
-                        break;
-                    }
+                    player.resetTurnsInJail();
+                    return true;
+                } else {
+                    gui.showMessage(player.playerName + " slog ikke to ens");
+                    player.addTurnInJail();
+                    return false;
                 }
             }
         }

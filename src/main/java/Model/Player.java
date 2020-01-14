@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Fields.Field;
+import Model.Fields.Property;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -12,13 +14,13 @@ public class Player {
     public String playerName;
     private GUI_Player car;
     private GUI gui;
-    private static   GUI_Car brik;
+    private static GUI_Car brik;
 
     public boolean passedStart = false;
     private boolean jailPass = false;
     public int turnsInJail = 0;
     public boolean isInJail = false;
-    public int turnsInARow = 0;
+    private boolean hasGivenUp = false;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -36,7 +38,7 @@ public class Player {
         username();
         account = new Account(startBalance);
 
-        brikselect();
+        brikselect(gui);
 
         GUI_Player playercar = new GUI_Player(playerName, account.balance, brik);
         gui.addPlayer(playercar);
@@ -44,35 +46,37 @@ public class Player {
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
 
-    private static void brikselect(){
+    private static void brikselect(GUI gui){
         while(true){
-            if(!bilLock){
+            String valg = gui.getUserSelection("Hvilken farve bil vil du have?", "Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid");
+            if (!bilLock && valg.equals("Sort")) {
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock = true;
                 break;
-            }if(!bilLock2 && bilLock){
+            } else if(!bilLock2 && valg.equals("Rød")) {
                 brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock2 = true;
                 break;
-            } if(!bilLock3 && bilLock && bilLock2){
+            } else if (!bilLock3 && valg.equals("Grøn")) {
                 brik = new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock3 = true;
                 break;
-            }if(!bilLock4 && bilLock && bilLock2&&bilLock3){
+            } else if (!bilLock4 && valg.equals("Blå")) {
                 brik = new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock4 = true;
                 break;
-            }if(!bilLock5 && bilLock && bilLock2&&bilLock3&&bilLock4){
+            } else if (!bilLock5 && valg.equals("Gul")) {
                 brik = new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock5 = true;
                 break;
-            }if(!bilLock6 && bilLock && bilLock2&&bilLock3&&bilLock4&&bilLock5){
+            } else if (!bilLock6 && valg.equals("Hvid")) {
                 brik = new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock6 = true;
                 break;
+            } else {
+                gui.getUserButtonPressed("Den farve er allerede valgt", "Prøv igen");
             }
         }
-
     }
 
 
@@ -135,9 +139,11 @@ public class Player {
     }
     public void addTurnInJail() {
         this.turnsInJail++;
+        this.isInJail = true;
     }
     public void resetTurnsInJail() {
         this.turnsInJail = 0;
+        this.isInJail = false;
     }
 
     public int getNetWorth() {
@@ -150,6 +156,23 @@ public class Player {
 
     public int getHotels(){
         return 0;
+    }
+
+    public void giveUp(Field[] felter) {
+        for (Field felt : felter) {
+            if (felt instanceof Property && ((Property) felt).isOwned()) {
+                if (((Property) felt).getOwner().getPlayerName().equals(this.playerName))
+                    ((Property) felt).sell(gui);
+            }
+        }
+        if (gui != null) {
+            gui.getFields()[this.currentFelt].setCar(this.car, false);
+        }
+        this.updateBalance(-1 * this.getBalance());
+        this.hasGivenUp = true;
+    }
+    public boolean gaveUp() {
+        return this.hasGivenUp;
     }
 
     public boolean getJailPass() {

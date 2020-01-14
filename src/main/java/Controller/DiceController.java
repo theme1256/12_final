@@ -14,6 +14,12 @@ public class DiceController {
         shaker = new Shaker(2);
     }
 
+    public int rollAndSumDice() {
+        lastShake = shaker.shake();
+        this.gui.setDice(lastShake[0], lastShake[1]);
+        return lastShake[0] + lastShake[1];
+    }
+
     public int[] rollDice() {
         lastShake = shaker.shake();
         this.gui.setDice(lastShake[0], lastShake[1]);
