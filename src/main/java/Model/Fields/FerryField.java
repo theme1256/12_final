@@ -35,8 +35,8 @@ public class FerryField extends Property {
     private int ownersInGroup(Field[] felter) {
         int owns = 1;
         for (int value : group) {
-            if (this.nr != value) {
-                if (((FerryField) felter[value]).getOwner() == this.owner) {
+            if (this.nr != value && felter[value-1] instanceof FerryField) {
+                if (((FerryField) felter[value-1]).getOwner() == this.owner) {
                     owns++;
                 }
             }
