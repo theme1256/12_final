@@ -131,8 +131,8 @@ public class GameController {
                 if (properties.length > 0) {
                     properties = MatadorUI.addElement(properties, "Annuller");
                     valg = gui.getUserSelection("Hvilken grund vil du bygge på?", properties);
-                    BaseField felt = fieldController.getFieldFromName(valg);
                     if (!valg.equals("Annuller")) {
+                        BaseField felt = fieldController.getFieldFromName(valg);
                         if (felt instanceof StreetField) {
                             ((StreetField) felt).build(gui, player, fieldController.getFields());
                         }
