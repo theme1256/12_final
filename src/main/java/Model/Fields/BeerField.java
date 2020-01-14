@@ -6,8 +6,6 @@ import gui_fields.GUI_Brewery;
 import gui_fields.GUI_Field;
 import gui_main.GUI;
 
-import java.awt.*;
-
 public class BeerField extends Property{
     private int[] group = new int[]{13, 29};
     private int[] rent = new int[]{4, 10};
@@ -33,7 +31,7 @@ public class BeerField extends Property{
      * @param felter Array med alle felterne
      * @return Et mennesketal, som viser hvor mange grunde der ejes, husk minus 1, hvis der skal slås op i this.rent
      */
-    private int ownersInGroup(Field[] felter) {
+    private int ownersInGroup(BaseField[] felter) {
         int owns = 1;
         for (int value : group) {
             if (this.nr != value && felter[value-1] instanceof BeerField) {
@@ -45,13 +43,13 @@ public class BeerField extends Property{
         return owns;
     }
 
-    private int calculateRent(Field[] felter, DiceController dc) {
+    private int calculateRent(BaseField[] felter, DiceController dc) {
         return dc.rollAndSumDice() * this.rent[ownersInGroup(felter)-1];
     }
     @Override
-    protected int calculateRent(Field[] felter){ return 0; }
+    protected int calculateRent(BaseField[] felter){ return 0; }
 
-    public void action(GUI gui, Player player, Field[] felter, DiceController dc) {
+    public void action(GUI gui, Player player, BaseField[] felter, DiceController dc) {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent(felter, dc);
@@ -74,5 +72,5 @@ public class BeerField extends Property{
     @Override
     public void action(GUI gui, Player player){}
     @Override
-    public void action(GUI gui, Player player, Field[] felter) {}
+    public void action(GUI gui, Player player, BaseField[] felter) {}
 }

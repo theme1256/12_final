@@ -6,7 +6,7 @@ import gui_fields.*;
 import java.awt.*;
 
 public class FieldController {
-    private Model.Fields.Field[] fields = new Model.Fields.Field[40];
+    private BaseField[] fields = new BaseField[40];
 
     public FieldController() {
         instantiateFields();
@@ -63,7 +63,7 @@ public class FieldController {
      *
      * @return Array med felterne
      */
-    public Model.Fields.Field[] getFields() {
+    public BaseField[] getFields() {
         return fields;
     }
 
@@ -73,8 +73,16 @@ public class FieldController {
      * @param i Det felt der skal hentes
      * @return Feltet
      */
-    public Model.Fields.Field getField(int i) {
+    public BaseField getField(int i) {
         return fields[i];
+    }
+
+    public BaseField getFieldFromName(String find) {
+        for (BaseField field : fields) {
+            if (field.getName().equals(find))
+                return field;
+        }
+        return null;
     }
 
     /**

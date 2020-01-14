@@ -25,21 +25,7 @@ public class PlayerController {
     }
     public void removeCarColor(String color) {
         System.out.println(color + " fundet ved index: " + Arrays.asList(this.carColors).indexOf(color));
-        this.carColors = removeElement(this.carColors, color);
-    }
-    private String[] removeElement(String[] input, String deleteMe) {
-        if (input != null) {
-            List<String> list = new ArrayList<String>(Arrays.asList(input));
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).equals(deleteMe)) {
-                    list.remove(i);
-                    break;
-                }
-            }
-            return list.toArray(new String[0]);
-        } else {
-            return new String[0];
-        }
+        this.carColors = MatadorUI.removeElement(this.carColors, color);
     }
 
     private void getUserInputNumberOfPlayers() {
