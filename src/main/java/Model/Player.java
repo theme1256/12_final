@@ -10,6 +10,7 @@ import gui_fields.GUI_Player;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Player {
     public Account account;
@@ -30,17 +31,10 @@ public class Player {
 
     private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
 
-    private static boolean bilLock = false;
-    private static boolean bilLock2 = false;
-    private static boolean bilLock3 = false;
-    private static boolean bilLock4 = false;
-    private static boolean bilLock5 = false;
-    private static boolean bilLock6 = false;
-
 
     public Player(GUI gui, int startBalance, PlayerController playerController) {
         this.gui = gui;
-        getUserInputPlayerName();
+        getUserInputPlayerName(playerController);
         account = new Account(startBalance);
 
         brikselect(gui, playerController);
@@ -93,8 +87,15 @@ public class Player {
     /**
      * Beder brugeren om at indtaste et navn og gemmer det
      */
-    private void getUserInputPlayerName() {
-        playerName = gui.getUserString("Indtast dit navn");
+    private void getUserInputPlayerName(PlayerController pc) {
+        while (true) {
+            playerName = gui.getUserString("Indtast dit navn");
+            if (Arrays.stream(pc.getPlayerNames()).anyMatch(playerName::equals)) {
+                gui.getUserButtonPressed("Det er der allerede en player der hedder", "Prøv igen");
+            } else {
+                break;
+            }
+        }
     }
 
     /**
