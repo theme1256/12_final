@@ -13,13 +13,17 @@ public class StreetField extends Property {
     private int[] group;
     private int buildPrice;
 
-    public StreetField(String name,String description, int nr, int price, int[] rent, int[] group, Color color) {
+    public StreetField(String name,String description, int nr, int price, int[] rent, int[] group, int buildPrice, Color color) {
         super(name, description, nr, price, color);
         this.rent = rent;
         this.group = group;
+        this.buildPrice = buildPrice;
     }
     public int getBuildLevel() {
-        return buildLevel;
+        return this.buildLevel;
+    }
+    public int getBuildPrice() {
+        return this.buildPrice;
     }
 
     /**
@@ -113,15 +117,19 @@ public class StreetField extends Property {
     public void build(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
         if (buildLevel < 5 && buildingFlat("up", felter) && ownsEntireGroup(felter, player)) {
-            buildLevel++;
-            GUIv.setRent(rent[buildLevel] + " kr");
-            if (buildLevel < 5) {
-                GUIv.setHouses(buildLevel);
+            if (player.getBalance() >= this.buildPrice) {
+                buildLevel++;
+                GUIv.setRent(rent[buildLevel] + " kr");
+                if (buildLevel < 5) {
+                    GUIv.setHouses(buildLevel);
+                } else {
+                    GUIv.setHouses(0);
+                    GUIv.setHotel(true);
+                }
+                player.updateBalance(-1 * this.buildPrice);
             } else {
-                GUIv.setHouses(0);
-                GUIv.setHotel(true);
+                gui.getUserButtonPressed("Du har ikke nok penge til at bygge", "Ok");
             }
-            player.updateBalance(-1 * this.buildPrice);
         } else {
             gui.getUserButtonPressed(player.playerName + " kan ikke bygge på denne grund lige nu", "OK");
         }

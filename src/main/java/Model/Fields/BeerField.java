@@ -43,12 +43,33 @@ public class BeerField extends Property{
         return owns;
     }
 
+    /**
+     * Beregner hvor meget der skal betales i leje for at lande på feltet
+     *
+     * @param felter Array med alle felter
+     * @param dc Pointer til DiceController
+     * @return Hvor mange kr. der skal betales i leje
+     */
     private int calculateRent(BaseField[] felter, DiceController dc) {
         return dc.rollAndSumDice() * this.rent[ownersInGroup(felter)-1];
     }
+
+    /**
+     *  Bruges ikke
+     * @param felter Array med alle felter
+     * @return 0, ikke i brug
+     */
     @Override
     protected int calculateRent(BaseField[] felter){ return 0; }
 
+    /**
+     * Finder ud af om feltet kan købes og tilbyder det, eller finder ud af hvad der skal betales i leje og trækker det
+     *
+     * @param gui Pointer til aktivt GUI
+     * @param player Pointer til aktiv player
+     * @param felter Array med alle felterne
+     * @param dc Pointer til DiceController
+     */
     public void action(GUI gui, Player player, BaseField[] felter, DiceController dc) {
         if (this.owned) {
             // Beregn leje
