@@ -14,7 +14,6 @@ import java.util.Arrays;
 
 public class Player {
     public Account account;
-    private String input;
     public String playerName;
     private GUI_Player car;
     private GUI gui;
@@ -31,12 +30,6 @@ public class Player {
 
     private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
 
-    private static boolean bilLock = false;
-    private static boolean bilLock2 = false;
-    private static boolean bilLock3 = false;
-    private static boolean bilLock4 = false;
-    private static boolean bilLock5 = false;
-    private static boolean bilLock6 = false;
 
 
     public Player(GUI gui, int startBalance, PlayerController playerController) {
