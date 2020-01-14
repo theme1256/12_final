@@ -57,6 +57,17 @@ public class PlayerController {
         }
     }
 
+    public String[] getPlayerNames() {
+        String[] out = new String[0];
+        if (players.length > 0) {
+            for (Player p : players) {
+                if (p != null)
+                    out = MatadorUI.addElement(out, p.getPlayerName());
+            }
+        }
+        return out;
+    }
+
     public void handlePassStart(Player player) {
         if (player.passedStart) {
             this.gui.getUserButtonPressed(player + " passerer start og modtager 200 kr", "OK");
