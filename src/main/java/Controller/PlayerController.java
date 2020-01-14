@@ -53,11 +53,12 @@ public class PlayerController {
     }
 
     public boolean handleGetInJail(Player player) {
+        //if (player.currentFelt == 30) {
         if (player.currentFelt > 25) {
             this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
             player.moveTo(10,false);
-            player.setIsInJail(true);
             player.resetTurnsInJail();
+            player.setIsInJail(true);
             return true;
         }
         return false;
