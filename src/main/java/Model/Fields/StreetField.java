@@ -117,16 +117,17 @@ public class StreetField extends Property {
     public void build(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
         if (buildLevel < 5 && buildingFlat("up", felter) && ownsEntireGroup(felter, player)) {
-            if (player.getBalance() >= this.buildPrice) {
+            if (player.getBalance() >= this.buildPrice && this.buildLevel < 4 || player.getBalance() >= this.buildPrice*5 && this.buildLevel == 4) {
                 buildLevel++;
                 GUIv.setRent(rent[buildLevel] + " kr");
-                if (buildLevel < 5) {
+                if (buildLevel < 4) {
                     GUIv.setHouses(buildLevel);
+                    player.updateBalance(-1 * this.buildPrice);
                 } else {
                     GUIv.setHouses(0);
                     GUIv.setHotel(true);
+                    player.updateBalance(-1 * this.buildPrice*5);
                 }
-                player.updateBalance(-1 * this.buildPrice);
             } else {
                 gui.getUserButtonPressed("Du har ikke nok penge til at bygge", "Ok");
             }
