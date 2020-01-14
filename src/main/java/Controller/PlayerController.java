@@ -3,6 +3,10 @@ package Controller;
 import Model.Player;
 import gui_main.GUI;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class PlayerController {
     private GUI gui;
     private DiceController diceController;
@@ -10,10 +14,32 @@ public class PlayerController {
     public Player[] players;
     public int numberOfPlayers = 0;
     private int startBalance = 0;
+    private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
 
     public PlayerController(GUI gui, DiceController dc) {
         this.gui = gui;
         this.diceController = dc;
+    }
+    public String[] getCarColors() {
+        return this.carColors;
+    }
+    public void removeCarColor(String color) {
+        System.out.println(color + " fundet ved index: " + Arrays.asList(this.carColors).indexOf(color));
+        this.carColors = removeElement(this.carColors, color);
+    }
+    private String[] removeElement(String[] input, String deleteMe) {
+        if (input != null) {
+            List<String> list = new ArrayList<String>(Arrays.asList(input));
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equals(deleteMe)) {
+                    list.remove(i);
+                    break;
+                }
+            }
+            return list.toArray(new String[0]);
+        } else {
+            return new String[0];
+        }
     }
 
     private void getUserInputNumberOfPlayers() {
@@ -38,7 +64,7 @@ public class PlayerController {
         }
         players = new Player[numberOfPlayers];
         for (int i = 0; i < numberOfPlayers; i++) {
-            players[i] = new Player(this.gui, startBalance, i);
+            players[i] = new Player(this.gui, startBalance, this);
 
             this.gui.showMessage("Navn: " + players[i].playerName + ", start-balance: " + players[i].account.balance + " kr.");
         }
@@ -64,7 +90,7 @@ public class PlayerController {
         return false;
     }
 
-    public boolean handeGetOutOfJail(Player player, DiceController diceController) {
+    public boolean handeGetOutOfJail(Player player) {
         if (player.getTurnsInJail() >= 3) {
             gui.showMessage("Du løslades ved 3. forsøg");
             player.updateBalance(-50);

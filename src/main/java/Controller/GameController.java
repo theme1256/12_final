@@ -76,7 +76,7 @@ public class GameController {
     private void handleRound(Player player, boolean move) {
         if (player.getIsInJail()) {
             // Hvis spilleren kommer ud skalder behandles at de er rykket
-            if (playerController.handeGetOutOfJail(player, diceController)) {
+            if (playerController.handeGetOutOfJail(player)) {
                 handleRound(player, false);
             }
         } else {
@@ -126,7 +126,8 @@ public class GameController {
         while (true) {
             String valg = gui.getUserSelection("Hvad vil du gøre?", "Bygge", "Nedrive", "Sælge", "Give op", "Give turen videre");
             if (valg.equals("Bygge")) {
-                //
+                String[] properties = player.getProperties(fieldController.getFields());
+                valg = gui.getUserSelection("Hvilken grund vil du bygge på?", properties);
             } else if (valg.equals("Nedrive")) {
                 //
             } else if (valg.equals("Sælge")) {
