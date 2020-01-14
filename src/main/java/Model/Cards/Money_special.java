@@ -28,10 +28,10 @@ public class Money_special extends ChanceCards {
 
             case 19:
 
-                player.updateBalance(((-25) * player.getHouses(fc.getFields())) + ((-125)*player.getHotels(fc.getFields())));
+                player.updateBalance(((-25) * player.getNumberOfHouses(fc.getFields())) + ((-125)*player.getNumberOfHotels(fc.getFields())));
                 break;
             case 20:
-                player.updateBalance(((-50) * player.getHouses(fc.getFields())) + ((-125)*player.getHotels(fc.getFields())));
+                player.updateBalance(((-50) * player.getNumberOfHouses(fc.getFields())) + ((-125)*player.getNumberOfHotels(fc.getFields())));
             break;
             default:
                 break;

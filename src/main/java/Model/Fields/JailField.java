@@ -10,9 +10,7 @@ public class JailField extends BaseField {
     }
 
     @Override
-    public void action(GUI gui, Player player) {
-        player.addTurnInJail();
-    }
+    public void action(GUI gui, Player player) {}
     public void action(GUI gui, Player player, BaseField[] felter){}
 }
 
