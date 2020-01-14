@@ -119,6 +119,12 @@ public class GameController {
 
                 // Håndter handel/byg/nedriv
                 handleOptions(player);
+
+                // Hvis spilleren ikke har flere penge, smid spilleren ud af spillet
+                if (player.getBalance() < 0) {
+                    gui.getUserButtonPressed("Du er gået falit og kan ikke spille med mere", "Ok");
+                    player.giveUp(fieldController.getFields());
+                }
             }
         }
     }
