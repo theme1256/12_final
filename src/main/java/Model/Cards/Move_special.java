@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.FieldController;
 import Model.Player;
 import gui_main.GUI;
 
@@ -9,24 +10,23 @@ public class Move_special extends ChanceCards {
     }
 
     //MANGLER AT MAN BETALER DOBBELT!
-
     public boolean action(Player player, GUI gui) {
         switch (this.cardNumber) {
             case 30:
             case 31:
-                if (player.currentFelt == 3) {
+                if (player.currentFelt == 2) {
                     player.moveTo(6);
                     break;
-                } else if (player.currentFelt == 8) {
+                } else if (player.currentFelt == 7) {
                     player.moveTo(16);
                     break;
-                } else if (player.currentFelt == 18 || player.currentFelt == 23) {
+                } else if (player.currentFelt == 17 || player.currentFelt == 22) {
                     player.moveTo(24);
                     break;
-                } else if (player.currentFelt == 34) {
+                } else if (player.currentFelt == 33) {
                     player.moveTo(36);
                     break;
-                } else if (player.currentFelt == 37) {
+                } else if (player.currentFelt == 36) {
                     player.moveTo(6, true);
                     break;
                 }
@@ -50,5 +50,11 @@ public class Move_special extends ChanceCards {
             break;
         }
         return cardDescription;
+    }
+
+
+    //IGNORER, ikke slet
+    public boolean action(Player player, GUI gui, FieldController fc) {
+        return true;
     }
 }

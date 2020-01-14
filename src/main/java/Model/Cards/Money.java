@@ -1,5 +1,6 @@
 package Model.Cards;
 
+import Controller.FieldController;
 import Model.Player;
 import gui_main.GUI;
 
@@ -120,5 +121,11 @@ public class Money extends ChanceCards {
                 break;
         }
         return cardDescription;
+    }
+
+
+    //IGNORER ikke slet
+    public boolean action(Player player, GUI gui, FieldController fc) {
+        return true;
     }
 }
