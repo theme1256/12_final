@@ -135,9 +135,11 @@ public class Player {
     }
     public void addTurnInJail() {
         this.turnsInJail++;
+        this.isInJail = true;
     }
     public void resetTurnsInJail() {
         this.turnsInJail = 0;
+        this.isInJail = false;
     }
 
     public int getNetWorth() {

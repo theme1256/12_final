@@ -73,48 +73,48 @@ public class GameController {
      * @return Om spilleren er ude
      */
     boolean handleRound(Player player, boolean move) {
-
-        // Slå med terningen når spilleren trykker
-        if (move && !player.getIsInJail()) {
-
-            this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
-
-            // Vis resultatet og opdater felt
-            int[] val = diceController.rollDice();
-            int value = val[0] + val[1];
-            player.move(value);
-        }
-
-
-        // Tjek om spilleren landede på "Gå i fængsel"
-        if(!playerController.handleGetInJail(player) && !player.getIsInJail()) {
-            // Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
-            playerController.handlePassStart(player);
-
-            // Lad feltet håndtere at der er landet en person på det
-            Field felt = fieldController.getField(player.currentFelt);
-            if (felt instanceof BeerField)
-                ((BeerField) felt).action(gui, player, fieldController.getFields(), diceController);
-            else if (felt instanceof Property)
-                felt.action(gui, player, fieldController.getFields());
-            else
-                felt.action(gui, player);
-
-            // Håndterer chancekort
-            if (this.chanceCardController.handleChancekort(player)) {
+        if (player.getIsInJail()) {
+            // Hvis spilleren kommer ud skalder behandles at de er rykket
+            if (playerController.handeGetOutOfJail(player, diceController)) {
                 handleRound(player, false);
-            } else if (move) {
-                //Tjekker hvorvidt en spiller har slået 2 ens
-                extraTurn = diceController.gaveExtraTurn();
-                // Tjek om spilleren har fået 3 ture i streg
-                if (turnsInARow == 3 && extraTurn) {
-                    gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
-                    player.moveTo(10, false);
-                    extraTurn = false;
+            }
+        } else {
+            // Slå med terningen når spilleren trykker
+            if (move) {
+                this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
+
+                // Slå med terningerne, opdater terningerne i GUI og flyt spilleren
+                player.move(diceController.rollAndSumDice());
+            }
+
+            // Tjek om spilleren landede på "Gå i fængsel"
+            if (!playerController.handleGetInJail(player)) {
+                // Hvis en spiller lander på et felt over felt 39; så starterde forfra på brættet og chekcer om spilleren skal have 200kr.
+                playerController.handlePassStart(player);
+
+                // Lad feltet håndtere at der er landet en person på det
+                Field felt = fieldController.getField(player.currentFelt);
+                if (felt instanceof BeerField)
+                    ((BeerField) felt).action(gui, player, fieldController.getFields(), diceController);
+                else if (felt instanceof Property)
+                    felt.action(gui, player, fieldController.getFields());
+                else
+                    felt.action(gui, player);
+
+                // Håndterer chancekort
+                if (this.chanceCardController.handleChancekort(player)) {
+                    handleRound(player, false);
+                } else if (move) {
+                    //Tjekker hvorvidt en spiller har slået 2 ens
+                    extraTurn = diceController.gaveExtraTurn();
+                    // Tjek om spilleren har fået 3 ture i streg
+                    if (turnsInARow == 3 && extraTurn) {
+                        gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
+                        player.moveTo(10, false);
+                        extraTurn = false;
+                    }
                 }
             }
-        } else if (player.getIsInJail()){
-            playerController.handeGetOutOfJail(player, diceController);
         }
 
         return player.account.balance > 0;
