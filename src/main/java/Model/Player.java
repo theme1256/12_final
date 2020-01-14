@@ -16,7 +16,9 @@ public class Player {
 
     public boolean passedStart = false;
     private boolean jailPass = false;
-    private int turnsInJail = 0;
+    public int turnsInJail = 0;
+    public boolean isInJail = false;
+    public int turnsInARow = 0;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
@@ -133,9 +135,11 @@ public class Player {
     }
     public void addTurnInJail() {
         this.turnsInJail++;
+        this.isInJail = true;
     }
     public void resetTurnsInJail() {
         this.turnsInJail = 0;
+        this.isInJail = false;
     }
 
     public int getNetWorth() {
@@ -156,7 +160,13 @@ public class Player {
     public void setJailPass(boolean inp) {
         this.jailPass = inp;
     }
+    public boolean getIsInJail(){
+        return this.isInJail;
+    }
 
+    public void setIsInJail(boolean inp){
+        this.isInJail = inp;
+    }
     @Override
     public String toString() {
         return playerName;
