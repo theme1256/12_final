@@ -59,7 +59,7 @@ public class BeerField extends Property{
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
-                String valg = gui.getUserButtonPressed("Du har råd til at købe " + this.name + ". Vil du købe rederiet?", "Ja", "Nej");
+                String valg = gui.getUserButtonPressed("Du har råd til at købe " + this.name + ". Vil du købe bryggeriet?", "Ja", "Nej");
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);
