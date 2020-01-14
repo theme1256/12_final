@@ -46,7 +46,7 @@ public abstract class Property extends BaseField {
         return owned;
     }
     public void sell(GUI gui) {
-        owner.updateBalance(this.price/2);
+        owner.updateBalance(this.price);
         if (gui != null) {
             GUI_Ownable GUIv = getGuiVersion(gui);
             GUIv.setRent("");
