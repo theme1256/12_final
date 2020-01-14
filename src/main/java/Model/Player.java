@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Fields.Field;
+import Model.Fields.Property;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -156,8 +158,21 @@ public class Player {
         return 0;
     }
 
-    public void giveUp() {
+    public void giveUp(Field[] felter) {
+        for (Field felt : felter) {
+            if (felt instanceof Property && ((Property) felt).isOwned()) {
+                if (((Property) felt).getOwner().getPlayerName().equals(this.playerName))
+                    ((Property) felt).sell(gui);
+            }
+        }
+        if (gui != null) {
+            gui.getFields()[this.currentFelt].setCar(this.car, false);
+        }
+        this.updateBalance(-1 * this.getBalance());
         this.hasGivenUp = true;
+    }
+    public boolean gaveUp() {
+        return this.hasGivenUp;
     }
 
     public boolean getJailPass() {

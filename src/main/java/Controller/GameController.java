@@ -39,22 +39,31 @@ public class GameController {
             for (int i = 0; i < playerController.players.length; i++) {
                 turnsInARow++;
                 Player player = playerController.players[i];
-                handleRound(player, true);
+                if (!player.gaveUp()) {
+                    handleRound(player, true);
 
-                if (playerController.numberOfPlayers <= 1) {
-                    playing = false;
-                    break;
-                }
+                    if (playerController.numberOfPlayers <= 1) {
+                        playing = false;
+                        break;
+                    }
 
-                if (extraTurn) {
-                    gui.getUserButtonPressed(player.playerName +" tillykke du får ekstra tur", "Fedt!");
-                    i--;
-                    extraTurn = false;
-                } else {
-                    turnsInARow = 0;
+                    if (extraTurn && !player.gaveUp()) {
+                        gui.getUserButtonPressed(player.playerName + " tillykke du får ekstra tur", "Fedt!");
+                        i--;
+                        extraTurn = false;
+                    } else {
+                        turnsInARow = 0;
+                    }
                 }
             }
         }
+        // Skriv hvem der vandt
+        for (Player player : playerController.players) {
+            if (!player.gaveUp()) {
+                gui.showMessage("Tillykke til " + player.getPlayerName() + ", som vandt");
+            }
+        }
+        System.exit(0);
     }
 
     /**
@@ -125,7 +134,7 @@ public class GameController {
             } else if (valg.equals("Give op")) {
                 valg = gui.getUserButtonPressed("Er du sikker?", "Ja", "Nej");
                 if (valg.equals("Ja")) {
-                    player.giveUp();
+                    player.giveUp(fieldController.getFields());
                     playerController.numberOfPlayers--;
                     break;
                 }
