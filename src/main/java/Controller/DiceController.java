@@ -14,18 +14,33 @@ public class DiceController {
         shaker = new Shaker(2);
     }
 
+    /**
+     * Ruller terningerne, viser dem i GUI og returnerer summen af slaget
+     *
+     * @return Summen af de to terninger
+     */
     public int rollAndSumDice() {
         lastShake = shaker.shake();
         this.gui.setDice(lastShake[0], lastShake[1]);
         return lastShake[0] + lastShake[1];
     }
 
+    /**
+     * Ruller terningerne, viser dem i GUI og returnerer et array af slaget
+     *
+     * @return De enkelte værdier af terningerner
+     */
     public int[] rollDice() {
         lastShake = shaker.shake();
         this.gui.setDice(lastShake[0], lastShake[1]);
         return lastShake;
     }
 
+    /**
+     * Tjekker om det slag der var sidst, gav en ekstra tur
+     *
+     * @return om der skal gives en ekstra tur
+     */
     public boolean gaveExtraTurn() {
         return (lastShake[0] == lastShake[1]);
     }

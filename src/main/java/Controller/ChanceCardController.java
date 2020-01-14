@@ -18,6 +18,12 @@ public class ChanceCardController {
         chanceDeck.blandkort();
     }
 
+    /**
+     * Håndterer at trække et chancekort, hvis der er landet på et chance-felt
+     *
+     * @param player Pointer til den spiller, hvis tur det er
+     * @return Om der skal håndteres at spilleren er blevet flyttet
+     */
     public boolean handleChancekort(Player player) {
         if(fieldController.getField(player.currentFelt) instanceof ChanceCardsField) {
             ChanceCards card = chanceDeck.traekkort();

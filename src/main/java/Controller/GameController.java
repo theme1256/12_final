@@ -14,7 +14,7 @@ public class GameController {
     public static PlayerController playerController;
     private FieldController fieldController;
 
-    public static boolean extraTurn = false;
+    public boolean extraTurn = false;
     public int turnsInARow = 0;
 
 
@@ -118,12 +118,17 @@ public class GameController {
                 }
 
                 // Håndter handel/byg/nedriv
-                handleTrade(player);
+                handleOptions(player);
             }
         }
     }
 
-    private void handleTrade(Player player) {
+    /**
+     * Håndterer at give brugeren muligheder i slutningen af en tur og udføre den valgte handling
+     *
+     * @param player Den player, hvis tur det er, som skal vælge
+     */
+    private void handleOptions(Player player) {
         while (true) {
             String valg = gui.getUserSelection(player.getPlayerName() + ", hvad vil du gøre?", "Bygge", "Nedrive", "Sælge", "Give op", "Give turen videre");
             if (valg.equals("Bygge")) {
