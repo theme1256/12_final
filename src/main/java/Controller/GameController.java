@@ -1,8 +1,9 @@
 package Controller;
 
 import Model.Fields.BeerField;
-import Model.Fields.Field;
+import Model.Fields.BaseField;
 import Model.Fields.Property;
+import Model.Fields.StreetField;
 import Model.Player;
 import gui_main.GUI;
 
@@ -94,7 +95,7 @@ public class GameController {
                 playerController.handlePassStart(player);
 
                 // Lad feltet håndtere at der er landet en person på det
-                Field felt = fieldController.getField(player.currentFelt);
+                BaseField felt = fieldController.getField(player.currentFelt);
                 if (felt instanceof BeerField)
                     ((BeerField) felt).action(gui, player, fieldController.getFields(), diceController);
                 else if (felt instanceof Property)
@@ -124,14 +125,49 @@ public class GameController {
 
     private void handleTrade(Player player) {
         while (true) {
-            String valg = gui.getUserSelection("Hvad vil du gøre?", "Bygge", "Nedrive", "Sælge", "Give op", "Give turen videre");
+            String valg = gui.getUserSelection(player.getPlayerName() + ", hvad vil du gøre?", "Bygge", "Nedrive", "Sælge", "Give op", "Give turen videre");
             if (valg.equals("Bygge")) {
-                String[] properties = player.getProperties(fieldController.getFields());
-                valg = gui.getUserSelection("Hvilken grund vil du bygge på?", properties);
+                String[] properties = player.getStreets(fieldController.getFields());
+                if (properties.length > 0) {
+                    properties = MatadorUI.addElement(properties, "Annuller");
+                    valg = gui.getUserSelection("Hvilken grund vil du bygge på?", properties);
+                    BaseField felt = fieldController.getFieldFromName(valg);
+                    if (!valg.equals("Annuller")) {
+                        if (felt instanceof StreetField) {
+                            ((StreetField) felt).build(gui, player, fieldController.getFields());
+                        }
+                    }
+                } else {
+                    gui.getUserButtonPressed("Du har ikke nogen grunde der kan bygges på", "Ok");
+                }
             } else if (valg.equals("Nedrive")) {
-                //
+                String[] properties = player.getStreets(fieldController.getFields());
+                if (properties.length > 0) {
+                    properties = MatadorUI.addElement(properties, "Annuller");
+                    valg = gui.getUserSelection("Hvilken grund vil du rive ned på?", properties);
+                    if (!valg.equals("Annuller")) {
+                        BaseField felt = fieldController.getFieldFromName(valg);
+                        if (felt instanceof StreetField) {
+                            ((StreetField) felt).destroy(gui, player, fieldController.getFields());
+                        }
+                    }
+                } else {
+                    gui.getUserButtonPressed("Du har ikke nogen grunde der kan nedrives", "Ok");
+                }
             } else if (valg.equals("Sælge")) {
-                //
+                String[] properties = player.getProperties(fieldController.getFields());
+                if (properties.length > 0) {
+                    properties = MatadorUI.addElement(properties, "Annuller");
+                    valg = gui.getUserSelection("Hvilket skøde vil du sælge?", properties);
+                    if (!valg.equals("Annuller")) {
+                        BaseField felt = fieldController.getFieldFromName(valg);
+                        if (felt instanceof Property) {
+                            ((Property) felt).sell(gui);
+                        }
+                    }
+                } else {
+                    gui.getUserButtonPressed("Du har ikke nogen skøder der kan sælges", "Ok");
+                }
             } else if (valg.equals("Give op")) {
                 valg = gui.getUserButtonPressed("Er du sikker?", "Ja", "Nej");
                 if (valg.equals("Ja")) {

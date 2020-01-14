@@ -3,7 +3,7 @@ package Model.Fields;
 import Model.Player;
 import gui_main.GUI;
 
-public class JailField extends Field {
+public class JailField extends BaseField {
 
     public JailField(String name, String description, int nr) {
         super(name, description, nr);
@@ -13,7 +13,7 @@ public class JailField extends Field {
     public void action(GUI gui, Player player) {
         player.addTurnInJail();
     }
-    public void action(GUI gui, Player player, Field[] felter){}
+    public void action(GUI gui, Player player, BaseField[] felter){}
 }
 
 
