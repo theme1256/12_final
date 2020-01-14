@@ -36,7 +36,7 @@ public class Player {
         username();
         account = new Account(startBalance);
 
-        brikselect();
+        brikselect(gui);
 
         GUI_Player playercar = new GUI_Player(playerName, account.balance, brik);
         gui.addPlayer(playercar);
@@ -44,35 +44,37 @@ public class Player {
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
 
-    private static void brikselect(){
+    private static void brikselect(GUI gui){
         while(true){
-            if(!bilLock){
+            String valg = gui.getUserSelection("Hvilken farve bil vil du have?", "Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid");
+            if (!bilLock && valg.equals("Sort")) {
                 brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock = true;
                 break;
-            }if(!bilLock2 && bilLock){
+            } else if(!bilLock2 && valg.equals("Rød")) {
                 brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock2 = true;
                 break;
-            } if(!bilLock3 && bilLock && bilLock2){
+            } else if (!bilLock3 && valg.equals("Grøn")) {
                 brik = new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock3 = true;
                 break;
-            }if(!bilLock4 && bilLock && bilLock2&&bilLock3){
+            } else if (!bilLock4 && valg.equals("Blå")) {
                 brik = new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock4 = true;
                 break;
-            }if(!bilLock5 && bilLock && bilLock2&&bilLock3&&bilLock4){
+            } else if (!bilLock5 && valg.equals("Gul")) {
                 brik = new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock5 = true;
                 break;
-            }if(!bilLock6 && bilLock && bilLock2&&bilLock3&&bilLock4&&bilLock5){
+            } else if (!bilLock6 && valg.equals("Hvid")) {
                 brik = new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
                 bilLock6 = true;
                 break;
+            } else {
+                gui.getUserButtonPressed("Den farve er allerede valgt", "Prøv igen");
             }
         }
-
     }
 
 
