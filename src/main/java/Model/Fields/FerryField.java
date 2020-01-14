@@ -32,7 +32,7 @@ public class FerryField extends Property {
      * @param felter Array med alle felterne
      * @return Et mennesketal, som viser hvor mange grunde der ejes, husk minus 1, hvis der skal slås op i this.rent
      */
-    private int ownersInGroup(Field[] felter) {
+    private int ownersInGroup(BaseField[] felter) {
         int owns = 1;
         for (int value : group) {
             if (this.nr != value && felter[value-1] instanceof FerryField) {
@@ -51,12 +51,12 @@ public class FerryField extends Property {
      * @return Hvor mange kr der skal betales i leje
      */
     @Override
-    protected int calculateRent(Field[] felter) {
+    protected int calculateRent(BaseField[] felter) {
         return rent[ownersInGroup(felter)-1];
     }
 
     @Override
-    public void action(GUI gui, Player player, Field[] felter) {
+    public void action(GUI gui, Player player, BaseField[] felter) {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent(felter);

@@ -3,7 +3,7 @@ package Model.Fields;
 import Model.Player;
 import gui_main.GUI;
 
-public class ChanceCardsField extends Field {
+public class ChanceCardsField extends BaseField {
 
     public ChanceCardsField(String name, String description, int nr) {
 
@@ -14,5 +14,5 @@ public class ChanceCardsField extends Field {
     public void action(GUI gui, Player player) {
         gui.getUserButtonPressed(player.playerName +" træk et chancekort", "OK");
     }
-    public void action(GUI gui, Player player, Field[] felter){}
+    public void action(GUI gui, Player player, BaseField[] felter){}
 }

@@ -1,8 +1,10 @@
 package Model;
 
+import Controller.MatadorUI;
 import Controller.PlayerController;
-import Model.Fields.Field;
+import Model.Fields.BaseField;
 import Model.Fields.Property;
+import Model.Fields.StreetField;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -157,25 +159,37 @@ public class Player {
         return 0;
     }
 
-    public String[] getProperties(Field[] felter) {
+    public String[] getStreets(BaseField[] felter) {
         String[] out = new String[0];
-        for (Field felt : felter) {
-            if (felt instanceof Property) {
-                if (((Property) felt).getOwner().getPlayerName().equals(this.playerName)) {
-                    out = addElement(out, felt.getName());
+        for (BaseField felt : felter) {
+            if (felt instanceof StreetField) {
+                Player owner = ((StreetField) felt).getOwner();
+                if (owner != null) {
+                    if (owner.getPlayerName().equals(this.playerName)) {
+                        out = MatadorUI.addElement(out, felt.getName());
+                    }
                 }
             }
         }
         return out;
     }
-    public String[] addElement(String[] srcArray, String elementToAdd) {
-        String[] destArray = Arrays.copyOf(srcArray, srcArray.length + 1);
-        destArray[destArray.length - 1] = elementToAdd;
-        return destArray;
+    public String[] getProperties(BaseField[] felter) {
+        String[] out = new String[0];
+        for (BaseField felt : felter) {
+            if (felt instanceof Property) {
+                Player owner = ((Property) felt).getOwner();
+                if (owner != null) {
+                    if (owner.getPlayerName().equals(this.playerName)) {
+                        out = MatadorUI.addElement(out, felt.getName());
+                    }
+                }
+            }
+        }
+        return out;
     }
 
-    public void giveUp(Field[] felter) {
-        for (Field felt : felter) {
+    public void giveUp(BaseField[] felter) {
+        for (BaseField felt : felter) {
             if (felt instanceof Property && ((Property) felt).isOwned()) {
                 if (((Property) felt).getOwner().getPlayerName().equals(this.playerName))
                     ((Property) felt).sell(gui);

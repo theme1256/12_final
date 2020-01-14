@@ -39,7 +39,7 @@ public class StreetField extends Property {
      * @param player Pointer til den aktive player
      * @return Om den player ejer alle felterne i gruppen
      */
-    private boolean ownsEntireGroup(Field[] felter, Player player) {
+    private boolean ownsEntireGroup(BaseField[] felter, Player player) {
         boolean ownsAll = true;
         for (int value : group) {
             if (((Property) felter[value - 1]).getOwner() != player) {
@@ -56,7 +56,7 @@ public class StreetField extends Property {
      * @param direction "up" eller "down". Om der bygges eller nedrives
      * @return Om der må bygges/nedrives eller ej
      */
-    private boolean buildingFlat(String direction, Field[] felter) {
+    private boolean buildingFlat(String direction, BaseField[] felter) {
         boolean flat = true;
         if (group.length == 1) {
             // Hvis der kun er en anden grund i gruppen, er det lidt nemmere at tjekke
@@ -107,10 +107,10 @@ public class StreetField extends Property {
      * Forsøger at bygge på den aktive grund, hvis det er muligt
      *
      * @param gui Pointer til det aktive GUI
-     * @param felter Array med felter, som GUI er bygget af
      * @param player Pointer til den aktive player
+     * @param felter Array med felter, som GUI er bygget af
      */
-    public void build(GUI gui, Field[] felter, Player player) {
+    public void build(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
         if (buildLevel < 5 && buildingFlat("up", felter) && ownsEntireGroup(felter, player)) {
             buildLevel++;
@@ -131,10 +131,10 @@ public class StreetField extends Property {
      * Forsøger at rive nedrive hotel/et hus, hvis det er muligt
      *
      * @param gui Pointer til det aktive GUI
-     * @param felter Array med felter, som GUI er bygget af
      * @param player Pointer til den aktive player
+     * @param felter Array med felter, som GUI er bygget af
      */
-    public void destroy(GUI gui, Field[] felter, Player player) {
+    public void destroy(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
         if (buildLevel > 0 && buildingFlat("down", felter)) {
             GUIv.setHotel(false);
@@ -142,6 +142,8 @@ public class StreetField extends Property {
             GUIv.setHouses(buildLevel);
             GUIv.setRent(rent[buildLevel] + " kr");
             player.updateBalance(this.buildPrice/2);
+        } else {
+            gui.getUserButtonPressed(player.playerName + " kan ikke nedrive på denne grund lige nu", "OK");
         }
     }
 
@@ -151,7 +153,7 @@ public class StreetField extends Property {
      * @return Hvor mange kr der skal betales i leje
      */
     @Override
-    protected int calculateRent(Field[] felter) {
+    protected int calculateRent(BaseField[] felter) {
         int multiplier = 1;
         if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner()) && this.buildLevel == 0) {
             multiplier = 2;
@@ -167,7 +169,7 @@ public class StreetField extends Property {
      * @param felter Array af pointers til de felter, som GUI er bygget op af
      */
     @Override
-    public void action(GUI gui, Player player, Field[] felter) {
+    public void action(GUI gui, Player player, BaseField[] felter) {
         if (this.owned) {
             // Beregn leje
             int rent = this.calculateRent(felter);

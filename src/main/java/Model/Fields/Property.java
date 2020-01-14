@@ -3,14 +3,13 @@ package Model.Fields;
 import Model.Player;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
-import gui_fields.GUI_Shipping;
 import gui_main.GUI;
 
 import java.awt.*;
 
 // alt vi vil gerne at eje
 
-public abstract class Property extends Field {
+public abstract class Property extends BaseField {
     protected boolean owned = false;
     protected Player owner = null;
 
@@ -33,9 +32,9 @@ public abstract class Property extends Field {
         return ((GUI_Ownable) fields[nr - 1]);
     }
 
-    protected abstract int calculateRent(Field[] felter);
+    protected abstract int calculateRent(BaseField[] felter);
     public abstract void action(GUI gui, Player player);
-    public abstract void action(GUI gui, Player player, Field[] felter);
+    public abstract void action(GUI gui, Player player, BaseField[] felter);
     public Player getOwner() {
         return this.owner;
     }

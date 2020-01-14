@@ -7,7 +7,7 @@ import java.awt.*;
 
 
 //Til brug af anden felt metode HUSK AT TILFØJ FELT KLASSER
-public abstract class Field {
+public abstract class BaseField {
     protected String description;
     protected String name;
     protected int nr;
@@ -15,24 +15,24 @@ public abstract class Field {
     protected int price = 0;
 
     //Constructor
-    public Field(String name, String description, int nr) {
+    public BaseField(String name, String description, int nr) {
         this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
     }
-    public Field(String name, String description, int nr, int price) {
+    public BaseField(String name, String description, int nr, int price) {
         this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
         this.price = price;
     }
-    public Field(String name, String description, int nr, Color color) {
+    public BaseField(String name, String description, int nr, Color color) {
         this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
         this.color = color;
     }
-    public Field(String name, String description, int nr, int price, Color color) {
+    public BaseField(String name, String description, int nr, int price, Color color) {
         this.description = (description.length() == 0 ? name : description);
         this.name = name;
         this.nr = nr;
@@ -47,7 +47,7 @@ public abstract class Field {
     public int getPrice() {return price;}
 
     public abstract void action(GUI gui, Player player);
-    public abstract void action(GUI gui, Player player, Field[] felter);
+    public abstract void action(GUI gui, Player player, BaseField[] felter);
 }
 
 

@@ -3,7 +3,7 @@ package Model.Fields;
 import Model.Player;
 import gui_main.GUI;
 
-public class TaxField extends Field {
+public class TaxField extends BaseField {
 
     public TaxField(String name, String description, int nr) {
         super(name, description, nr);
@@ -24,5 +24,5 @@ public class TaxField extends Field {
             player.updateBalance(-100);
         }
     }
-    public void action(GUI gui, Player player, Field[] felter){}
+    public void action(GUI gui, Player player, BaseField[] felter){}
 }
