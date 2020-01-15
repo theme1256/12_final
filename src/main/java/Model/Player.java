@@ -146,6 +146,8 @@ public class Player {
         if (this.currentFelt >= 40) {
             this.currentFelt -= 40;
             this.passedStart = true;
+        } else if (this.currentFelt < 0) {
+            this.currentFelt += 40;
         }
         this.updateCar();
     }

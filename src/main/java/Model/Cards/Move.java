@@ -30,17 +30,13 @@ public class Move extends ChanceCards {
 
             //Ryk tre felter tilbage
             case 23:
-                player.moveTo(player.currentFelt -3, false);
+            case 25:
+                player.move(-3);
                 break;
 
             //Tag ind på Rådhuspladsen
             case 24:
                 player.moveTo(39);
-                break;
-
-            // Ryk tre felter frem
-            case 25:
-                player.moveTo(player.currentFelt +3);
                 break;
 
 
