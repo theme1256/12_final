@@ -24,6 +24,7 @@ public class Player {
     public int turnsInJail = 0;
     public boolean isInJail = false;
     private boolean isOut = false;
+    public int nextRentModifier = 1;
 
     public int currentFelt = 0;
     public int previousFelt = 0;

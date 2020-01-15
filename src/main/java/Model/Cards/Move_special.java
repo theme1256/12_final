@@ -9,46 +9,25 @@ public class Move_special extends ChanceCards {
         super(cardNumber);
     }
 
-    //MANGLER AT MAN BETALER DOBBELT!
     public boolean action(Player player, GUI gui) {
-        switch (this.cardNumber) {
-            case 30:
-            case 31:
-                if (player.currentFelt == 2) {
-                    player.moveTo(6);
-                    break;
-                } else if (player.currentFelt == 7) {
-                    player.moveTo(16);
-                    break;
-                } else if (player.currentFelt == 17 || player.currentFelt == 22) {
-                    player.moveTo(24);
-                    break;
-                } else if (player.currentFelt == 33) {
-                    player.moveTo(36);
-                    break;
-                } else if (player.currentFelt == 36) {
-                    player.moveTo(6, true);
-                    break;
-                }
+        if (player.currentFelt <= 5 || player.currentFelt > 35) {
+            player.moveTo(5, true);
+        } else if (player.currentFelt <= 15) {
+            player.moveTo(15);
+        } else if (player.currentFelt <= 25) {
+            player.moveTo(25);
+        } else {
+            player.moveTo(35);
         }
+        player.nextRentModifier = 2;
         gui.displayChanceCard(toString());
         return true;
     }
 
-
+    @Override
     public String toString(){
-        switch (cardNumber){
-            case 30:
-                cardDescription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til.\n " +
+        cardDescription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til.\n " +
                         "Hvis selskabet ikke ejes af nogen, kan De købe det af banken";
-                break;
-            case 31:
-                cardDescription = "Ryk brikken frem til nærmeste dampskibsselskab og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen, kan De købe det af banken.";
-                break;
-            default:
-            cardDescription +=cardNumber+0;
-            break;
-        }
         return cardDescription;
     }
 
