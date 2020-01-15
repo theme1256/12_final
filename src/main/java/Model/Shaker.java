@@ -27,7 +27,7 @@ public class Shaker {
 
     public int[] shake() {
         int[] rtn = new int[this.numberOfDices];
-        if (this.override && this.overrideSlag.length <= this.overrideCounter) {
+        if (this.override && this.overrideSlag.length >= this.overrideCounter) {
             rtn = this.overrideSlag[this.overrideCounter];
             this.overrideCounter++;
         } else {
@@ -40,7 +40,7 @@ public class Shaker {
 
     public int shake_and_sum() {
         int rtn = 0;
-        if (this.override && this.overrideSlag.length <= this.overrideCounter) {
+        if (this.override && this.overrideSlag.length >= this.overrideCounter) {
             for (int tal : this.overrideSlag[this.overrideCounter]) {
                 rtn += tal;
             }
