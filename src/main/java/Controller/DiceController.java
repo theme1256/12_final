@@ -14,6 +14,10 @@ public class DiceController {
         shaker = new Shaker(2);
     }
 
+    public void overrideShakes(int[][] slag) {
+        shaker.override(slag);
+    }
+
     /**
      * Ruller terningerne, viser dem i GUI og returnerer summen af slaget
      *
