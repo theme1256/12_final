@@ -96,21 +96,18 @@ public class PlayerController {
                     player.setJailPass(false);
                     player.resetTurnsInJail();
                     gui.showMessage("Du løslades med dit frikort");
-                    player.move(diceController.rollAndSumDice());
                     return 1;
                 } else {
                     gui.showMessage("Du har ikke noget frikort!");
                 }
             } else if (valg.equals("Betal 50kr og ryk det slåede")) {
                 player.updateBalance(-50);
-                player.move(diceController.rollAndSumDice());
                 player.resetTurnsInJail();
                 return 2;
             } else if (valg.equals("Prøv at slå to ens")) {
                 int[] val = diceController.rollDice();
                 if (val[0] == val[1]) {
                     gui.showMessage("Tillykke du slog to ens");
-                    player.move(val[0] + val[1]);
                     player.resetTurnsInJail();
                     return 2;
                 } else {
