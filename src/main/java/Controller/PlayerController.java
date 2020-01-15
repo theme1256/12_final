@@ -88,42 +88,41 @@ public class PlayerController {
         return false;
     }
 
-    public boolean handeGetOutOfJail(Player player) {
-        if (player.getTurnsInJail() >= 3) {
-            gui.showMessage("Du løslades ved 3. forsøg");
-            player.updateBalance(-50);
-            player.resetTurnsInJail();
-            return true;
-        }
-
+    public int handeGetOutOfJail(Player player) {
         while (true) {
             String valg = gui.getUserButtonPressed(player.playerName + " hvordan vil du løslades?", "Brug frikort", "Betal 50kr og ryk det slåede", "Prøv at slå to ens");
             if (valg.equals("Brug frikort")) {
                 if (player.getJailPass()) {
                     player.setJailPass(false);
+                    player.resetTurnsInJail();
                     gui.showMessage("Du løslades med dit frikort");
                     player.move(diceController.rollAndSumDice());
-                    return true;
+                    return 1;
                 } else {
                     gui.showMessage("Du har ikke noget frikort!");
-                    continue;
                 }
             } else if (valg.equals("Betal 50kr og ryk det slåede")) {
                 player.updateBalance(-50);
                 player.move(diceController.rollAndSumDice());
                 player.resetTurnsInJail();
-                return true;
+                return 2;
             } else if (valg.equals("Prøv at slå to ens")) {
                 int[] val = diceController.rollDice();
                 if (val[0] == val[1]) {
                     gui.showMessage("Tillykke du slog to ens");
                     player.move(val[0] + val[1]);
                     player.resetTurnsInJail();
-                    return true;
+                    return 2;
                 } else {
                     gui.showMessage(player.playerName + " slog ikke to ens");
                     player.addTurnInJail();
-                    return false;
+                    if (player.getTurnsInJail() >= 3) {
+                        gui.showMessage("Du løslades ved 3. forsøg");
+                        player.updateBalance(-50);
+                        player.resetTurnsInJail();
+                        return 2;
+                    }
+                    return 0;
                 }
             }
         }

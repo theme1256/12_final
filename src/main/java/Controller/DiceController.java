@@ -36,6 +36,10 @@ public class DiceController {
         return lastShake;
     }
 
+    public int sumLastShake() {
+        return lastShake[0] + lastShake[1];
+    }
+
     /**
      * Tjekker om det slag der var sidst, gav en ekstra tur
      *

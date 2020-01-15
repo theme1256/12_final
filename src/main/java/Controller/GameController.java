@@ -67,6 +67,9 @@ public class GameController {
         System.exit(0);
     }
 
+    private void handleRound(Player player, boolean move) {
+        handleRound(player, move, false);
+    }
     /**
      * Håndterer det primære flow i en tur, terningkast, land på felter, dobbelt-slag, etc.
      *
@@ -74,11 +77,14 @@ public class GameController {
      * @param move Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
      * @return Om spilleren er ude
      */
-    private void handleRound(Player player, boolean move) {
+    private void handleRound(Player player, boolean move, boolean moveLastRoll) {
         if (player.getIsInJail()) {
             // Hvis spilleren kommer ud skalder behandles at de er rykket
-            if (playerController.handeGetOutOfJail(player)) {
-                handleRound(player, false);
+            int rsp = playerController.handeGetOutOfJail(player);
+            if (rsp == 1) {
+                handleRound(player, true);
+            } else if (rsp == 2) {
+                handleRound(player, false, true);
             }
         } else {
             // Slå med terningen når spilleren trykker
@@ -87,6 +93,8 @@ public class GameController {
 
                 // Slå med terningerne, opdater terningerne i GUI og flyt spilleren
                 player.move(diceController.rollAndSumDice());
+            } else if (moveLastRoll) {
+                player.move(diceController.sumLastShake());
             }
 
             // Tjek om spilleren landede på "Gå i fængsel"
