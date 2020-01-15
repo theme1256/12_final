@@ -14,6 +14,8 @@ public class ChanceCardController {
     public ChanceCardController(FieldController fc, GUI gui) {
         this.fieldController = fc;
         this.gui = gui;
+
+        // Opret et nyt dæk af chancekort og sørg for at det er blandet
         chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
     }
@@ -25,10 +27,12 @@ public class ChanceCardController {
      * @return Om der skal håndteres at spilleren er blevet flyttet
      */
     public boolean handleChancekort(Player player) {
+        // Hvis feltet er af type "ChanceCardField", så må det være fordi der skal trækkes og udføres et chancekort
         if(fieldController.getField(player.currentFelt) instanceof ChanceCardsField) {
+            // Træk et chancekort
             ChanceCards card = chanceDeck.traekkort();
 
-            System.out.println(card);
+            // Bed kortet om at udføre den handling det skal udføre
             return card.action(player, this.gui);
         }
         return false;

@@ -36,6 +36,12 @@ public class DiceController {
         return lastShake;
     }
 
+    /**
+     * Returnerer summen af hvad der sidst blev slået
+     * Bruges til når en spiller er kommet ud af fængsel og skal rykke det slåede
+     *
+     * @return Summen af det slåede
+     */
     public int sumLastShake() {
         return lastShake[0] + lastShake[1];
     }
