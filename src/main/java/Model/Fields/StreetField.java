@@ -238,6 +238,8 @@ public class StreetField extends Property {
                     GUIv.setOwnerName(player.getPlayerName());
                     GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
+            } else {
+                gui.getUserButtonPressed("Du har ikke nok penge til at købe denne grund", "Øv");
             }
         }
     }
