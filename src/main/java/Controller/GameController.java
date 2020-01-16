@@ -139,20 +139,20 @@ public class GameController {
             String[] options = new String[]{"Give turen videre"};
             String[] streets = player.getStreets(fieldController.getFields());
             if (streets.length > 0) {
-                options = MatadorUI.addElement(options, "Bygge");
-                options = MatadorUI.addElement(options, "Nedrive");
+                options = MatadorUIController.addElement(options, "Bygge");
+                options = MatadorUIController.addElement(options, "Nedrive");
             }
             String[] properties = player.getProperties(fieldController.getFields());
             if (properties.length > 0) {
-                options = MatadorUI.addElement(options, "Sælge");
+                options = MatadorUIController.addElement(options, "Sælge");
                 //options = MatadorUI.addElement(options, "Pantsætte");
                 //options = MatadorUI.addElement(options, "Tilbagebetale lån");
             }
-            options = MatadorUI.addElement(options, "Give op");
+            options = MatadorUIController.addElement(options, "Give op");
             String valg = gui.getUserSelection(player.getPlayerName() + ", hvad vil du gøre?", options);
             if (valg.equals("Bygge")) {
                 if (streets.length > 0) {
-                    streets = MatadorUI.addElement(streets, "Annuller");
+                    streets = MatadorUIController.addElement(streets, "Annuller");
                     valg = gui.getUserSelection("Hvilken grund vil du bygge på?", streets);
                     if (!valg.equals("Annuller")) {
                         BaseField felt = fieldController.getFieldFromName(valg);
@@ -166,7 +166,7 @@ public class GameController {
                 }
             } else if (valg.equals("Nedrive")) {
                 if (streets.length > 0) {
-                    streets = MatadorUI.addElement(streets, "Annuller");
+                    streets = MatadorUIController.addElement(streets, "Annuller");
                     valg = gui.getUserSelection("Hvilken grund vil du rive ned på?", streets);
                     if (!valg.equals("Annuller")) {
                         BaseField felt = fieldController.getFieldFromName(valg);
@@ -179,7 +179,7 @@ public class GameController {
                 }
             } else if (valg.equals("Sælge")) {
                 if (properties.length > 0) {
-                    properties = MatadorUI.addElement(properties, "Annuller");
+                    properties = MatadorUIController.addElement(properties, "Annuller");
                     valg = gui.getUserSelection("Hvilket skøde vil du sælge?", properties);
                     if (!valg.equals("Annuller")) {
                         BaseField felt = fieldController.getFieldFromName(valg);
