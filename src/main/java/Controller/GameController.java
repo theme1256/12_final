@@ -175,19 +175,19 @@ public class GameController {
             String[] streets = player.getStreets(fieldController.getFields());
             // Hvis spilleren ejer nogen grunde, skal "Bygge" og "Nedrive" tilføjes til menuen
             if (streets.length > 0) {
-                options = MatadorUI.addElement(options, "Bygge");
-                options = MatadorUI.addElement(options, "Nedrive");
+                options = MatadorUIController.addElement(options, "Bygge");
+                options = MatadorUIController.addElement(options, "Nedrive");
             }
             // Liste med alle skøder, som spilleren ejer, hentes
             String[] properties = player.getProperties(fieldController.getFields());
             // Hvis spilleren ejer noget, skal "Sælge", "Pantsætte" og "Tilbagebetale lån" tilføjes til menuen
             if (properties.length > 0) {
-                options = MatadorUI.addElement(options, "Sælge");
+                options = MatadorUIController.addElement(options, "Sælge");
                 //options = MatadorUI.addElement(options, "Pantsætte");
                 //options = MatadorUI.addElement(options, "Tilbagebetale lån");
             }
             // Tilføjer punktet "Give op" til menuen
-            options = MatadorUI.addElement(options, "Give op");
+            options = MatadorUIController.addElement(options, "Give op");
 
             // Spørger Spilleren hvad de vil
             String valg = gui.getUserSelection(player.getPlayerName() + ", hvad vil du gøre?", options);
@@ -195,7 +195,7 @@ public class GameController {
                 // Spilleren vil bygge, tjek om de ejer nogen grunde, bare for en sikerheds skyld
                 if (streets.length > 0) {
                     // Tilføj punktet "Annuller" til mulighederne
-                    streets = MatadorUI.addElement(streets, "Annuller");
+                    streets = MatadorUIController.addElement(streets, "Annuller");
 
                     // Spørger Spilleren hvad der skal ske
                     valg = gui.getUserSelection("Hvilken grund vil du bygge på?", streets);
@@ -216,7 +216,7 @@ public class GameController {
                 // Spilleren vil nedrive, tjek om de ejer nogen grunde, bare for en sikerheds skyld
                 if (streets.length > 0) {
                     // Tilføj punktet "Annuller" til mulighederne
-                    streets = MatadorUI.addElement(streets, "Annuller");
+                    streets = MatadorUIController.addElement(streets, "Annuller");
 
                     // Spørger Spilleren hvad der skal ske
                     valg = gui.getUserSelection("Hvilken grund vil du rive ned på?", streets);
@@ -236,7 +236,7 @@ public class GameController {
                 // Spilleren vil sælge, tjek om de ejer noget, bare for en sikkerheds skyld
                 if (properties.length > 0) {
                     // Tilføj punktet "Annuller" til mulighederne
-                    properties = MatadorUI.addElement(properties, "Annuller");
+                    properties = MatadorUIController.addElement(properties, "Annuller");
 
                     // Spørger Spilleren hvad der skal ske
                     valg = gui.getUserSelection("Hvilket skøde vil du sælge?", properties);

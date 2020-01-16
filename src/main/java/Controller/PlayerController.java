@@ -33,7 +33,7 @@ public class PlayerController {
      * @param color Den farve der skal fjernes
      */
     public void removeCarColor(String color) {
-        this.carColors = MatadorUI.removeElement(this.carColors, color);
+        this.carColors = MatadorUIController.removeElement(this.carColors, color);
     }
 
     /**
@@ -78,7 +78,7 @@ public class PlayerController {
             for (Player p : players) {
                 // Sikrer sig at spilleren rent faktisk findes og tilføjer navnet til listen
                 if (p != null)
-                    out = MatadorUI.addElement(out, p.getPlayerName());
+                    out = MatadorUIController.addElement(out, p.getPlayerName());
             }
         }
         return out;

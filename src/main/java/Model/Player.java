@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.MatadorUI;
+import Controller.MatadorUIController;
 import Controller.PlayerController;
 import Model.Fields.BaseField;
 import Model.Fields.Property;
@@ -281,7 +281,7 @@ public class Player {
                 Player owner = ((StreetField) felt).getOwner();
                 if (owner != null) {
                     if (owner.getPlayerName().equals(this.playerName)) {
-                        out = MatadorUI.addElement(out, felt.getName());
+                        out = MatadorUIController.addElement(out, felt.getName());
                     }
                 }
             }
@@ -302,7 +302,7 @@ public class Player {
                 Player owner = ((Property) felt).getOwner();
                 if (owner != null) {
                     if (owner.getPlayerName().equals(this.playerName)) {
-                        out = MatadorUI.addElement(out, felt.getName());
+                        out = MatadorUIController.addElement(out, felt.getName());
                     }
                 }
             }
