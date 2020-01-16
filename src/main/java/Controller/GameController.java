@@ -166,7 +166,7 @@ public class GameController {
         while (true) {
             // Menuen med muligheder opbygges
             // Den har som standard kun en mulighed: "Give turen videre"
-            String[] options = new String[]{"Give turen videre"};
+            String[] options = new String[]{(diceController.gaveExtraTurn() ? "Tage min ekstra tur" : "Give turen videre")};
             // Liste med grunde, som spilleren ejer, hentes
             String[] streets = player.getStreets(fieldController.getFields());
             // Hvis spilleren ejer nogen grunde, skal "Bygge" og "Nedrive" tilføjes til menuen
@@ -261,7 +261,7 @@ public class GameController {
                 // Ikke implementeret
             } else if (valg.equals("Tilbagebetale lån")) {
                 // Ikke implementeret
-            } else if (valg.equals("Give turen videre")) {
+            } else {
                 // Spilleren har valgt at give turen videre, bryd det uendelige loop
                 break;
             }
