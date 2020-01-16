@@ -148,7 +148,7 @@ public class PlayerController {
                 // Spilleren vil betale, træk pengene
                 player.updateBalance(-50);
                 player.resetTurnsInJail();
-                return 2;
+                return 1;
             } else if (valg.equals("Prøv at slå to ens")) {
                 // Spilleren vil forsøge at slå to ens
                 int[] val = diceController.rollDice();

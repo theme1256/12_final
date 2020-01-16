@@ -86,7 +86,7 @@ public class GameController {
      * @param player Pointer til den aktive player
      * @param move Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
      */
-    private void handleRound(Player player, boolean move, boolean moveLastRoll) {
+    private void handleRound(Player player, boolean move, boolean moveLastRoll, boolean previousWasChance) {
         if (player.getIsInJail()) {
             // Hvis spilleren kommer ud skal der behandles at de er rykket
             int rsp = playerController.handeGetOutOfJail(player);
@@ -123,20 +123,22 @@ public class GameController {
 
                 // Håndterer chancekort, hvis der returneres true, så skal der håndteres at spilleren er blevet flyttet
                 if (this.chanceCardController.handleChancekort(player)) {
-                    handleRound(player, false);
-                } else if (move) {
-                    //Tjekker hvorvidt en spiller har slået 2 ens
-                    extraTurn = diceController.gaveExtraTurn();
-                    // Tjek om spilleren har fået 3 ture i streg
-                    if (turnsInARow == 3 && extraTurn) {
-                        gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
-                        player.moveTo(10, false);
-                        extraTurn = false;
-                    }
+                    handleRound(player, false, false, true);
                 }
 
                 // Håndter handel/byg/nedriv/salg/etc
-                handleOptions(player);
+                if (!previousWasChance)
+                    handleOptions(player);
+
+                //Tjekker hvorvidt en spiller har slået 2 ens
+                extraTurn = diceController.gaveExtraTurn();
+                // Tjek om spilleren har fået 3 ture i streg
+                if (turnsInARow == 3 && extraTurn) {
+                    gui.getUserButtonPressed("Du har slået 2 ens, 3 gange i streg og bliver smidt i spjældet", "øv..");
+                    player.moveTo(10, false);
+                    player.isInJail = true;
+                    extraTurn = false;
+                }
 
                 // Hvis spilleren ikke har flere penge, smid spilleren ud af spillet
                 if (player.getBalance() < 0) {
@@ -156,6 +158,8 @@ public class GameController {
         handleRound(player, move, false);
     }
 
+    private void handleRound(Player player, boolean move, boolean moveLastRoll) { handleRound(player, move, moveLastRoll, false); }
+
     /**
      * Håndterer at give Spilleren muligheder i slutningen af en tur og udføre den valgte handling
      *
@@ -166,7 +170,7 @@ public class GameController {
         while (true) {
             // Menuen med muligheder opbygges
             // Den har som standard kun en mulighed: "Give turen videre"
-            String[] options = new String[]{(diceController.gaveExtraTurn() ? "Tage min ekstra tur" : "Give turen videre")};
+            String[] options = new String[]{(diceController.gaveExtraTurn() && turnsInARow != 3 ? "Tage min ekstra tur" : "Give turen videre")};
             // Liste med grunde, som spilleren ejer, hentes
             String[] streets = player.getStreets(fieldController.getFields());
             // Hvis spilleren ejer nogen grunde, skal "Bygge" og "Nedrive" tilføjes til menuen
