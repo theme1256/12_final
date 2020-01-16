@@ -50,28 +50,86 @@ public class ChanceDeck {
         cards[31] = new Move_special(31);
     }
 
-    public ChanceCards traekkort() {
+    /**
+     * Trækker det første kort i arrayet, kopierer det til enden af arrayet og returnerer det til den der skal bruge det
+     *
+     * @return Det kort der blev trukket
+     */
+    public ChanceCards draw() {
+        // Tager en kopi af det første kort i array'et
         ChanceCards trukket = cards[0];
+        // Løber kortene igennem og flytter dem med en
         for (int i = 0; i < cards.length - 1; i++) {
             cards[i] = cards[i + 1];
 
         }
+        // Tilføjer det først kort til enden
         cards[cards.length - 1] = trukket;
+        // Returnerer det første kort
         return trukket;
     }
 
-
-    public void blandkort() {
+    /**
+     * Blander rækkefølgen, som kortene trækkes i
+     */
+    public void shuffle() {
         int index;
+        // Laver et sted at opbevare et kort, midlertidigt
         ChanceCards temp;
         Random random = new Random();
+        // Løber alle kortene igennem baglæns
         for (int i = cards.length - 1; i > 0; i--) {
+            // Find et tilfældigt tal
             index = random.nextInt(i + 1);
             temp = cards[index];
             cards[index] = cards[i];
             cards[i] = temp;
         }
-        //Collections.shuffle(Arrays.asList(kort));
+    }
+
+    /**
+     * Overskiver rækkefølgen, som chancekortene er i.
+     * Hvis der ikke gives en rækkefølge, som er kortere end antallet af kort, så flyttes de resterende kort til efter de definerede
+     *
+     * @param newOrder Et array af numre, i den rækkefølge de skal trækkes
+     */
+    public void setOrder(int[] newOrder) {
+        ChanceCards[] tmp = new ChanceCards[32];
+        for (int i = 0; i < newOrder.length; i++) {
+            tmp[i] = this.cards[newOrder[i]];
+        }
+        if (newOrder.length < cards.length) {
+            int i = newOrder.length;
+            for (ChanceCards card : this.cards) {
+                if (!this.contains(tmp, card)) {
+                    tmp[i] = card;
+                    i++;
+                }
+            }
+        }
+        this.cards = tmp;
+    }
+
+    /**
+     * Finder ud af om et chancekort er i et array af chancekort
+     *
+     * @param array Det array der skal ledes i
+     * @param v Det kort der skal findes
+     * @return Om kortet blev fundet
+     */
+    public boolean contains(ChanceCards[] array, ChanceCards v) {
+        boolean result = false;
+        if (array != null && v != null) {
+            for (ChanceCards i : array) {
+                if (i != null) {
+                    if (i.getCardNumber() == v.getCardNumber()) {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     public String toString() {

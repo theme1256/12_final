@@ -24,11 +24,10 @@ public class Player {
     public int turnsInJail = 0;
     public boolean isInJail = false;
     private boolean isOut = false;
+    public int nextRentModifier = 1;
 
     public int currentFelt = 0;
     public int previousFelt = 0;
-
-    private String[] carColors = new String[]{"Sort", "Rød", "Grøn", "Blå", "Gul", "Hvid"};
 
 
     public Player(GUI gui, int startBalance, PlayerController playerController) {
@@ -130,7 +129,7 @@ public class Player {
      * Opdaterer spillerens position i GUI, hvis der er defineret et GUI
      */
     private void updateCar(){
-        if(gui != null) {
+        if (gui != null) {
             gui.getFields()[this.previousFelt].setCar(this.car, false);
             gui.getFields()[this.currentFelt].setCar(this.car, true);
         }
@@ -144,9 +143,11 @@ public class Player {
     public void move(int amount) {
         this.previousFelt = this.currentFelt;
         this.currentFelt += amount;
-        if(this.currentFelt >= 40) {
+        if (this.currentFelt >= 40) {
             this.currentFelt -= 40;
             this.passedStart = true;
+        } else if (this.currentFelt < 0) {
+            this.currentFelt += 40;
         }
         this.updateCar();
     }
@@ -172,7 +173,7 @@ public class Player {
     public void moveTo(int to, boolean passStart) {
         this.previousFelt = this.currentFelt;
         this.currentFelt = to;
-        if(this.currentFelt < this.previousFelt && passStart)
+        if (this.currentFelt < this.previousFelt && passStart)
             this.passedStart = true;
         this.updateCar();
     }
@@ -315,16 +316,22 @@ public class Player {
      * @param felter Array med alle felter på brættet
      */
     public void giveUp(BaseField[] felter) {
+        // Løber alle felterne på brættet igennem
         for (BaseField felt : felter) {
+            // Hvis feltet er en ejendom og der er en der ejer det
             if (felt instanceof Property && ((Property) felt).isOwned()) {
+                // Hvis det er den nuværrende player der ejer den, sælg den
                 if (((Property) felt).getOwner().getPlayerName().equals(this.playerName))
                     ((Property) felt).sell(gui);
             }
         }
+        // Hvis der er et GUI, slet spillerens brik
         if (gui != null) {
             gui.getFields()[this.currentFelt].setCar(this.car, false);
         }
+        // Fjern alle pengene på kontoen
         this.updateBalance(-1 * this.getBalance());
+        // Marker at spilleren er ude
         this.isOut = true;
     }
 

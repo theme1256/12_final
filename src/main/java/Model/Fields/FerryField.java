@@ -58,11 +58,15 @@ public class FerryField extends Property {
     @Override
     public void action(GUI gui, Player player, BaseField[] felter) {
         if (this.owned) {
-            // Beregn leje
-            int rent = this.calculateRent(felter);
-            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
-            player.updateBalance(-1 * rent);
-            this.owner.updateBalance(rent);
+            if (this.owner == player) {
+                gui.getUserButtonPressed("Du ejer allerede denne grund.", "OK");
+            } else {
+                // Beregn leje, husk multiplier, hvis spilleren har trukket Move_special
+                int rent = this.calculateRent(felter) * player.nextRentModifier;
+                gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
+                player.updateBalance(-1 * rent);
+                this.owner.updateBalance(rent);
+            }
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
@@ -74,8 +78,12 @@ public class FerryField extends Property {
                     GUIv.setOwnerName(player.getPlayerName());
                     GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
+            } else {
+                gui.getUserButtonPressed("Du har ikke nok penge til at købe dette rederi", "Øv");
             }
         }
+        // Sæt altid nextRentModifier til 1, så den ikke bliver videreført til næste gang spilleren lander på et rederi
+        player.nextRentModifier = 1;
     }
     @Override
     public void action(GUI gui, Player player){}

@@ -7,6 +7,13 @@ import gui_main.GUI;
 
 import java.awt.*;
 
+/**
+ * Extender Property, som extender BaseField.
+ *
+ * Håndterer, hvis en spiller lander på en grund.
+ * Beregner hvad leje skal være, hvis grunden er ejet, der er bygget på den og om de andre grunde i gruppen er ejet af den samme
+ * Holder styr på at opdatere GUI, når der bygges/nedrives/købes/sælges
+ */
 public class StreetField extends Property {
     private int buildLevel = 0;
     private int[] rent;
@@ -19,9 +26,21 @@ public class StreetField extends Property {
         this.group = group;
         this.buildPrice = buildPrice;
     }
+
+    /**
+     * Giver information om hvor meget der er bygget på denne grund. Bruges til at beregne en spillers værdi og hvad de skal betale i skat
+     *
+     * @return Antal huse der er bygget, med mindre det er 5, så er det et hotel
+     */
     public int getBuildLevel() {
         return this.buildLevel;
     }
+
+    /**
+     * Returnerer hvad det koster at bygge et hus på denne grund
+     *
+     * @return Antal kr et hus koster
+     */
     public int getBuildPrice() {
         return this.buildPrice;
     }
@@ -116,16 +135,24 @@ public class StreetField extends Property {
      */
     public void build(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
+        // Tjekker at der kan bygges på grunden, som der fortsat vil være bygget jævn og om den samme spiller ejer alle felterne i gruppen
         if (buildLevel < 5 && buildingFlat("up", felter) && ownsEntireGroup(felter, player)) {
+            // Tjekker om spilleren har nok penge til at bygge
             if (player.getBalance() >= this.buildPrice && this.buildLevel < 4 || player.getBalance() >= this.buildPrice*5 && this.buildLevel == 4) {
+                // Tæller antallet af huse op
                 buildLevel++;
+                // Opdaterer GUI til at vise den nye leje
                 GUIv.setRent(rent[buildLevel] + " kr");
-                if (buildLevel < 4) {
+                // Hvis der skal bygges mindre end 5, så er det et antal huse, ellers er det et hotel
+                if (buildLevel < 5) {
                     GUIv.setHouses(buildLevel);
+                    // Træk pengene fra spilleren
                     player.updateBalance(-1 * this.buildPrice);
                 } else {
+                    // Fjern huse og erstat med et hotel
                     GUIv.setHouses(0);
                     GUIv.setHotel(true);
+                    // Træk pengene fra spilleren
                     player.updateBalance(-1 * this.buildPrice*5);
                 }
             } else {
@@ -145,12 +172,22 @@ public class StreetField extends Property {
      */
     public void destroy(GUI gui, Player player, BaseField[] felter) {
         GUI_Street GUIv = getGuiVersion(gui);
-        if (buildLevel > 0 && buildingFlat("down", felter)) {
+        // Tjekker om der er bygget noget på grunden, at man fortsat vil have bygget jævnt hvis der fjernes et hus og om den samme spiller ejer alle felterne i gruppen
+        if (buildLevel > 0 && buildingFlat("down", felter) && ownsEntireGroup(felter, player)) {
+            // Uanset hvad, så skal der ikke længere være et hotel på denne grund
             GUIv.setHotel(false);
+            // Giv spilleren penge tilbage, det halve af byggeprisen
+            if (buildLevel == 5) {
+                player.updateBalance(this.buildPrice / 2 * 5);
+            } else {
+                player.updateBalance(this.buildPrice / 2);
+            }
+            // Tæl antallet af huse ned
             buildLevel--;
+            // Opdater GUI til at vise det nye antal huse
             GUIv.setHouses(buildLevel);
+            // Opdater prisen på leje, som står i GUI
             GUIv.setRent(rent[buildLevel] + " kr");
-            player.updateBalance(this.buildPrice/2);
         } else {
             gui.getUserButtonPressed(player.playerName + " kan ikke nedrive på denne grund lige nu", "OK");
         }
@@ -164,6 +201,7 @@ public class StreetField extends Property {
     @Override
     protected int calculateRent(BaseField[] felter) {
         int multiplier = 1;
+        // Hvis det er den samme, som ejer hele gruppen og der ikke er bygget endnu, så skal leje være det dobbelte
         if (ownsEntireGroup(felter, ((Property) felter[nr-1]).getOwner()) && this.buildLevel == 0) {
             multiplier = 2;
         }
@@ -180,11 +218,15 @@ public class StreetField extends Property {
     @Override
     public void action(GUI gui, Player player, BaseField[] felter) {
         if (this.owned) {
-            // Beregn leje
-            int rent = this.calculateRent(felter);
-            gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
-            player.updateBalance(-1 * rent);
-            this.owner.updateBalance(rent);
+            if (this.owner == player) {
+                gui.getUserButtonPressed("Du ejer allerede denne grund.", "OK");
+            } else {
+                // Beregn leje
+                int rent = this.calculateRent(felter);
+                gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent + " kr. ", "Øv");
+                player.updateBalance(-1 * rent);
+                this.owner.updateBalance(rent);
+            }
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
@@ -196,6 +238,8 @@ public class StreetField extends Property {
                     GUIv.setOwnerName(player.getPlayerName());
                     GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
+            } else {
+                gui.getUserButtonPressed("Du har ikke nok penge til at købe denne grund", "Øv");
             }
         }
     }
