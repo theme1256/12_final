@@ -11,13 +11,15 @@ public class Move extends ChanceCards {
 
     @Override
     public boolean action(Player player, GUI gui) {
+        gui.displayChanceCard(toString());
         switch (this.cardNumber) {
 
             //Fængsel
             case 21:
             case 27:
                 player.moveTo(10, false);
-                break;
+                player.setIsInJail(true);
+                return false;
 
             //Frederikberg Allé
             case 22:
@@ -68,7 +70,6 @@ public class Move extends ChanceCards {
             default:
                 break;
         }
-        gui.displayChanceCard(toString());
         return true;
     }
 

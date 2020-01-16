@@ -27,7 +27,7 @@ public class Shaker {
 
     public int[] shake() {
         int[] rtn = new int[this.numberOfDices];
-        if (this.override && this.overrideSlag.length >= this.overrideCounter) {
+        if (this.override && this.overrideSlag.length > this.overrideCounter) {
             rtn = this.overrideSlag[this.overrideCounter];
             this.overrideCounter++;
         } else {

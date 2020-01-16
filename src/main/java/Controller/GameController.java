@@ -171,14 +171,14 @@ public class GameController {
             String[] streets = player.getStreets(fieldController.getFields());
             // Hvis spilleren ejer nogen grunde, skal "Bygge" og "Nedrive" tilføjes til menuen
             if (streets.length > 0) {
-                options = MatadorUIController.addElement(options, "Bygge");
-                options = MatadorUIController.addElement(options, "Nedrive");
+                options = MatadorUI.addElement(options, "Bygge");
+                options = MatadorUI.addElement(options, "Nedrive");
             }
             // Liste med alle skøder, som spilleren ejer, hentes
             String[] properties = player.getProperties(fieldController.getFields());
             // Hvis spilleren ejer noget, skal "Sælge", "Pantsætte" og "Tilbagebetale lån" tilføjes til menuen
             if (properties.length > 0) {
-                options = MatadorUIController.addElement(options, "Sælge");
+                options = MatadorUI.addElement(options, "Sælge");
                 //options = MatadorUI.addElement(options, "Pantsætte");
                 //options = MatadorUI.addElement(options, "Tilbagebetale lån");
             }

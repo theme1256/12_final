@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MatadorUIController {
+public class MatadorUI {
     public static void main(String[] args) {
         FieldController fieldController = new FieldController();
         GUI_Field[] gui_fields = fieldController.createGUIFromFields();
@@ -72,16 +72,19 @@ public class MatadorUIController {
                     break;
                 case "TC5":
                     diceController.overrideShakes(new int[][]{
-                            {1, 5},
-                            {1, 5},
-                            {1, 5},
+                            {3, 4},  //p1 Start -> Prøv lykken -> Rådhuspladsen
+                            {6, 6},  //p2 Start -> Bryggeri + ekstra tur
+                            {1, 2},  //p2 Bryggeri -> D.F.D.S
+                            {1, 6},  //p3 Start -> Chancekort -> Ryk til nærmeste skib og betal dobbelt husleje
+                            {1, 2},  //p1 Rådhuspladsen -> Chancekort -> Gå i fængsel (Modtager ikke 200kr)
                     });
-                    chanceCardController = new ChanceCardController(fieldController, gui, true);
+                    chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{24,30,27});
                     break;
                 case "TC6":
                     diceController.overrideShakes(new int[][]{
                             {1, 6},
-                            {1, 6},
+                            {6, 6},
+                            {1, 2},
                             {1, 6},
                     });
                     chanceCardController = new ChanceCardController(fieldController, gui, true);

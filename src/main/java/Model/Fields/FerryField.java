@@ -63,14 +63,14 @@ public class FerryField extends Property {
             } else {
                 // Beregn leje, husk multiplier, hvis spilleren har trukket Move_special
                 int rent = this.calculateRent(felter) * player.nextRentModifier;
-                gui.getUserButtonPressed("Du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
+                gui.getUserButtonPressed(player.playerName +" du er landet på " + this.name + ", som er ejet af " + this.owner.getPlayerName() + " og skal betale husleje på " + rent, "Øv");
                 player.updateBalance(-1 * rent);
                 this.owner.updateBalance(rent);
             }
         } else {
             // Tilbyd at køb, hvis spiller har nok penge
             if (player.getBalance() >= this.price) {
-                String valg = gui.getUserButtonPressed("Du har råd til at købe " + this.name + ". Vil du købe rederiet?", "Ja", "Nej");
+                String valg = gui.getUserButtonPressed(player.playerName + " du har råd til at købe " + this.name + ". Vil du købe rederiet?", "Ja", "Nej");
                 if (valg.equals("Ja")) {
                     this.setOwner(player);
                     player.updateBalance(-1 * this.price);
@@ -79,7 +79,7 @@ public class FerryField extends Property {
                     GUIv.setRent(this.calculateRent(felter) + " kr.");
                 }
             } else {
-                gui.getUserButtonPressed("Du har ikke nok penge til at købe dette rederi", "Øv");
+                gui.getUserButtonPressed(player.playerName + " du har ikke nok penge til at købe dette rederi", "Øv");
             }
         }
         // Sæt altid nextRentModifier til 1, så den ikke bliver videreført til næste gang spilleren lander på et rederi

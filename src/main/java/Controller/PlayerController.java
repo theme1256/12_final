@@ -3,8 +3,6 @@ package Controller;
 import Model.Player;
 import gui_main.GUI;
 
-import java.util.Arrays;
-
 public class PlayerController {
     private GUI gui;
     private DiceController diceController;
@@ -80,7 +78,7 @@ public class PlayerController {
             for (Player p : players) {
                 // Sikrer sig at spilleren rent faktisk findes og tilføjer navnet til listen
                 if (p != null)
-                    out = MatadorUIController.addElement(out, p.getPlayerName());
+                    out = MatadorUI.addElement(out, p.getPlayerName());
             }
         }
         return out;
