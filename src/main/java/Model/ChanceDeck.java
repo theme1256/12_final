@@ -50,22 +50,36 @@ public class ChanceDeck {
         cards[31] = new Move_special(31);
     }
 
+    /**
+     * Trækker det første kort i arrayet, kopierer det til enden af arrayet og returnerer det til den der skal bruge det
+     *
+     * @return Det kort der blev trukket
+     */
     public ChanceCards draw() {
+        // Tager en kopi af det første kort i array'et
         ChanceCards trukket = cards[0];
+        // Løber kortene igennem og flytter dem med en
         for (int i = 0; i < cards.length - 1; i++) {
             cards[i] = cards[i + 1];
 
         }
+        // Tilføjer det først kort til enden
         cards[cards.length - 1] = trukket;
+        // Returnerer det første kort
         return trukket;
     }
 
-
+    /**
+     * Blander rækkefølgen, som kortene trækkes i
+     */
     public void shuffle() {
         int index;
+        // Laver et sted at opbevare et kort, midlertidigt
         ChanceCards temp;
         Random random = new Random();
+        // Løber alle kortene igennem baglæns
         for (int i = cards.length - 1; i > 0; i--) {
+            // Find et tilfældigt tal
             index = random.nextInt(i + 1);
             temp = cards[index];
             cards[index] = cards[i];
@@ -73,6 +87,12 @@ public class ChanceDeck {
         }
     }
 
+    /**
+     * Overskiver rækkefølgen, som chancekortene er i.
+     * Hvis der ikke gives en rækkefølge, som er kortere end antallet af kort, så flyttes de resterende kort til efter de definerede
+     *
+     * @param newOrder Et array af numre, i den rækkefølge de skal trækkes
+     */
     public void setOrder(int[] newOrder) {
         ChanceCards[] tmp = new ChanceCards[32];
         for (int i = 0; i < newOrder.length; i++) {
