@@ -29,8 +29,14 @@ public class MatadorUI {
                 case "TC3":
                     diceController.overrideShakes(new int[][]{
                             {1, 3},
-                            {1, 3},
-                            {1, 3},
+                            {3, 3},
+                            {1, 2},
+                            {3, 3},
+                            {2, 2},
+                            {1, 2},
+                            {3, 3},
+                            {2, 2},
+                            {5, 5},
                     });
                     break;
                 case "TC4":
