@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MatadorUI {
+public class MatadorUIController {
     public static void main(String[] args) {
         FieldController fieldController = new FieldController();
         GUI_Field[] gui_fields = fieldController.createGUIFromFields();

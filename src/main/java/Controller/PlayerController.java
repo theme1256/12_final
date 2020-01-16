@@ -3,9 +3,7 @@ package Controller;
 import Model.Player;
 import gui_main.GUI;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class PlayerController {
     private GUI gui;
@@ -26,7 +24,7 @@ public class PlayerController {
     }
     public void removeCarColor(String color) {
         System.out.println(color + " fundet ved index: " + Arrays.asList(this.carColors).indexOf(color));
-        this.carColors = MatadorUI.removeElement(this.carColors, color);
+        this.carColors = MatadorUIController.removeElement(this.carColors, color);
     }
 
     private void getUserInputNumberOfPlayers() {
@@ -62,7 +60,7 @@ public class PlayerController {
         if (players.length > 0) {
             for (Player p : players) {
                 if (p != null)
-                    out = MatadorUI.addElement(out, p.getPlayerName());
+                    out = MatadorUIController.addElement(out, p.getPlayerName());
             }
         }
         return out;
@@ -76,6 +74,11 @@ public class PlayerController {
         }
     }
 
+    /**
+     *
+     * @param player
+     * @return
+     */
     public boolean handleGetInJail(Player player) {
         //if (player.currentFelt == 30) {
         if (player.currentFelt > 25) {
