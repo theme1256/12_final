@@ -88,9 +88,31 @@ public class MatadorUI {
                     break;
                 case "TC7":
                     diceController.overrideShakes(new int[][]{
-                            {2, 6},
-                            {2, 6},
-                            {2, 6},
+                        {1, 1}, // P1 Start -> Prøv lykken (free-card)
+                        {1, 1}, // P1 Prøv lykken -> Skat
+                        {1, 1}, // P1 Skat -> Roskildevej -> Fængsel
+                        {1, 1}, // P2 Start -> Prøv lykken (free-card)
+                        {1, 1}, // P2 Prøv lykken -> Skat
+                        {1, 1}, // P2 Skat -> Roskildevej -> Fængsel
+                        {6, 6}, // P3 Start -> Tuborg
+                        {6, 6}, // P3 Tuborg -> Grønningen
+                        {4, 2}, // P3 Grønningen -> Fængsel
+                        {6, 6}, // P4 Start -> Tuborg
+                        {6, 6}, // P4 Tuborg -> Grønningen
+                        {4, 2}, // P4 Grønningen -> Fængsel
+                        {4, 6}, // P1 Fængsel -> Helle
+                        {4, 6}, // P2 Fængsel -> Helle
+                        {3, 3}, // P3 Fængsel -> Bernstorffsvej
+                        {1, 3}, // P3 Bernstorffsvej -> Helle
+                        {1, 2}, // P4 Fængsel
+                        {1, 2}, // P1 Helle -> Grønningen
+                        {1, 2}, // P2 Helle -> Grønningen
+                        {1, 2}, // P3 Helle -> Grønningen
+                        {1, 2}, // P4 Fængsel
+                        {1, 2}, // P1 Grønningen -> Kgs.  Nytorv
+                        {1, 2}, // P2 Grønningen -> Kgs.  Nytorv
+                        {1, 2}, // P3 Grønningen -> Kgs.  Nytorv
+                        {4, 5}, // P4 Fængsel -> Strandvej
                     });
                     chanceCardController = new ChanceCardController(fieldController, gui, true);
                     break;
