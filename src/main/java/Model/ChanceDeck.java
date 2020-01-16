@@ -50,7 +50,7 @@ public class ChanceDeck {
         cards[31] = new Move_special(31);
     }
 
-    public ChanceCards traekkort() {
+    public ChanceCards draw() {
         ChanceCards trukket = cards[0];
         for (int i = 0; i < cards.length - 1; i++) {
             cards[i] = cards[i + 1];
@@ -61,7 +61,7 @@ public class ChanceDeck {
     }
 
 
-    public void blandkort() {
+    public void shuffle() {
         int index;
         ChanceCards temp;
         Random random = new Random();
@@ -91,10 +91,11 @@ public class ChanceDeck {
     }
 
     /**
+     * Finder ud af om et chancekort er i et array af chancekort
      *
-     * @param array
-     * @param v
-     * @return
+     * @param array Det array der skal ledes i
+     * @param v Det kort der skal findes
+     * @return Om kortet blev fundet
      */
     public boolean contains(ChanceCards[] array, ChanceCards v) {
         boolean result = false;

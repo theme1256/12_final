@@ -17,7 +17,7 @@ public class ChanceCardController {
 
         // Opret et nyt dæk af chancekort og sørg for at det er blandet
         chanceDeck = new ChanceDeck();
-        chanceDeck.blandkort();
+        chanceDeck.shuffle();
     }
     public ChanceCardController(FieldController fc, GUI gui, boolean override) {
         this.fieldController = fc;
@@ -26,7 +26,7 @@ public class ChanceCardController {
         // Opret et nyt dæk af chancekort og sørg for at det er blandet
         chanceDeck = new ChanceDeck();
         if (!override) {
-            chanceDeck.blandkort();
+            chanceDeck.shuffle();
         }
     }
     public ChanceCardController(FieldController fc, GUI gui, boolean override, int[] newOrder) {
@@ -36,7 +36,7 @@ public class ChanceCardController {
         // Opret et nyt dæk af chancekort og sørg for at det er blandet
         chanceDeck = new ChanceDeck();
         if (!override) {
-            chanceDeck.blandkort();
+            chanceDeck.shuffle();
         } else {
             chanceDeck.setOrder(newOrder);
         }
@@ -52,7 +52,7 @@ public class ChanceCardController {
         // Hvis feltet er af type "ChanceCardField", så må det være fordi der skal trækkes og udføres et chancekort
         if(fieldController.getField(player.currentFelt) instanceof ChanceCardsField) {
             // Træk et chancekort
-            ChanceCards card = chanceDeck.traekkort();
+            ChanceCards card = chanceDeck.draw();
 
             // Bed kortet om at udføre den handling det skal udføre
             return card.action(player, this.gui);
