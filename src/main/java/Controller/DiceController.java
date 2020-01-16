@@ -14,6 +14,10 @@ public class DiceController {
         shaker = new Shaker(2);
     }
 
+    public void overrideShakes(int[][] slag) {
+        shaker.override(slag);
+    }
+
     /**
      * Ruller terningerne, viser dem i GUI og returnerer summen af slaget
      *
@@ -34,6 +38,16 @@ public class DiceController {
         lastShake = shaker.shake();
         this.gui.setDice(lastShake[0], lastShake[1]);
         return lastShake;
+    }
+
+    /**
+     * Returnerer summen af hvad der sidst blev slået
+     * Bruges til når en spiller er kommet ud af fængsel og skal rykke det slåede
+     *
+     * @return Summen af det slåede
+     */
+    public int sumLastShake() {
+        return lastShake[0] + lastShake[1];
     }
 
     /**

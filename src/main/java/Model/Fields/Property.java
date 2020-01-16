@@ -21,6 +21,11 @@ public abstract class Property extends BaseField {
     }
 
 
+    protected abstract int calculateRent(BaseField[] felter);
+    public abstract void action(GUI gui, Player player);
+    public abstract void action(GUI gui, Player player, BaseField[] felter);
+
+
     /**
      * Henter den version af feltet, som GUI bruger
      *
@@ -32,27 +37,44 @@ public abstract class Property extends BaseField {
         return ((GUI_Ownable) fields[nr - 1]);
     }
 
-    protected abstract int calculateRent(BaseField[] felter);
-    public abstract void action(GUI gui, Player player);
-    public abstract void action(GUI gui, Player player, BaseField[] felter);
     public Player getOwner() {
         return this.owner;
     }
+
     public void setOwner(Player player) {
         this.owner = player;
         this.owned = true;
     }
+
     public boolean isOwned() {
         return owned;
     }
+
+    /**
+     * Håndterer at sælge et skøde
+     * @param gui Pointer til det aktive GUI
+     */
     public void sell(GUI gui) {
-        owner.updateBalance(this.price);
-        if (gui != null) {
-            GUI_Ownable GUIv = getGuiVersion(gui);
-            GUIv.setRent("");
-            GUIv.setOwnerName("");
+        boolean stop = false;
+        // Hvis det er en grund, så skal alle bygninderne være solgt inden skødet kan sælges
+        if (this instanceof StreetField) {
+            if (((StreetField) this).getBuildLevel() > 0) {
+                gui.getUserButtonPressed("Du kan ikke sælge denne grund, da der er bygget på den", "OK");
+                stop = true;
+            }
         }
-        this.owner = null;
-        this.owned = false;
+        if (!stop) {
+            // Giv penge tilbage
+            this.owner.updateBalance(this.price);
+            // Hvis der er et GUI, opdater ejer og leje-pris
+            if (gui != null) {
+                GUI_Ownable GUIv = getGuiVersion(gui);
+                GUIv.setRent("");
+                GUIv.setOwnerName("");
+            }
+            // Nulstil ejeren
+            this.owner = null;
+            this.owned = false;
+        }
     }
 }
