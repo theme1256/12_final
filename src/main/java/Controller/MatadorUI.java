@@ -51,15 +51,15 @@ public class MatadorUI {
                     break;
                 case "TC3":
                     diceController.overrideShakes(new int[][]{
-                        {1, 3},
-                        {3, 3},
-                        {1, 2},
-                        {3, 3},
-                        {2, 2},
-                        {1, 2},
-                        {3, 3},
-                        {2, 2},
-                        {5, 5},
+                        {1, 3}, // P1 Start -> Skat
+                        {3, 3}, // P2 Start -> Roskildevej
+                        {1, 2}, // P2 Roskildevej -> Allégade
+                        {3, 3}, // P3 Start -> Roskildevej
+                        {2, 2}, // P3 Roskildevej -> Fængsel
+                        {1, 2}, // P3 Fængsel -> Bülowsvej
+                        {3, 3}, // P4 Start -> Roskildevej
+                        {2, 2}, // P4 Roskildevej -> Fængsel
+                        {5, 5}, // P4 Fængsel -> Helle -> Fængsel
                     });
                     break;
                 case "TC4":
