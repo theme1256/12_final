@@ -64,11 +64,17 @@ public class MatadorUI {
                     break;
                 case "TC4":
                     diceController.overrideShakes(new int[][]{
-                            {1, 4},
-                            {1, 4},
-                            {1, 4},
+                            {3, 3},
+                            {1, 1},
+                            {5, 4},
+                            {2, 3},
+                            {6, 6},
+                            {3, 1},
+                            {5, 4},
+
+
                     });
-                    chanceCardController = new ChanceCardController(fieldController, gui, true);
+                    chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{29});
                     break;
                 case "TC5":
                     diceController.overrideShakes(new int[][]{
