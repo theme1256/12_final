@@ -113,8 +113,7 @@ public class PlayerController {
      */
     public boolean handleGetInJail(Player player) {
         // Tjek om spilleren står på det rigtige felt
-        //if (player.currentFelt == 30) {
-        if (player.currentFelt > 25) {
+        if (player.currentFelt == 30) {
             // Spilleren skal i fængsel, ryk dem
             this.gui.getUserButtonPressed("Du er røget i fængsel!", "ØV");
             player.moveTo(10,false);

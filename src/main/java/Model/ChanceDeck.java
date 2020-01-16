@@ -119,10 +119,14 @@ public class ChanceDeck {
      */
     public boolean contains(ChanceCards[] array, ChanceCards v) {
         boolean result = false;
-        for(ChanceCards i : array){
-            if(i.getCardNumber() == v.getCardNumber()){
-                result = true;
-                break;
+        if (array != null && v != null) {
+            for (ChanceCards i : array) {
+                if (i != null) {
+                    if (i.getCardNumber() == v.getCardNumber()) {
+                        result = true;
+                        break;
+                    }
+                }
             }
         }
         return result;
