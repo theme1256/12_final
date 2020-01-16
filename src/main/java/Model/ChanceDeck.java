@@ -71,7 +71,40 @@ public class ChanceDeck {
             cards[index] = cards[i];
             cards[i] = temp;
         }
-        //Collections.shuffle(Arrays.asList(kort));
+    }
+
+    public void setOrder(int[] newOrder) {
+        ChanceCards[] tmp = new ChanceCards[32];
+        for (int i = 0; i < newOrder.length; i++) {
+            tmp[i] = this.cards[newOrder[i]];
+        }
+        if (newOrder.length < cards.length) {
+            int i = newOrder.length;
+            for (ChanceCards card : this.cards) {
+                if (!this.contains(tmp, card)) {
+                    tmp[i] = card;
+                    i++;
+                }
+            }
+        }
+        this.cards = tmp;
+    }
+
+    /**
+     *
+     * @param array
+     * @param v
+     * @return
+     */
+    public boolean contains(ChanceCards[] array, ChanceCards v) {
+        boolean result = false;
+        for(ChanceCards i : array){
+            if(i.getCardNumber() == v.getCardNumber()){
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     public String toString() {

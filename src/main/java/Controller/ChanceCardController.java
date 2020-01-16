@@ -19,6 +19,28 @@ public class ChanceCardController {
         chanceDeck = new ChanceDeck();
         chanceDeck.blandkort();
     }
+    public ChanceCardController(FieldController fc, GUI gui, boolean override) {
+        this.fieldController = fc;
+        this.gui = gui;
+
+        // Opret et nyt dæk af chancekort og sørg for at det er blandet
+        chanceDeck = new ChanceDeck();
+        if (!override) {
+            chanceDeck.blandkort();
+        }
+    }
+    public ChanceCardController(FieldController fc, GUI gui, boolean override, int[] newOrder) {
+        this.fieldController = fc;
+        this.gui = gui;
+
+        // Opret et nyt dæk af chancekort og sørg for at det er blandet
+        chanceDeck = new ChanceDeck();
+        if (!override) {
+            chanceDeck.blandkort();
+        } else {
+            chanceDeck.setOrder(newOrder);
+        }
+    }
 
     /**
      * Håndterer at trække et chancekort, hvis der er landet på et chance-felt
