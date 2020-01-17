@@ -1,8 +1,9 @@
 package Controller;
 
-import Model.AccountStub;
+import Stub.Controller.*;
+import Stub.Model.AccountStub;
 import Model.Player;
-import Model.PlayerStub;
+import Stub.Model.PlayerStub;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

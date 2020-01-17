@@ -1,6 +1,6 @@
-package Model;
+package Stub.Model;
 
-import Controller.PlayerControllerStub;
+import Stub.Controller.PlayerControllerStub;
 
 public class PlayerStub {
     public  AccountStub account;

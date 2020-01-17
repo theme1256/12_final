@@ -1,4 +1,6 @@
-package Model;
+package Stub.Model;
+
+import Model.Die;
 
 public class ShakerStub {
     private Die die;

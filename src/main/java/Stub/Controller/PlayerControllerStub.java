@@ -1,6 +1,6 @@
-package Controller;
+package Stub.Controller;
 
-import Model.PlayerStub;
+import Stub.Model.PlayerStub;
 
 import java.util.Scanner;
 

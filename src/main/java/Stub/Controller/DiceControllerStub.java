@@ -1,6 +1,6 @@
-package Controller;
+package Stub.Controller;
 
-import Model.ShakerStub;
+import Stub.Model.ShakerStub;
 
 public class DiceControllerStub {
 

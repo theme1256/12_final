@@ -1,4 +1,4 @@
-package Model;
+package Stub.Model;
 
 public class AccountStub {
     public int balance;
