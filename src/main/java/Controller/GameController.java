@@ -73,7 +73,7 @@ public class GameController {
         // Skriv hvem der vandt, det er den eneste der ikke har givet op eller er gået fallit
         for (Player player : playerController.players) {
             if (!player.getIsOut()) {
-                gui.getUserButtonPressed("Tillykke til " + player.getPlayerName() + ", som vandt");
+                this.gui.getUserButtonPressed("Tillykke til " + player.getPlayerName() + ", som vandt", "Nice!");
             }
         }
         // Luk programmet

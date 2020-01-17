@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.GameController;
 import Controller.MatadorUIController;
 import Controller.PlayerController;
 import Model.Fields.BaseField;
