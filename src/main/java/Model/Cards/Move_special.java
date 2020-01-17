@@ -30,10 +30,4 @@ public class Move_special extends ChanceCards {
                         "Hvis selskabet ikke ejes af nogen, kan De købe det af banken";
         return cardDescription;
     }
-
-
-    //IGNORER, ikke slet
-    public boolean action(Player player, GUI gui, FieldController fc) {
-        return true;
-    }
 }

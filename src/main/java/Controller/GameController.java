@@ -12,7 +12,7 @@ public class GameController {
     private ChanceCardController chanceCardController;
     private DiceController diceController;
     public static PlayerController playerController;
-    private FieldController fieldController;
+    public static FieldController fieldController;
 
     public boolean extraTurn = false;
     public int turnsInARow = 0;
@@ -24,7 +24,7 @@ public class GameController {
         this.chanceCardController = cc;
         this.diceController = dc;
         playerController = pc;
-        this.fieldController = fc;
+        fieldController = fc;
 
         // Bed playerController om at oprette spillere
         playerController.createPlayers();

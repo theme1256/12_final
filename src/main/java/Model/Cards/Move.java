@@ -104,10 +104,4 @@ public class Move extends ChanceCards {
         }
         return cardDescription;
     }
-
-
-    //IGNORER ikke slet
-    public boolean action(Player player, GUI gui, FieldController fc) {
-        return true;
-    }
 }

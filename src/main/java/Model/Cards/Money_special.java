@@ -13,26 +13,29 @@ public class Money_special extends ChanceCards {
     }
 
     @Override
-    public boolean action(Player player, GUI gui, FieldController fc) {
+    public boolean action(Player player, GUI gui) {
         switch (this.cardNumber) {
             case 17:
-
                 player.updateBalance((GameController.playerController.numberOfPlayers-1)*25);
+                for (Player other : GameController.playerController.players) {
+                    if (other != player) {
+                        other.updateBalance(-25);
+                    }
+                }
                 break;
             case 18:
-                if(player.getNetWorth(fc.getFields()) <= 750){
+                if (player.getNetWorth(GameController.fieldController.getFields()) <= 750) {
                     player.updateBalance(+2000);
-                } else
-                    gui.showMessage("Du lever desværre ikke op til kravene til dette legat, da din totale værdi overstiger græsen med" + (player.getNetWorth(fc.getFields()) - 750)+ "kr");
+                } else {
+                    gui.showMessage("Du lever desværre ikke op til kravene til dette legat, da din totale værdi overstiger græsen med" + (player.getNetWorth(GameController.fieldController.getFields()) - 750) + "kr");
+                }
                 break;
-
             case 19:
-
-                player.updateBalance(((-25) * player.getNumberOfHouses(fc.getFields())) + ((-125)*player.getNumberOfHotels(fc.getFields())));
+                player.updateBalance(((-25) * player.getNumberOfHouses(GameController.fieldController.getFields())) + ((-125)*player.getNumberOfHotels(GameController.fieldController.getFields())));
                 break;
             case 20:
-                player.updateBalance(((-50) * player.getNumberOfHouses(fc.getFields())) + ((-125)*player.getNumberOfHotels(fc.getFields())));
-            break;
+                player.updateBalance(((-50) * player.getNumberOfHouses(GameController.fieldController.getFields())) + ((-125)*player.getNumberOfHotels(GameController.fieldController.getFields())));
+                break;
             default:
                 break;
         }
@@ -65,11 +68,6 @@ public class Money_special extends ChanceCards {
                 break;
         }
         return cardDescription;
-    }
-
-    //IGNORER ikke slet
-    public boolean action(Player player, GUI gui){
-        return true;
     }
 }
 

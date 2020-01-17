@@ -21,12 +21,6 @@ public class Jail extends ChanceCards {
                         "Dette kort opbevares, indtil De får brug for det, eller De kan sælge det.";
         return cardDescription;
     }
-
-
-    //IGNORER ikke slet
-    public boolean action(Player player, GUI gui, FieldController fc) {
-        return true;
-    }
 }
 
 

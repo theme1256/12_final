@@ -20,6 +20,4 @@ public abstract class ChanceCards {
     }
 
     public abstract boolean action(Player player, GUI gui);
-
-    public abstract boolean action(Player player, GUI gui, FieldController fc);
 }

@@ -23,7 +23,7 @@ public class ChanceCardController {
         this.fieldController = fc;
         this.gui = gui;
 
-        // Opret et nyt dæk af chancekort og sørg for at det er blandet
+        // Opret et nyt dæk af chancekort
         chanceDeck = new ChanceDeck();
         if (!override) {
             chanceDeck.shuffle();
@@ -33,13 +33,22 @@ public class ChanceCardController {
         this.fieldController = fc;
         this.gui = gui;
 
-        // Opret et nyt dæk af chancekort og sørg for at det er blandet
+        // Opret et nyt dæk af chancekort
         chanceDeck = new ChanceDeck();
         if (!override) {
             chanceDeck.shuffle();
         } else {
             chanceDeck.setOrder(newOrder);
         }
+    }
+    public ChanceCardController(FieldController fc, GUI gui, int[] newOrder) {
+        this.fieldController = fc;
+        this.gui = gui;
+
+        // Opret et nyt dæk af chancekort og sørg for at det er blandet
+        chanceDeck = new ChanceDeck();
+        chanceDeck.shuffle();
+        chanceDeck.setOrder(newOrder);
     }
 
     /**
