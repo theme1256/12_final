@@ -64,7 +64,7 @@ public class Move extends ChanceCards {
 
             //Frem til Start
             case 29:
-                player.moveTo(0, false);
+                player.moveTo(0, true);
                 break;
 
             default:

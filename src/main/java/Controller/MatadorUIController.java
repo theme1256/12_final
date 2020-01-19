@@ -64,36 +64,44 @@ public class MatadorUIController {
                     break;
                 case "TC4":
                     diceController.overrideShakes(new int[][]{
-                            {3, 3},
-                            {1, 1},
-                            {5, 4},
-                            {2, 3},
-                            {6, 6},
-                            {3, 1},
-                            {5, 4},
-
-
+                        {3, 3}, // P1 Start -> Roskildevej
+                        {1, 1}, // P1 Roskildevej -> Valby Langgade
+                        {5, 4}, // P1 Valby Langgade -> Chance (move(29)) -> Start
+                        {2, 3}, // P2 Start -> Øresund
+                        {6, 6}, // P3 Start -> Tuborg
+                        {3, 1}, // P3 Tuborg -> Bernstorffsvej
+                        {5, 4}, // P1 Start -> Allégade
                     });
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{29});
                     break;
                 case "TC5":
                     diceController.overrideShakes(new int[][]{
-                            {3, 4},  //p1 Start -> Prøv lykken -> Rådhuspladsen
-                            {6, 6},  //p2 Start -> Bryggeri + ekstra tur
-                            {1, 2},  //p2 Bryggeri -> D.F.D.S
-                            {1, 6},  //p3 Start -> Chancekort -> Ryk til nærmeste skib og betal dobbelt husleje
-                            {1, 2},  //p1 Rådhuspladsen -> Chancekort -> Gå i fængsel (Modtager ikke 200kr)
+                        {3, 4},  //p1 Start -> Prøv lykken -> Rådhuspladsen
+                        {6, 6},  //p2 Start -> Bryggeri + ekstra tur
+                        {1, 2},  //p2 Bryggeri -> D.F.D.S
+                        {1, 6},  //p3 Start -> Chancekort -> Ryk til nærmeste skib og betal dobbelt husleje
+                        {1, 2},  //p1 Rådhuspladsen -> Chancekort -> Gå i fængsel (Modtager ikke 200kr)
                     });
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{24,30,27});
                     break;
                 case "TC6":
                     diceController.overrideShakes(new int[][]{
-                            {1, 6},
-                            {6, 6},
-                            {1, 2},
-                            {1, 6},
+                        {3, 3}, // P1 Start -> Roskildevej
+                        {1, 1}, // P1 Roskildevej -> Valby Langgade
+                        {5, 4}, // P1 Valby Langgade -> Chance (move(29)) -> Start
+                        {2, 3}, // P2 Start -> Øresund
+                        {6, 6}, // P3 Start -> Tuborg
+                        {3, 1}, // P3 Tuborg -> Bernstorffsvej
+                        {5, 4}, // P1 Start -> Allégade
+                        {2, 2}, // P2 Øresund -> Allégade
+                        {4, 4}, // P2 Allégade -> Chance (move(26)) -> Øresund
+                        {1, 3}, // P2 Øresund -> Allégade
+                        {1, 3}, // P3 Bernstorffsvej -> Helle
+                        {5, 6}, // P1 Allégade -> Helle
+                        {4, 4}, // P2 Allégade -> Chance (move(24)) -> Rådhuspladsen
+                        {4, 6}, // P2 Rådhuspladsen -> Allégade
                     });
-                    chanceCardController = new ChanceCardController(fieldController, gui, true);
+                    chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{29, 26, 24});
                     break;
                 case "TC7":
                     diceController.overrideShakes(new int[][]{
