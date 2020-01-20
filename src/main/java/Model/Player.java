@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.GameController;
 import Controller.MatadorUIController;
 import Controller.PlayerController;
 import Model.Fields.BaseField;
@@ -18,7 +17,6 @@ public class Player {
     public String playerName;
     private GUI_Player car;
     private GUI gui;
-    private static GUI_Car brik;
 
     public boolean passedStart = false;
     private boolean jailPass = false;
@@ -34,19 +32,18 @@ public class Player {
     public Player(GUI gui, int startBalance, PlayerController playerController) {
         this.gui = gui;
         getUserInputPlayerName(playerController);
-        account = new Account(startBalance);
+        this.account = new Account(startBalance);
 
-        brikselect(gui, playerController);
+        GUI_Car brik = brikselect(gui, playerController);
 
-        GUI_Player playercar = new GUI_Player(playerName, account.balance, brik);
-        gui.addPlayer(playercar);
-        car = playercar;
+        this.car = new GUI_Player(this.playerName, this.account.balance, brik);
+        gui.addPlayer(this.car);
         gui.getFields()[this.currentFelt].setCar(this.car, true);
     }
 
     public Player(int startBalance, String username) {
-        account = new Account(startBalance);
-        playerName = username;
+        this.account = new Account(startBalance);
+        this.playerName = username;
     }
 
     /**
@@ -55,28 +52,22 @@ public class Player {
      * @param gui Pointer til aktivt GUI
      * @param pc Pointer til PlayerController
      */
-    private void brikselect(GUI gui, PlayerController pc){
+    private GUI_Car brikselect(GUI gui, PlayerController pc){
         while(true){
             String valg = gui.getUserSelection("Hvilken farve bil vil du have?", pc.getCarColors());
             pc.removeCarColor(valg);
             if (valg.equals("Sort")) {
-                brik = new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.BLACK, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else if(valg.equals("Rød")) {
-                brik = new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.RED, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else if (valg.equals("Grøn")) {
-                brik = new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.GREEN, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else if (valg.equals("Blå")) {
-                brik = new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.BLUE, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else if (valg.equals("Gul")) {
-                brik = new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.YELLOW, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else if (valg.equals("Hvid")) {
-                brik = new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
-                break;
+                return new GUI_Car(Color.WHITE, Color.BLACK,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
             } else {
                 gui.getUserButtonPressed("Den farve er allerede valgt", "Prøv igen");
             }
@@ -88,9 +79,9 @@ public class Player {
      */
     private void getUserInputPlayerName(PlayerController pc) {
         while (true) {
-            playerName = gui.getUserString("Indtast dit navn");
-            if (Arrays.stream(pc.getPlayerNames()).anyMatch(playerName::equals)) {
-                gui.getUserButtonPressed("Det er der allerede en player der hedder", "Prøv igen");
+            this.playerName = this.gui.getUserString("Indtast dit navn");
+            if (Arrays.stream(pc.getPlayerNames()).anyMatch(this.playerName::equals)) {
+                this.gui.getUserButtonPressed("Det er der allerede en player der hedder", "Prøv igen");
             } else {
                 break;
             }
@@ -103,7 +94,7 @@ public class Player {
      * @return Navnet
      */
     public String getPlayerName() {
-        return playerName;
+        return this.playerName;
     }
 
     /**
@@ -112,9 +103,11 @@ public class Player {
      * @param diff Hvor meget der skal tilføjes eller fjernes
      */
     public void updateBalance(int diff){
-        account.updateBalance(diff);
-        if (car != null)
-            car.setBalance(account.balance);
+        // Opdater account
+        this.account.updateBalance(diff);
+        // Hvis der er et GUI, opdater GUI
+        if (this.car != null)
+            this.car.setBalance(this.account.balance);
     }
 
     /**
@@ -123,16 +116,19 @@ public class Player {
      * @return Antal kr. spilleren har
      */
     public int getBalance() {
-        return account.balance;
+        return this.account.balance;
     }
 
     /**
      * Opdaterer spillerens position i GUI, hvis der er defineret et GUI
      */
     private void updateCar(){
-        if (gui != null) {
-            gui.getFields()[this.previousFelt].setCar(this.car, false);
-            gui.getFields()[this.currentFelt].setCar(this.car, true);
+        // Hvis der er et GUI
+        if (this.gui != null) {
+            // Fjern bilen fra det forrige felt
+            this.gui.getFields()[this.previousFelt].setCar(this.car, false);
+            // Tilføj bilen til det nuværrende felt
+            this.gui.getFields()[this.currentFelt].setCar(this.car, true);
         }
     }
 
@@ -142,14 +138,19 @@ public class Player {
      * @param amount Antal felter der skal flyttes
      */
     public void move(int amount) {
+        // Huske hvor spilleren stod før
         this.previousFelt = this.currentFelt;
+        // Flytter spilleren
         this.currentFelt += amount;
+        // Hvis spilleren står på et for højt tal, ryk tilbage med 40, da der er 40 felter på brættet
         if (this.currentFelt >= 40) {
             this.currentFelt -= 40;
             this.passedStart = true;
         } else if (this.currentFelt < 0) {
+            // Spilleren er blevet rykket bagud og har passeret start, tilføj 40 felter, så spilleren stadig er på brættet
             this.currentFelt += 40;
         }
+        // Opdater bilen i GUI
         this.updateCar();
     }
 
@@ -211,19 +212,33 @@ public class Player {
      * @return Antal kr. spilleren er værd
      */
     public int getNetWorth(BaseField[] felter) {
+        // Opret en variabel der kan returneres, med startværdi af det som spilleren har af balance
         int out = getBalance();
+        // For alle felter
         for (BaseField felt : felter) {
+            // Hvis det er en ejendom
             if (felt instanceof Property) {
+                // Find ejeren af feltet
                 Player owner = ((Property) felt).getOwner();
+                // Hvis der er en ejer
                 if (owner != null) {
+                    // Hvis navnet på ejeren er det samme som den nuværrende spiller
                     if (owner.getPlayerName().equals(this.playerName)) {
+                        // Tilføj prisen på feltet til retur-værdien
                         out += felt.getPrice();
-                        if(felt instanceof StreetField)
-                            out += ((StreetField) felt).getBuildLevel() * ((StreetField) felt).getBuildPrice();
+                        // Hvis feltet er en grund/vej, tilføj værdien af bygningerne
+                        if (felt instanceof StreetField) {
+                            int level = ((StreetField) felt).getBuildLevel();
+                            if (level == 5)
+                                out += 9 * ((StreetField) felt).getBuildPrice();
+                            else
+                                out += level * ((StreetField) felt).getBuildPrice();
+                        }
                     }
                 }
             }
         }
+        // Returner spillerens værdi
         return out;
     }
 
@@ -234,12 +249,18 @@ public class Player {
      * @return Antal huse
      */
     public int getNumberOfHouses(BaseField[] felter) {
+        // Opret en variabel der kan returneres
         int out = 0;
+        // For alle felter
         for (BaseField felt : felter) {
-            if (felt instanceof Property) {
-                Player owner = ((Property) felt).getOwner();
+            // Hvis feltet er en grund
+            if (felt instanceof StreetField) {
+                Player owner = ((StreetField) felt).getOwner();
+                // Hvis der er en ejer
                 if (owner != null) {
+                    // Hvis ejeren er den nuværrende spiller og der er bygget til mindre en niveau 5
                     if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() < 5) {
+                        // Tilføj antallet af huse til totalen
                         out += ((StreetField) felt).getBuildLevel();
                     }
                 }
@@ -255,12 +276,18 @@ public class Player {
      * @return Antal hoteller
      */
     public int getNumberOfHotels(BaseField[] felter) {
+        // Opret en variabel der kan returneres
         int out = 0;
+        // For alle felter
         for (BaseField felt : felter) {
-            if (felt instanceof Property) {
-                Player owner = ((Property) felt).getOwner();
+            // Hvis feltet er en grund
+            if (felt instanceof StreetField) {
+                Player owner = ((StreetField) felt).getOwner();
+                // Hvis der er en ejer
                 if (owner != null) {
+                    // Hvis ejeren er den nuværrende og der er bygget til niveau 5
                     if (owner.getPlayerName().equals(this.playerName) && ((StreetField) felt).getBuildLevel() == 5) {
+                        // Tæl antallet af hoteller en op
                         out++;
                     }
                 }
@@ -276,12 +303,18 @@ public class Player {
      * @return Array med navne på grundene som spilleren ejer
      */
     public String[] getStreets(BaseField[] felter) {
+        // Opret et array, som kan returneres
         String[] out = new String[0];
+        // For alle felter
         for (BaseField felt : felter) {
+            // Hvis det er en grund
             if (felt instanceof StreetField) {
                 Player owner = ((StreetField) felt).getOwner();
+                // Hvis der er en ejer
                 if (owner != null) {
+                    // Hvis ejeren er den nuværrende spiller
                     if (owner.getPlayerName().equals(this.playerName)) {
+                        // Tilføj navnet på vejen til array med grunde spilleren ejer
                         out = MatadorUIController.addElement(out, felt.getName());
                     }
                 }
@@ -297,12 +330,18 @@ public class Player {
      * @return Array med navne på felterne som spilleren ejer
      */
     public String[] getProperties(BaseField[] felter) {
+        // Opret et array, som kan returneres
         String[] out = new String[0];
+        // For alle felter
         for (BaseField felt : felter) {
+            // Hvis feltet er en ejendom
             if (felt instanceof Property) {
                 Player owner = ((Property) felt).getOwner();
+                // Hvis der er en ejer
                 if (owner != null) {
+                    // Hvis ejeren er den nuværrende spiller
                     if (owner.getPlayerName().equals(this.playerName)) {
+                        // Tilføj navnet på ejendommen til array med felter spilleren ejer
                         out = MatadorUIController.addElement(out, felt.getName());
                     }
                 }
@@ -327,8 +366,8 @@ public class Player {
             }
         }
         // Hvis der er et GUI, slet spillerens brik
-        if (gui != null) {
-            gui.getFields()[this.currentFelt].setCar(this.car, false);
+        if (this.gui != null) {
+            this.gui.getFields()[this.currentFelt].setCar(this.car, false);
         }
         // Fjern alle pengene på kontoen
         this.updateBalance(-1 * this.getBalance());
@@ -382,6 +421,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return playerName;
+        return this.playerName;
     }
 }

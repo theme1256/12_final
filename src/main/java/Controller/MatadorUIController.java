@@ -9,17 +9,25 @@ import java.util.List;
 
 public class MatadorUIController {
     public static void main(String[] args) {
+        // Opretter fieldcontroller og henter GUI-versioner af felterne ud
         FieldController fieldController = new FieldController();
         GUI_Field[] gui_fields = fieldController.createGUIFromFields();
 
+        // Opret GUI fra felter
         GUI gui = new GUI(gui_fields);
 
+        // Opret en chancecardcontroller
         ChanceCardController chanceCardController = new ChanceCardController(fieldController, gui);
 
+        // Opret en dicecontroller
         DiceController diceController = new DiceController(gui);
+
+        // Hvis der er givet et eller flere parametere, da programmet startede
         if (args.length > 0) {
+            // Reager på det første parameter
             switch (args[0]) {
                 case "TC2":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {3, 3}, // P1 Start -> Roskildevej (køb)
                         {1, 2}, // P1 Roskildevej -> Allégade (køb)
@@ -47,9 +55,11 @@ public class MatadorUIController {
                         {1, 1}, // P6 Hvidovre -> Øresund (betal leje)
                         {1, 3}, // P6 Øresund -> Allégade (betal leje)
                     });
+                    // Overskriver chancecardcontroller med en fast rækkefølge
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{2, 3, 4});
                     break;
                 case "TC3":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {1, 3}, // P1 Start -> Skat
                         {3, 3}, // P2 Start -> Roskildevej
@@ -63,6 +73,7 @@ public class MatadorUIController {
                     });
                     break;
                 case "TC4":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {3, 3}, // P1 Start -> Roskildevej
                         {1, 1}, // P1 Roskildevej -> Valby Langgade
@@ -72,9 +83,11 @@ public class MatadorUIController {
                         {3, 1}, // P3 Tuborg -> Bernstorffsvej
                         {5, 4}, // P1 Start -> Allégade
                     });
+                    // Overskriver chancecardcontroller med en fast rækkefølge
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{29});
                     break;
                 case "TC5":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {3, 4},  //p1 Start -> Prøv lykken -> Rådhuspladsen
                         {6, 6},  //p2 Start -> Bryggeri + ekstra tur
@@ -82,9 +95,11 @@ public class MatadorUIController {
                         {1, 6},  //p3 Start -> Chancekort -> Ryk til nærmeste skib og betal dobbelt husleje
                         {1, 2},  //p1 Rådhuspladsen -> Chancekort -> Gå i fængsel (Modtager ikke 200kr)
                     });
+                    // Overskriver chancecardcontroller med en fast rækkefølge
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{24,30,27});
                     break;
                 case "TC6":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {3, 3}, // P1 Start -> Roskildevej
                         {1, 1}, // P1 Roskildevej -> Valby Langgade
@@ -101,9 +116,11 @@ public class MatadorUIController {
                         {4, 4}, // P2 Allégade -> Chance (move(24)) -> Rådhuspladsen
                         {4, 6}, // P2 Rådhuspladsen -> Allégade
                     });
+                    // Overskriver chancecardcontroller med en fast rækkefølge
                     chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{29, 26, 24});
                     break;
                 case "TC7":
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
                         {1, 1}, // P1 Start -> Prøv lykken (free-card)
                         {1, 1}, // P1 Prøv lykken -> Skat
@@ -131,6 +148,7 @@ public class MatadorUIController {
                         {1, 2}, // P3 Grønningen -> Kgs.  Nytorv
                         {4, 5}, // P4 Fængsel -> Strandvej
                     });
+                    // Overskriver chancecardcontroller, så kort ikke er blandet
                     chanceCardController = new ChanceCardController(fieldController, gui, true);
                     break;
                 default:
@@ -139,8 +157,10 @@ public class MatadorUIController {
             }
         }
 
+        // Opretter playercontroller
         PlayerController playerController = new PlayerController(gui, diceController);
 
+        // Opretter gamecontroller, som starter spillet
         GameController gameController = new GameController(gui, chanceCardController, diceController, playerController, fieldController);
     }
 
@@ -172,6 +192,7 @@ public class MatadorUIController {
 
     /**
      * Kan slette et element fra et String-array, ud fra værdien, og fjerne punktet i array'et, så størrelsen stadig passer
+     *
      * @param input Det array der skal fjernes et element fra
      * @param deleteMe Det element der skal fjernes
      * @return Det opdaterede array
