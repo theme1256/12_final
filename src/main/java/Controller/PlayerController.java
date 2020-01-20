@@ -3,6 +3,8 @@ package Controller;
 import Model.Player;
 import gui_main.GUI;
 
+import java.awt.*;
+
 public class PlayerController {
     private GUI gui;
     private DiceController diceController;
@@ -15,7 +17,17 @@ public class PlayerController {
     public PlayerController(GUI gui, DiceController dc) {
         this.gui = gui;
         this.diceController = dc;
+    }
+    public PlayerController(GUI gui, DiceController dc, String[] users) {
+        this.gui = gui;
+        this.diceController = dc;
 
+        Color[] carColorColors = new Color[]{Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE};
+        this.startBalance = 1500;
+        players = new Player[users.length];
+        for (int i = 0; i < users.length; i++) {
+            players[i] = new Player(this.gui, this.startBalance, users[i], carColorColors[i]);
+        }
     }
 
     /**
@@ -41,26 +53,26 @@ public class PlayerController {
      */
     public void createPlayers(){
         // Så længe der ikke er sat en start-balance, så forsøg at få et antal spillere
-        while (startBalance == 0) {
+        while (this.startBalance == 0) {
             // Bed om et antal spillere
-            numberOfPlayers = this.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
+            this.numberOfPlayers = this.gui.getUserInteger("Indtast ønskede antal spillere", 3, 6);
 
             // Hvis det er mellem 3 og 6, sæt start balancen, så loop brydes
-            if ((numberOfPlayers >= 3) && (numberOfPlayers <= 6)) {
-                startBalance = 1500;
+            if ((this.numberOfPlayers >= 3) && (this.numberOfPlayers <= 6)) {
+                this.startBalance = 1500;
             } else {
                 this.gui.showMessage("Dette antal spillere er ikke understøttet");
             }
         }
 
         // Opret det rigtige antal spillere
-        players = new Player[numberOfPlayers];
-        for (int i = 0; i < numberOfPlayers; i++) {
+        this.players = new Player[this.numberOfPlayers];
+        for (int i = 0; i < this.numberOfPlayers; i++) {
             // Opret en spiller, den håndterer selv at spørge om username og valg af farve
-            players[i] = new Player(this.gui, startBalance, this);
+            this.players[i] = new Player(this.gui, this.startBalance, this);
 
             // Skriv resultatet ud
-            this.gui.showMessage("Navn: " + players[i].playerName + ", start-balance: " + players[i].account.balance + " kr.");
+            this.gui.showMessage("Navn: " + this.players[i].playerName + ", start-balance: " + this.players[i].account.balance + " kr.");
         }
     }
 

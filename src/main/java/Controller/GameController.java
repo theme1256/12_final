@@ -32,6 +32,21 @@ public class GameController {
         // Start selve spillet
         this.playGame();
     }
+    public GameController(GUI gui, ChanceCardController cc, DiceController dc, PlayerController pc, FieldController fc, boolean create) {
+        // Gemmer de variabler der er givet i parametre, så de kan bruges senere
+        this.gui = gui;
+        this.chanceCardController = cc;
+        this.diceController = dc;
+        playerController = pc;
+        fieldController = fc;
+
+        // Bed playerController om at oprette spillere
+        if (create)
+            playerController.createPlayers();
+
+        // Start selve spillet
+        this.playGame();
+    }
 
     /**
      * Håndterer at give spillerne deres ture, og ekstra ture.

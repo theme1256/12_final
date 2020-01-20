@@ -46,6 +46,17 @@ public class Player {
         this.playerName = username;
     }
 
+    public Player(GUI gui, int startBalance, String username, Color color) {
+        this.gui = gui;
+        this.account = new Account(startBalance);
+        this.playerName = username;
+        GUI_Car brik = new GUI_Car(color, Color.WHITE,GUI_Car.Type.CAR,GUI_Car.Pattern.FILL);
+
+        this.car = new GUI_Player(this.playerName, this.account.balance, brik);
+        gui.addPlayer(this.car);
+        gui.getFields()[this.currentFelt].setCar(this.car, true);
+    }
+
     /**
      * Giver spilleren mulighed for selv at vælge farve på sin brik, og fjerner muligheden, så en anden ikke kan vælge det samme
      *

@@ -17,15 +17,25 @@ public class MatadorUIController {
         GUI gui = new GUI(gui_fields);
 
         // Opret en chancecardcontroller
-        ChanceCardController chanceCardController = new ChanceCardController(fieldController, gui);
+        ChanceCardController chanceCardController = null;
 
         // Opret en dicecontroller
         DiceController diceController = new DiceController(gui);
+
+        // Opretter playercontroller
+        PlayerController playerController = null;
+
+        // En variabel til at fortælle GameController, om den skal sørge for at brugere oprettes
+        boolean createPlayers = true;
 
         // Hvis der er givet et eller flere parametere, da programmet startede
         if (args.length > 0) {
             // Reager på det første parameter
             switch (args[0]) {
+                case "Eksamen":
+                    playerController = new PlayerController(gui, diceController, new String[]{"Amer", "Christian", "Christine", "Ismail", "Theis", "Zahra"});
+                    createPlayers = false;
+                    break;
                 case "TC2":
                     // Giver dicecontroller en liste med slag, som shaker skal slå
                     diceController.overrideShakes(new int[][]{
@@ -156,12 +166,15 @@ public class MatadorUIController {
                     break;
             }
         }
-
-        // Opretter playercontroller
-        PlayerController playerController = new PlayerController(gui, diceController);
+        if (playerController == null) {
+            playerController= new PlayerController(gui, diceController);
+        }
+        if (chanceCardController == null) {
+            chanceCardController = new ChanceCardController(fieldController, gui);
+        }
 
         // Opretter gamecontroller, som starter spillet
-        GameController gameController = new GameController(gui, chanceCardController, diceController, playerController, fieldController);
+        GameController gameController = new GameController(gui, chanceCardController, diceController, playerController, fieldController, createPlayers);
     }
 
     /**
