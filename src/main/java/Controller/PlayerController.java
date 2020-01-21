@@ -178,7 +178,7 @@ public class PlayerController {
                     // Tjek om spilleren har været i fængsel i 3 ture nu
                     if (player.getTurnsInJail() >= 3) {
                         // Spilleren har nu været her i 3 ture og skal betale for at komme ud
-                        gui.showMessage("Du løslades ved 3. forsøg");
+                        gui.showMessage("Du løslades ved 3. forsøg og betaler 50 kr.");
                         player.updateBalance(-50);
                         player.resetTurnsInJail();
                         return 2;

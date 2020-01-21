@@ -99,9 +99,9 @@ public class GameController {
      * Håndterer det primære flow i en tur, terningkast, land på felter, dobbelt-slag, etc.
      *
      * @param player Pointer til den aktive player
-     * @param move Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
+     * @param rollAndMove Om det er en tur, hvor spilleren skal slå, eller det er fordi spilleren er blevet flyttet
      */
-    private void handleRound(Player player, boolean move, boolean moveLastRoll, boolean previousWasChance) {
+    private void handleRound(Player player, boolean rollAndMove, boolean moveLastRoll, boolean previousWasChance) {
         if (player.getIsInJail()) {
             // Hvis spilleren kommer ud skal der behandles at de er rykket
             int rsp = playerController.handeGetOutOfJail(player);
@@ -111,7 +111,7 @@ public class GameController {
                 handleRound(player, false, true);
             }
         } else {
-            if (move) {
+            if (rollAndMove) {
                 // Det er en almindelig runde, så spilleren skal bare slå og rykke
                 this.gui.getUserButtonPressed(player + ", tryk enter/knappen for at slå", "SLÅ");
 
@@ -198,8 +198,8 @@ public class GameController {
             // Hvis spilleren ejer noget, skal "Sælge", "Pantsætte" og "Tilbagebetale lån" tilføjes til menuen
             if (properties.length > 0) {
                 options = MatadorUIController.addElement(options, "Sælge");
-                //options = MatadorUI.addElement(options, "Pantsætte");
-                //options = MatadorUI.addElement(options, "Tilbagebetale lån");
+                //options = MatadorUIController.addElement(options, "Pantsætte");
+                //options = MatadorUIController.addElement(options, "Tilbagebetale lån");
             }
             // Tilføjer punktet "Give op" til menuen
             options = MatadorUIController.addElement(options, "Give op");
@@ -221,7 +221,6 @@ public class GameController {
                         // Hvis feltet er en grund, forsøg at bygge
                         if (felt instanceof StreetField) {
                             ((StreetField) felt).build(gui, player, fieldController.getFields());
-                            player.getNumberOfHouses(fieldController.getFields());
                         }
                     }
                 } else {

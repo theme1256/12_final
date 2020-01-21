@@ -80,6 +80,7 @@ public class StreetField extends Property {
      * @return Om der må bygges/nedrives eller ej
      */
     private boolean buildingFlat(String direction, BaseField[] felter) {
+        // Om der fortsat vil være bygget jævnt når den ønskede handling er fuldført
         boolean flat = true;
         if (group.length == 1) {
             // Hvis der kun er en anden grund i gruppen, er det lidt nemmere at tjekke

@@ -80,8 +80,11 @@ public class ChanceDeck {
         for (int i = cards.length - 1; i > 0; i--) {
             // Find et tilfældigt tal
             index = random.nextInt(i + 1);
+            // Lav en midlertidig kopi af et tilfældigt kort
             temp = cards[index];
+            // Erstart det tilfældige kort med det nuværrende
             cards[index] = cards[i];
+            // Erstart det nuværrende med det tilfældige kort
             cards[i] = temp;
         }
     }
