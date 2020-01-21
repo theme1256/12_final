@@ -25,6 +25,7 @@ public class PlayerController {
         Color[] carColorColors = new Color[]{Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.WHITE};
         this.startBalance = 1500;
         players = new Player[users.length];
+        this.numberOfPlayers = users.length;
         for (int i = 0; i < users.length; i++) {
             players[i] = new Player(this.gui, this.startBalance, users[i], carColorColors[i]);
         }

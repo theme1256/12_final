@@ -33,7 +33,46 @@ public class MatadorUIController {
             // Reager på det første parameter
             switch (args[0]) {
                 case "Eksamen":
-                    playerController = new PlayerController(gui, diceController, new String[]{"Amer", "Christian", "Christine", "Ismail", "Theis", "Zahra"});
+                    // Giver dicecontroller en liste med slag, som shaker skal slå
+                    diceController.overrideShakes(new int[][]{
+                        {1, 1}, // Theis, Start -> Prøv lykken (30) -> Øresund
+                        {5, 5}, // Theis, Øresund -> D.F.D.S.
+                        {5, 6}, // Theis, D.F.D.S. -> Bredgade
+                        {3, 4}, // Amer, Start -> Prøv lykken (24) -> Rådhuspladsen
+                        {3, 3}, // Zahra, Start -> Skat
+                        {1, 1}, // Zahra, Skat -> Valby Langgade
+                        {1, 2}, // Zahra, Valby Langgade -> Frederikberg Alle
+                        {6, 6}, // Christian, Start -> Tuborg
+                        {5, 4}, // Christian, Tuborg -> Trianglen
+                        {1, 1}, // Christine, Start -> Prøv lykken (26) -> Øresund
+                        {1, 1}, // Christine, Øresund -> Prøv lykken (31) -> D.F.D.S
+                        {2, 3}, // Christine, D.F.D.S -> Helle -> Giv op
+                        {1, 1}, // Ismail, Start -> Prøv lykken (0)
+                        {3, 2}, // Ismail, Prøv lykken -> Prøv lykken (21) -> Fængsel
+                        // Runde
+                        {2, 2}, // Theis, Bredgade -> Gå i fængsel -> Fængsel (ingen ekstra-tur)
+                        {1, 3}, // Amer, Rådhuspladsen -> Hvidovre -> giv op
+                        {1, 1}, // Zahra, Frederikberg Alle -> Bülowsvej
+                        {3, 3}, // Zahra, Bülowsvej -> Strandvej
+                        {1, 1}, // Zahra, Strandvej -> Trianglen -> Fængsel
+                        {1, 1}, // Christian, Trianglen -> Østerbrogade
+                        {4, 6}, // Christian, Østerbrogade -> Prøv lykken (28) -> Grønningen
+                        {4, 6}, // Ismail, Fængsel -> Helle -> giv op
+                        // Runde
+                        {2, 1}, // Theis, i fængsel
+                        {5, 5}, // Zahra, Fængsel -> Helle -> giv op
+                        {1, 3}, // Christian, Grønningen -> Carlsberg
+                        // Runde
+                        {2, 1}, // Theis, i fængsel
+                        {1, 2}, // Christian, Carlsberg -> Amagertorv
+                        // Runde
+                        {2, 3}, // Theis, i fængsel (betal) -> D.F.D.S.
+                    });
+                    // Overskriver chancecardcontroller med en fast rækkefølge
+                    chanceCardController = new ChanceCardController(fieldController, gui, true, new int[]{30, 24, 26, 31, 0, 21, 28});
+                    // Opretter spillere
+                    playerController = new PlayerController(gui, diceController, new String[]{"Theis", "Amer", "Zahra", "Christian", "Christine", "Ismail"});
+                    // Overskriver at GameController skal oprette spillere
                     createPlayers = false;
                     break;
                 case "TC2":
